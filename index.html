@@ -60,17 +60,15 @@
         .main-content {
             width: 375px;
             height: 100vh;
-            /* Set to fit within the viewport height */
-            background-image: url('images/bg.jpg');
-            background-size: cover;
-            background-repeat: no-repeat;
             position: relative;
             overflow: hidden;
             margin: 0 auto;
-            padding: 12px;
+            padding: 0;
+            /* Remove padding */
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            background: none;
+            /* Remove the overall background */
         }
 
         .main-content.visible {
@@ -83,23 +81,27 @@
 
         /* Top section with jewelry image */
         .jewelry-showcase {
-            height: 40%;
-            margin-bottom: 5px;
+            height: 44%;
+            margin-bottom: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
+            background-image: url('images/black-gradient.png');
+            /* Add the black gradient background */
+            background-size: cover;
+            background-position: center;
+            padding: 12px;
         }
 
         .jewelry-image {
             width: 160px;
             height: 160px;
             margin: 5px auto;
-            background: url('images/necklace.svg') center/contain no-repeat;
             position: relative;
         }
 
         .showcase-header {
-            margin-bottom: 5px;
+            /* margin-bottom: 5px; */
             text-align: center;
         }
 
@@ -117,12 +119,64 @@
         }
 
         /* Bottom section with specifications */
+        /* Bottom section with specifications */
         .specifications-section {
             height: 60%;
-            gap: 2px;
-            padding: 0;
+            padding: 12px;
             display: flex;
             flex-direction: column;
+            background-image: url('images/grey-geometric.png');
+            background: linear-gradient(to bottom,
+                    rgba(73, 90, 123, 0.541),
+                    rgba(40, 51, 71, 0.75)),
+                url('images/grey-geometric.png');
+            background-size: cover;
+            background-position: top center;
+            background-repeat: no-repeat;
+            position: relative;
+            /* Add animation properties */
+            opacity: 0;
+            transform: translateY(50px);
+            animation: slideUpFade 0.8s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+
+        /* Add the slideUpFade animation */
+        @keyframes slideUpFade {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Add a subtle overlay to maintain readability */
+        .specifications-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom,
+                    rgba(40, 51, 71, 0.1),
+                    rgba(40, 51, 71, 0.2));
+            pointer-events: none;
+        }
+
+        .specifications-section::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 0;
+            right: 0;
+            height: 20px;
+            background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.2));
+            z-index: 1;
         }
 
         .product-id {
@@ -148,11 +202,12 @@
         }
 
         .spec-label {
-            color: #888;
+            color: #3B4960;
             font-size: 9px;
             /* margin-bottom: 2px; */
 
         }
+
         .spec-value {
             color: #fff;
             font-size: 10px;
@@ -164,7 +219,7 @@
         }
 
         .primary-gem .spec-label {
-            color: #888;
+            color: #3B4960;
             font-size: 9px;
             text-transform: uppercase;
             /* margin-top: 10px; */
@@ -195,7 +250,7 @@
         }
 
         .size-label {
-            color: #888;
+            color: #3B4960;
             font-size: 8px;
         }
 
@@ -225,7 +280,7 @@
         }
 
         .secondary-header {
-            color: #888;
+            color: #3B4960;
             font-size: 9px;
             text-transform: uppercase;
             padding-bottom: 5px;
@@ -256,7 +311,7 @@
         }
 
         .specs-label {
-            color: #888;
+            color: #3B4960;
             font-size: 8px;
             margin-bottom: 5px;
         }
@@ -283,17 +338,33 @@
         }
 
         .description-label {
-            color: #888;
+            color: #3B4960;
             font-size: 9px;
             text-transform: uppercase;
             text-align: center;
-            margin-bottom: 5px;
+            /* margin-bottom: 5px;
+            padding-bottom: 5px; */
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .description-label::before,
+        .description-label::after {
+            content: '';
+            height: 1px;
+            width: 140px;
+            background-color: #444;
+            display: block;
         }
 
         .description-card {
             background: rgba(67, 76, 94, 0.8);
             padding: 5px;
             border-radius: 6px;
+            max-width: fit-content;
         }
 
         .description-text {
@@ -335,7 +406,7 @@
         }
 
         /* Enhanced 3D rotation animation for both necklace and diamond */
-        @keyframes smoothRotate3D {
+        /* @keyframes smoothRotate3D {
             0% {
                 transform: rotateY(0deg) rotateX(0deg) scale(1);
             }
@@ -363,7 +434,7 @@
             display: block;
             margin: 0 auto;
         }
-
+ */
         /* Modal-like slide animations */
         @keyframes modalSlideUp {
             0% {
@@ -461,7 +532,11 @@
                 <div class="showcase-logo">HELZBERG</div>
                 <div class="showcase-year">1915</div>
             </div>
-            <div class="jewelry-image"></div>
+            <!-- Replace the div with video element -->
+            <video class="jewelry-image" autoplay loop muted playsinline>
+                <source src="images/mp4.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
 
         <!-- Bottom section with specifications -->
@@ -471,7 +546,7 @@
                     DISCERN#015525237/OTO-NZ<br>
                     PDO1552E-WA
                 </div>
-    
+
                 <div class="specs-grid">
                     <div class="spec-item">
                         <div class="spec-label">PENDANT</div>
@@ -543,7 +618,23 @@
         </div>
     </div>
 
-    <script src="js/main.js"></script>
+    <script src="js/main.js">
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const specsSection = document.querySelector('.specifications-section');
+
+            // After 3 seconds, show the main content
+            setTimeout(() => {
+                mainContent.classList.remove('hidden');
+                setTimeout(() => {
+                    mainContent.classList.add('visible');
+                    // The CSS animation will automatically start when the section becomes visible
+                    specsSection.style.visibility = 'visible';
+                }, 100);
+            }, 3000);
+
+        });
+    </script>
 </body>
 
 </html>

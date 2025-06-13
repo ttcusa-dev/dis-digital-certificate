@@ -34,11 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 2000);
     }, 3000);
 
-    // Add redirect after animations complete
-    // setTimeout(() => {
-    //     mainContent.style.opacity = '0';
-    //     setTimeout(() => {
-    //         window.location.href = 'product.html';
-    //     }, 500);
-    // }, 12000);
+    // // Add redirect after animations complete
+    setTimeout(() => {
+        mainContent.style.opacity = '0';
+        setTimeout(() => {
+            window.location.href = 'product.html';
+        }, 500);
+    }, 12000);
 });

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diamond Service || Digital Service Lab</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .product-container {
+            background-color: #779BBF;
+            width: 375px;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .brand-text {
+            position: absolute;
+            top: 40px;
+            width: 80%;
+            text-align: left;
+            z-index: 2;
+        }
+
+        .brand-name {
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: 12px;
+            color: #fff;
+            margin-bottom: 5px;
+            text-align: center;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .brand-subtitle {
+            font-size: 1.5rem;
+            color: #fff;
+            letter-spacing: 8px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-left: 15px;
+        }
+
+        .image-container {
+            margin-top: 80px;
+            width: 100%;
+            height: calc(100vh - 120px);
+            position: relative;
+            display: flex;
+            /* Added */
+            justify-content: center;
+            /* Added */
+            align-items: center;
+            /* Added */
+        }
+
+        .product-image {
+            width: 80%;
+            height: 80%;
+            object-fit: cover;
+            object-position: center;
+            /* Changed from 'top' to 'center' */
+        }
+
+        @keyframes slideButton {
+            0% {
+                transform: translateX(-200%) translateY(0);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .shop-button {
+            position: absolute;
+            left: 50%;
+            bottom: 50px;
+            transform: translateX(-50%);
+            background: #fff;
+            color: #000;
+            padding: 12px 35px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 2;
+            min-width: 140px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            /* Add these new properties */
+            animation: slideButton 0.8s ease-out forwards;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        /* Add hover effect */
+        .shop-button:hover {
+            background-color: #f0f0f0;
+            transform: translateX(-50%) scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="product-container">
+        <div class="brand-text">
+            <div class="brand-name">HELZBERG</div>
+            <div class="brand-subtitle">DIAMONDS</div>
+        </div>
+
+        <div class="image-container">
+            <img src="images/girlImage.svg" alt="Helzberg Jewelry Model" class="product-image">
+            <a href="#" class="shop-button">SHOP NOW</a>
+        </div>
+    </div>
+</body>
+
+</html>

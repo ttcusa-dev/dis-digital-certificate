@@ -1,63 +1,44 @@
 document.addEventListener('DOMContentLoaded', () => {
     const introContainer = document.querySelector('.intro-container');
     const mainContent = document.querySelector('.main-content');
+    const specsSection = document.querySelector('.specifications-section');
+    const primaryGem = document.querySelector('.primary-gem');
+    const secondaryDiamonds = document.querySelector('.secondary-diamonds');
+    const commentSection = document.querySelector('.product-description');
 
-    // After 5 seconds, show the main content
+    // After 3 seconds, show the main content
     setTimeout(() => {
         mainContent.classList.remove('hidden');
         setTimeout(() => {
             mainContent.classList.add('visible');
         }, 100);
-    }, 5000);
 
-    // Handle dropdowns
-    const dropdowns = document.querySelectorAll('.dropdown');
-    
-    dropdowns.forEach(dropdown => {
-        const button = dropdown.querySelector('.dropdown-btn');
-        const content = dropdown.querySelector('.dropdown-content');
-        
-        // Add dropdown options
-        if (button.textContent.includes('STYLE')) {
-            content.innerHTML = `
-                <div class="dropdown-item">Classic Pendant</div>
-                <div class="dropdown-item">Modern Pendant</div>
-                <div class="dropdown-item">Vintage Pendant</div>
-            `;
-        } else if (button.textContent.includes('METAL')) {
-            content.innerHTML = `
-                <div class="dropdown-item">10k White Gold</div>
-                <div class="dropdown-item">14k White Gold</div>
-                <div class="dropdown-item">18k White Gold</div>
-            `;
-        }
+        // Animate the specifications section with modal effect
+        setTimeout(() => {
+            specsSection.classList.add('animate');
+        }, 800);
 
-        // Toggle dropdown
-        button.addEventListener('click', (e) => {
-            const isActive = dropdown.classList.contains('active');
-            
-            // Close all dropdowns first
-            dropdowns.forEach(d => d.classList.remove('active'));
-            
-            // Toggle current dropdown
-            if (!isActive) {
-                dropdown.classList.add('active');
-            }
-        });
+        // Animate primary gem section
+        setTimeout(() => {
+            primaryGem.classList.add('animate');
+        }, 1200);
 
-        // Handle dropdown item selection
-        content.addEventListener('click', (e) => {
-            if (e.target.classList.contains('dropdown-item')) {
-                button.textContent = e.target.textContent;
-                dropdown.classList.remove('active');
-            }
-        });
-    });
+        // Animate secondary diamonds section
+        setTimeout(() => {
+            secondaryDiamonds.classList.add('animate');
+        }, 1600);
 
-    // Close dropdowns when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.dropdown')) {
-            dropdowns.forEach(d => d.classList.remove('active'));
-        }
-    });
+        // Animate the comments section with modal effect
+        setTimeout(() => {
+            commentSection.classList.add('animate');
+        }, 2000);
+    }, 3000);
+
+    // Add redirect after animations complete
+    setTimeout(() => {
+        mainContent.style.opacity = '0';
+        setTimeout(() => {
+            window.location.href = 'product.html';
+        }, 500);
+    }, 12000);
 });

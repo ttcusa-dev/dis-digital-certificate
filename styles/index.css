@@ -808,7 +808,7 @@
         display: flex;
         justify-content: flex-start;
         align-items: center;
-        gap: 30px;
+        gap: 40px;
         margin-top: 0;
         overflow: hidden;
     }
@@ -886,7 +886,7 @@
 
     .specs-container {
         display: flex;
-        gap: 10px;
+        gap: 15px;
     }
 
     .clarity-info,

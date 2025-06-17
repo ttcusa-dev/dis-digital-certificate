@@ -40,7 +40,7 @@
 
     .main-content {
         width: 500px;
-        height: 96.5vh;
+        height: min(96.5vh, 900px);
         position: relative;
         overflow: hidden;
         margin: 0 auto;
@@ -60,7 +60,7 @@
 
     /* Top section with jewelry image */
     .jewelry-showcase {
-        height: 450.67px;
+        /* height: 450.67px; */
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -117,6 +117,7 @@
         animation: slideUpFade 0.8s ease-out forwards;
         animation-delay: 0.5s;
         border-radius: 0 0 18px 18px;
+        flex: 1;
     }
 
     /* Add the slideUpFade animation */
@@ -155,6 +156,10 @@
         height: 20px;
         background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.2));
         z-index: 1;
+    }
+
+    .product-info{
+        height: 20%;
     }
 
     .product-id {
@@ -224,8 +229,9 @@
     }
 
     .primary-gem {
-        margin-top: 20px;
+        /* margin-top: 20px; */
         padding: 0 50px 0 50px;
+        height: 20%;
     }
 
     .primary-gem .spec-label {
@@ -243,7 +249,7 @@
         display: flex;
         justify-content: flex-start;
         align-items: center;
-        gap: 69px;
+        gap: 67px;
         margin-top: 0;
     }
 
@@ -275,8 +281,8 @@
     }
 
     .gem-image {
-        width: 61.74px;
-        height: 89.69px;
+        width: 100.74px;
+        height: 120.69px;
         margin-bottom: 2px;
         margin-left: 0;
     }
@@ -327,6 +333,7 @@
         color: #4C5A71;
         font-size: 16px;
         font-weight: 400;
+        text-align: center;
         margin-bottom: 2px;
         font-family: 'inter', sans-serif;
     }
@@ -374,6 +381,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        height: 20%;
 
     }
 
@@ -586,8 +594,8 @@
     }
 
     .main-content {
-        width: 200px;
-        height: 93vh;
+        width: min(90vw, 300px);
+        height: min(93vh, 800px);
         position: relative;
         overflow: hidden;
         margin: 0 auto;
@@ -607,7 +615,7 @@
 
     /* Top section with jewelry image */
     .jewelry-showcase {
-        height: 450.67px;
+        /* height: 450.67px; */
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -649,7 +657,7 @@
 
     /* Bottom section with specifications */
     .specifications-section {
-        height: 950.33px;
+        /* height: 950.33px; */
         padding: 0 0 0 0;
         display: flex;
         flex-direction: column;
@@ -663,6 +671,7 @@
         animation: slideUpFade 0.8s ease-out forwards;
         animation-delay: 0.5s;
         border-radius: 0 0 18px 18px;
+        flex: 1;
     }
 
     /* Add the slideUpFade animation */
@@ -705,6 +714,7 @@
 
     .product-info {
         overflow-y: hidden;
+        height: 20%;
     }
 
     .product-id {
@@ -775,10 +785,11 @@
 
     .primary-gem {
         /* margin-bottom: 50px; */
-        margin-top: 8px;
+        /* margin-top: 8px; */
         padding-right: 25px;
         padding-left: 25px;
         overflow: hidden;
+        height: 20%;
 
     }
 
@@ -797,7 +808,7 @@
         display: flex;
         justify-content: flex-start;
         align-items: center;
-        gap: 40px;
+        gap: 30px;
         margin-top: 0;
         overflow: hidden;
     }
@@ -832,8 +843,8 @@
     }
 
     .gem-image {
-        width: 40.74px;
-        height: 40.69px;
+        width: 50.74px;
+        height: 50.69px;
         /* margin-bottom: 6px; */
         /* padding-bottom: 8px; */
         margin-left: 0;
@@ -887,6 +898,7 @@
         color: #4C5A71;
         font-size: 10px;
         font-weight: 400;
+        text-align: center;
         margin-bottom: 1px;
         font-family: 'inter', sans-serif;
     }
@@ -933,6 +945,9 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        height: 20%;
+        /* margin-top: auto;
+        padding-bottom: 20px; */
 
     }
 
@@ -973,7 +988,7 @@
 
     .description-text {
         color: #C0C0C0;
-        font-size: 9px;
+        font-size: 12px;
         text-align: center;
         font-weight: 400;
         font-family: 'inter', sans-serif;
@@ -993,6 +1008,8 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        /* margin-top: auto;
+        padding: 15px 30px; */
     }
 
 
@@ -1122,11 +1139,11 @@
             height: 640px;
         }
         .main-content {
-            width: 300px;
+            width: min(90vw, 300px);
+            height: min(78vh, 700px);
             border-radius: 0;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
             margin: 20px auto;
-            height: 76vh;
             justify-content: center;
         }
         .showcase-logo {
@@ -1137,8 +1154,8 @@
         }
 
         .jewelry-image {
-            width: 250px;
-            height: 100px;
+            width: 300px;
+            height: 110px;
             margin-bottom: 70px;
         }
 
@@ -1155,23 +1172,23 @@
 
     @media (min-width: 769px) and (max-width: 1024px) {
         .main-content {
-            width: 300px;
+            width: min(90vw, 300px);
+            /* height: min(85vh, 750px); */
             border-radius: 0;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
             margin: 20px auto;
-            height: 50vh; /* Reduced height for iPad screens */
             justify-content: center;
         }
     
-        .specifications-section {
-            height: 580px; /* Adjust this value as needed */
+        /* .specifications-section {
+            height: 580px; 
         }
     
         .jewelry-showcase {
-            height: 350px; /* Adjust this value as needed */
-        }
+            height: 350px; 
+        } */
 
-        .product-description {
+        /* .product-description {
             margin-top: auto;
             padding-bottom: 20px;
         }
@@ -1179,7 +1196,7 @@
         .footer {
             margin-top: auto;
             padding: 15px 30px;
-        }
+        } */
     }
 
 }

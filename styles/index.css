@@ -843,8 +843,8 @@
     }
 
     .gem-image {
-        width: 50.74px;
-        height: 50.69px;
+        width: 30.74px;
+        height: 30.69px;
         /* margin-bottom: 6px; */
         /* padding-bottom: 8px; */
         margin-left: 0;
@@ -852,7 +852,7 @@
 
     .gem-type {
         color: #4C5A71;
-        font-size: 8px;
+        font-size: 7px;
         line-height: 5px;
         font-weight: 400;
         padding-top: 2px;

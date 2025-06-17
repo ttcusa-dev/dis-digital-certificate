@@ -218,14 +218,14 @@
 
     .spec-value {
         color: #C0C0C0;
-        font-size: 10.67px;
+        font-size: 8px;
         font-weight: 400;
         font-family: 'inter', sans-serif;
     }
 
     .primary-gem {
         margin-top: 20px;
-        padding: 0 100px 0 30px;
+        padding: 0 50px 0 50px;
     }
 
     .primary-gem .spec-label {
@@ -243,7 +243,7 @@
         display: flex;
         justify-content: flex-start;
         align-items: center;
-        gap: 90px;
+        gap: 69px;
         margin-top: 0;
     }
 
@@ -314,7 +314,7 @@
 
     .specs-container {
         display: flex;
-        gap: 90px;
+        gap: 65px;
     }
 
     .clarity-info,
@@ -403,8 +403,8 @@
         background: #434C5E;
         padding: 8px 8px 8px 8px;
         border-radius: 0;
-        width: 298.6px;
-        max-width: 100%;
+        width: 358.6px;
+        max-width: 120%;
         box-sizing: border-box;
         margin: 0 auto;
     }
@@ -772,7 +772,7 @@
 
     .spec-value {
         color: #C0C0C0;
-        font-size: 9px;
+        font-size: 8px;
         font-weight: 400;
         font-family: 'inter', sans-serif;
     }
@@ -780,8 +780,8 @@
     .primary-gem {
         /* margin-bottom: 50px; */
         margin-top: 8px;
-        padding-right: 20px;
-        padding-left: 20px;
+        padding-right: 25px;
+        padding-left: 25px;
         overflow: hidden;
 
     }
@@ -801,7 +801,7 @@
         display: flex;
         justify-content: flex-start;
         align-items: center;
-        gap: 50px;
+        gap: 40px;
         margin-top: 0;
         overflow: hidden;
     }
@@ -835,8 +835,8 @@
     }
 
     .gem-image {
-        width: 30.74px;
-        height: 30.69px;
+        width: 40.74px;
+        height: 40.69px;
         /* margin-bottom: 6px; */
         /* padding-bottom: 8px; */
         margin-left: 0;
@@ -878,7 +878,7 @@
 
     .specs-container {
         display: flex;
-        gap: 20px;
+        gap: 10px;
     }
 
     .clarity-info,
@@ -967,7 +967,7 @@
         background: #434C5E;
         padding: 3px 0 3px 0;
         border-radius: 0;
-        width: 200.6px;
+        width: 250.6px;
         max-width: 100%;
         box-sizing: border-box;
         margin: 0 auto;

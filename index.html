@@ -21,7 +21,7 @@
                 padding: 0;
                 overflow: hidden;
                 /* Prevent scrolling */
-                display: flex;  
+                display: flex;
                 justify-content: center;
                 min-height: 100vh;
             }
@@ -45,19 +45,6 @@
                 animation: scaleUp 0.8s ease-out;
             }
 
-            .logo-text {
-                font-size: 2.5rem;
-                font-weight: normal;
-                letter-spacing: 8px;
-                color: #fff;
-                margin-bottom: 10px;
-            }
-
-            .logo-year {
-                font-size: 0.6rem;
-                color: #fff;
-                letter-spacing: 2px;
-            }
 
             .main-content {
                 width: 500px;
@@ -93,7 +80,7 @@
             }
 
             .jewelry-image {
-                width:  100%;
+                width: 100%;
                 height: 240px;
                 /* margin-bottom: 120px; */
                 display: block;
@@ -192,7 +179,7 @@
 
             .product-id-main {
                 display: block;
-                color: #731E45;
+                color: white;
                 font-size: 13.653px;
                 font-weight: 400;
                 letter-spacing: 1px;
@@ -603,18 +590,11 @@
                 animation: scaleUp 0.8s ease-out;
             }
 
-            .logo-text {
-                font-size: 2.5rem;
-                font-weight: normal;
-                letter-spacing: 8px;
-                color: #fff;
-                margin-bottom: 10px;
-            }
-
-            .logo-year {
-                font-size: 0.6rem;
-                color: #fff;
-                letter-spacing: 2px;
+            .logo-video{
+                width: 50%;
+                height: 50%;
+                object-fit: cover;
+                object-position: center;
             }
 
             .main-content {
@@ -753,7 +733,7 @@
 
             .product-id-main {
                 display: block;
-                color: #731E45;
+                color: white;
                 font-size: 10px;
                 font-weight: 400;
                 letter-spacing: 1px;
@@ -1165,8 +1145,9 @@
 <body>
     <div class="intro-container">
         <div class="logo-container">
-            <div class="logo-text">HELZBERG</div>
-            <div class="logo-year">1915</div>
+            <video class="logo-video" autoplay loop muted playsinline>
+                <source src="images/helzberg-logo.mp4" type="video/mp4">
+                Your browser does not support the video tag.
         </div>
     </div>
 
@@ -1179,7 +1160,7 @@
             </div>
             <!-- Replace the div with video element -->
             <video class="jewelry-image" autoplay loop muted playsinline>
-                <source src="images/mp4.mp4" type="video/mp4">
+                <source src="images/Emerlad.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>

@@ -264,6 +264,7 @@
         color: #C0C0C0;
         font-size: 10.67px;
         margin-bottom: 5px;
+        text-align: center;
         font-weight: 400;
         font-family: 'inter', sans-serif;
     }
@@ -335,6 +336,7 @@
         font-size: 10.67px;
         margin-bottom: 5px;
         font-weight: 400;
+        text-align: center;
         font-family: 'inter', sans-serif;
     }
 
@@ -545,11 +547,15 @@
 }
 
 @media not screen and (min-width: 1920px) and (min-height: 1080px) {
-    * {
+    body {
+        background: #000;
         margin: 0;
         padding: 0;
-        box-sizing: border-box;
-        overflow-x: hidden;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center; /* Add this */
+        min-height: 100vh;
     }
 
     body {
@@ -825,6 +831,7 @@
         font-size: 8px;
         margin-bottom: 3px;
         font-weight: 400;
+        text-align: center;
         font-family: 'inter', sans-serif;
     }
 
@@ -898,6 +905,7 @@
         color: #C0C0C0;
         font-size: 8px;
         margin-bottom: 3px;
+        text-align: center;
         font-weight: 400;
         font-family: 'inter', sans-serif;
     }
@@ -1115,18 +1123,29 @@
             border-radius: 0;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
             margin: 20px auto;
-            min-height: 90vh;
+            /* height: 70vh; */
         }
     }
 
     @media (max-width: 768px) {
+        .specifications-section {
+            height: 640px;
+        }
+        .main-content {
+            width: 300px;
+            border-radius: 0;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            margin: 20px auto;
+            height: 70vh;
+            justify-content: center;
+        }
         .showcase-logo {
             font-size: 1.5rem;
         }
 
         .jewelry-image {
             width: 250px;
-            height: 250px;
+            height: 100px;
         }
     }
 

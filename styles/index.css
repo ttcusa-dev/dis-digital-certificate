@@ -187,7 +187,7 @@ body {
 .specs-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 5px;
+    /* gap: 5px; */
 }
 
 .spec-item {
@@ -231,6 +231,7 @@ body {
 .size-info {
     text-align: left;
     margin-top: 0;
+    /* padding-left: 30px; */
 }
 
 .size-value {
@@ -274,8 +275,8 @@ body {
 
 .diamond-section {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
     overflow-y: hidden;
 }
 
@@ -286,6 +287,13 @@ body {
 .clarity-info,
 .specs-info {
     text-align: right;
+}
+
+.specs-info{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding-left: 7px;
 }
 
 .specs-value {
@@ -728,10 +736,6 @@ body {
         gap: 45px;
     }
 
-    .size-info {
-        padding-bottom: 30px;
-    }
-
     .size-value {
         font-size: 12px;
         margin-bottom: 1px;
@@ -777,9 +781,9 @@ body {
         margin-bottom: 3px;
     }
 
-    .diamond-visual {
+    /* .diamond-visual {
         margin-left: 25px;
-    }
+    } */
 
     .diamond-image {
         width: 50px;
@@ -932,9 +936,12 @@ body {
         height: auto;
     }
 
-    /* .gem-content-layout{
-        gap: 70px;
-    } */
+    .gem-content-layout{
+        align-items: center;
+    }
+    .specs-container {
+        align-items: center;
+    }
 }
 
 
@@ -951,16 +958,18 @@ body {
     }
 
     .gem-content-layout {
-        gap: 50px;
+        gap: 40px;
+        align-items: center;
     }
 
     .specs-container {
-        gap: 20px;
+        /* gap: 20px; */
+        align-items: center;
     }
 
     .gem-image {
-        width: 70px !important;
-        height: 74px !important;
+        width: 95px !important;
+        height: 95px !important;
     }
 
     .diamond-image {
@@ -1015,8 +1024,8 @@ body {
 
     .gem-image,
     .diamond-image {
-        width: 65px !important;
-        height: auto !important;
+        width: 60px !important;
+        height: 50px !important;
     }
 
     .product-id-main,
@@ -1039,8 +1048,8 @@ body {
 
     .gem-image,
     .diamond-image {
-        width: 70px !important;
-        height: 40px !important;
+        width: 95px !important;
+        height: 95px !important;
     }
 
     .gem-content-layout {
@@ -1062,18 +1071,21 @@ body {
         font-size: 7px;
     }
 
+
     .gem-image,
     .diamond-image {
-        width: 75px !important;
-        height: 40px !important;
+        width: 63px !important;
+        height: 63px !important;
     }
 
     .gem-content-layout {
-        gap: 30px;
+        gap: 35px;
+        align-items: center;
     }
 
     .specs-container {
-        gap: 10px;
+        /* gap: 10px; */
+        align-items: center;
     }
 
     .footer {

@@ -9,11 +9,20 @@
 </head>
 
 <body>
-    <div class="intro-container">
+    <!-- Loader container (shows first for 5 seconds) -->
+    <div class="loader-container">
+        <div class="loader-content">
+            <img src="images/loader.gif" class="loader-gif" alt="Loading...">
+        </div>
+    </div>
+
+    <!-- Intro container (shows after loader) -->
+    <div class="intro-container hidden">
         <div class="logo-container">
             <video class="logo-video" autoplay loop muted playsinline>
                 <source src="images/helzberg-logo.mp4" type="video/mp4">
                 Your browser does not support the video tag.
+            </video>
         </div>
     </div>
 
@@ -30,7 +39,6 @@
                 Your browser does not support the video tag.
             </video>
         </div>
-
 
         <div class="custom-divider"></div>
         <!-- Bottom section with specifications -->
@@ -116,21 +124,34 @@
         </div>
     </div>
 
-    <script src="js/main.js">
-
+    <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const loaderContainer = document.querySelector('.loader-container');
+            const introContainer = document.querySelector('.intro-container');
+            const mainContent = document.querySelector('.main-content');
             const specsSection = document.querySelector('.specifications-section');
 
-            // After 3 seconds, show the main content
+            // After 5 seconds, hide loader and show intro video
             setTimeout(() => {
-                mainContent.classList.remove('hidden');
+                loaderContainer.style.animation = 'fadeOut 0.5s ease-in-out forwards';
                 setTimeout(() => {
-                    mainContent.classList.add('visible');
-                    // The CSS animation will automatically start when the section becomes visible
-                    specsSection.style.visibility = 'visible';
-                }, 100);
-            }, 3000);
+                    loaderContainer.style.display = 'none';
+                    introContainer.classList.remove('hidden');
+                }, 500);
+            }, 5000);
 
+            // After 8 seconds total (5s loader + 3s intro), show main content
+            setTimeout(() => {
+                introContainer.style.animation = 'fadeOut 1s ease-in-out forwards';
+                setTimeout(() => {
+                    introContainer.style.display = 'none';
+                    mainContent.classList.remove('hidden');
+                    setTimeout(() => {
+                        mainContent.classList.add('visible');
+                        specsSection.style.visibility = 'visible';
+                    }, 100);
+                }, 1000);
+            }, 8000);
         });
     </script>
 </body>

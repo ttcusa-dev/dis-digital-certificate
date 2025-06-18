@@ -840,7 +840,8 @@ body {
 
     html,
     body {
-        height: 100vh;
+        height: 100dvh;
+        ;
         overflow: hidden;
         font-size: 14px;
     }
@@ -863,6 +864,7 @@ body {
         height: 38%;
         padding: 0;
     }
+
     .jewelry-image {
         height: 140px;
         margin-bottom: 80px;
@@ -921,6 +923,7 @@ body {
         width: 40px;
         height: auto;
     }
+
     /* .gem-content-layout{
         gap: 70px;
     } */
@@ -999,85 +1002,98 @@ body {
 /* Custom style for 360px devices (e.g., Galaxy S8, Pixel 3) */
 @media (max-width: 360px) {
     .main-content {
-      font-size: 12px;
+        font-size: 12px;
     }
-  
+
     .gem-image,
     .diamond-image {
-      width: 65px !important;
-      height: auto !important;
+        width: 65px !important;
+        height: auto !important;
     }
-  
+
     .product-id-main,
     .spec-label,
     .specs-label,
     .description-text {
-      font-size: 12px !important;
-    }
-  
-    .gem-content-layout {
-      gap: 35px;
-    }
-  }
-  
-  /* Custom style for 375px devices (e.g., iPhone X, 11 Pro) */
-  @media (max-width: 375px) {
-    .main-content {
-      font-size: 13px;
-    }
-  
-    .gem-image,
-    .diamond-image {
-      width: 70px !important;
-      height: 40px !important;
-    }
-  
-    .gem-content-layout {
-      gap: 40px;
-    }
-  
-    .description-text {
-      font-size: 13px !important;
-    }
-  }
-  
-  /* Custom style for 390px devices (e.g., iPhone 12/13/14 Pro Max) */
-  @media (max-width: 390px) {
-    .main-content {
-      font-size: 13.5px;
+        font-size: 12px !important;
     }
 
-    .round{
+    .gem-content-layout {
+        gap: 35px;
+    }
+}
+
+/* Custom style for 375px devices (e.g., iPhone X, 11 Pro) */
+@media (max-width: 375px) {
+    .main-content {
+        font-size: 13px;
+    }
+
+    .gem-image,
+    .diamond-image {
+        width: 70px !important;
+        height: 40px !important;
+    }
+
+    .gem-content-layout {
+        gap: 40px;
+    }
+
+    .description-text {
+        font-size: 13px !important;
+    }
+}
+
+/* Custom style for 390px devices (e.g., iPhone 12/13/14 Pro Max) */
+@media (max-width: 390px) {
+    .main-content {
+        font-size: 13.5px;
+    }
+
+    .round {
         font-size: 7px;
     }
-  
+
     .gem-image,
     .diamond-image {
-      width: 75px !important;
-      height: 40px !important;
-    }
-  
-    .gem-content-layout {
-      gap: 30px;
+        width: 75px !important;
+        height: 40px !important;
     }
 
-    .specs-container{
+    .gem-content-layout {
+        gap: 30px;
+    }
+
+    .specs-container {
         gap: 10px;
     }
+
     .footer {
-      margin-top: 0;
+        margin-top: 0;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .specifications-section {
+        padding-bottom: 10px;
     }
 
     .description-card {
-      padding-top: 2px;
-      overflow: hidden;
+        padding-top: 2px;
+        overflow: hidden;
     }
 
     .description-label {
-      width: 310px;
+        width: 310px;
     }
+
     .description-text {
-      font-size: 11.5px !important;
+        font-size: 11.5px !important;
     }
-  }
-  
+
+    .jewelry-image {
+        height: 120px;
+        margin-bottom: 40px;
+    }
+}

@@ -72,6 +72,7 @@ body {
 
 .main-content {
     position: relative;
+    height: 100vh;
     overflow: hidden;
     margin: 0 auto;
     padding: 0;
@@ -683,7 +684,7 @@ body {
 @media (min-width: 769px) and (max-width: 1024px) {
     .main-content {
         width: min(90vw, 450px);
-        height: min(95vh, 900px);
+        /* height: min(95vh, 900px); */
         /* border-radius: 12px; */
         box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
         margin: 2.5vh auto;
@@ -717,7 +718,7 @@ body {
 @media not screen and (min-width: 1920px) and (min-height: 1080px) {
     .main-content {
         width: min(90vw, 350px);
-        height: min(93vh, 800px);
+        /* height: min(93vh, 800px); */
     }
 
     .jewelry-image {

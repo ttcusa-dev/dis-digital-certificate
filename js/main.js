@@ -50,10 +50,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 8000);
 
     // Optional: Auto redirect after 12 seconds (uncomment if needed)
-    // setTimeout(() => {
-    //     mainContent.style.opacity = '0';
-    //     setTimeout(() => {
-    //         window.location.href = 'product.html';
-    //     }, 500);
-    // }, 20000); // 8s (loader+intro) + 12s (main content display)
+    setTimeout(() => {
+        mainContent.style.opacity = '0';
+        setTimeout(() => {
+            window.location.href = 'product.html';
+        }, 500);
+    }, 20000); // 8s (loader+intro) + 12s (main content display)
 });

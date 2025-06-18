@@ -6,7 +6,7 @@
 
 body {
     background: #000;
-    min-height: 100vh;
+    min-height: 100vh;;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,7 +15,7 @@ body {
 
 .product-container {
     background-color: #779BBF;
-    width: 375px;
+    width: 100vw;
     height: 100vh;
     position: relative;
     display: flex;
@@ -85,7 +85,7 @@ body {
 .shop-button {
     position: absolute;
     left: 50%;
-    bottom: 50px;
+    bottom: 100px;
     transform: translateX(-50%);
     background: #fff;
     color: #000;

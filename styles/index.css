@@ -655,7 +655,7 @@ body {
         padding: 8px 8px 8px 8px;
         width: 358.6px;
         max-width: 120%;
-        
+
     }
 
     .description-text {
@@ -1088,8 +1088,8 @@ body {
 
     .gem-image,
     .diamond-image {
-        width: 95px !important;
-        height: 95px !important;
+        width: 85px !important;
+        height: 85px !important;
     }
 
     .gem-content-layout {

@@ -10,7 +10,7 @@ body {
     background: #000;
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    /* overflow: hidden; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -53,6 +53,7 @@ body {
     display: flex;
     flex-direction: column;
     background: none;
+    scroll-snap-type: y mandatory;
 }
 
 .main-content.visible {
@@ -842,7 +843,9 @@ body {
     body {
         height: 100dvh;
         ;
-        overflow: hidden;
+        overflow-y: auto;
+        /* enable swipe gesture */
+        -webkit-overflow-scrolling: touch;
         font-size: 14px;
     }
 
@@ -857,7 +860,12 @@ body {
         flex-direction: column;
         justify-content: space-between;
         overflow: hidden;
+        scroll-snap-type: y mandatory;
     }
+
+    body::-webkit-scrollbar {
+        display: none; /* hide scroll bar */
+      }
 
     .jewelry-showcase {
         flex: 0 0 38%;

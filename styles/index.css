@@ -380,6 +380,7 @@ body {
     justify-content: center;
     gap: 10px;
     margin: 0 auto 4px auto;
+    overflow: hidden;
 }
 
 .description-label::before,

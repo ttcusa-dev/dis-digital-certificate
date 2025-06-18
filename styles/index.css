@@ -690,7 +690,7 @@ body {
 
     .jewelry-image {
         height: 180px;
-        
+
     }
 
     .showcase-logo {
@@ -703,7 +703,7 @@ body {
 
     .gem-image {
         width: 60px;
-        height: 70px;
+        height: 60px;
     }
 
     .diamond-image {
@@ -1009,8 +1009,8 @@ body {
     }
 
     .gem-image {
-        width: 74px !important;
-        height: 74px !important;
+        width: 70px !important;
+        height: 70px !important;
     }
 
     .diamond-image {

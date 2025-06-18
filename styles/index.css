@@ -52,8 +52,8 @@ body {
 }
 
 .loader-gif {
-    width: 100px; /* Adjust size as needed */
-    height: 100px; /* Adjust size as needed */
+    width: 100%; /* Adjust size as needed */
+    height: 100%; /* Adjust size as needed */
     object-fit: contain;
 }
 
@@ -315,6 +315,7 @@ body {
 .clarity-info,
 .specs-info {
     text-align: right;
+    align-self: center;
 }
 
 .specs-info{
@@ -516,7 +517,7 @@ body {
 
     .main-content {
         width: 500px;
-        height: min(96.5vh, 900px);
+        height: 100vh;
     }
 
     .jewelry-image {
@@ -843,7 +844,7 @@ body {
     }
 
     .description-text {
-        font-size: 13px;
+        font-size: 10px;
         padding-left: 4px;
         padding-right: 4px;
     }
@@ -1151,7 +1152,7 @@ body {
     }
 
     .description-text {
-        font-size: 11.5px !important;
+        font-size: 10.5px !important;
     }
 
     .jewelry-image {

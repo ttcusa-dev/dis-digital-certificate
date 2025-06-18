@@ -174,7 +174,7 @@ body {
 
 .product-info {
     overflow-y: hidden;
-    /* height: 20%; */
+    height: 15%;
 }
 
 .product-id {
@@ -1008,8 +1008,8 @@ body {
     }
 
     .gem-image {
-        width: 85px !important;
-        height: 85px !important;
+        width: 75px !important;
+        height: 75px !important;
     }
 
     .diamond-image {
@@ -1088,8 +1088,8 @@ body {
 
     .gem-image,
     .diamond-image {
-        width: 85px !important;
-        height: 85px !important;
+        width: 75px !important;
+        height: 75px !important;
     }
 
     .gem-content-layout {

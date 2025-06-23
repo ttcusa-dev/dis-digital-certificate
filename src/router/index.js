@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HelloWorld from "../views/HelloWorld.vue";
+import DigitalCertificate from "../views/DigitalCertificate.vue";
 
 const routes = [
   {
     path: "/",
-    name: "HelloWorld",
-    component: HelloWorld,
+    name: "DigitalCertificate",
+    component: DigitalCertificate,
   },
 ];
 

@@ -13,7 +13,7 @@
   <!-- Intro container (shows after loader) -->
   <div class="intro-container hidden">
     <div class="logo-container">
-      <video class="logo-video" autoplay loop muted playsinline>
+      <video id="video" class="logo-video" autoplay loop muted playsinline>
         <source src="../assets/images/helzberg-logo.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
@@ -157,12 +157,13 @@
   </div>
 </template>
 
-<script>
+<script setup>
 document.addEventListener("DOMContentLoaded", () => {
   const loaderContainer = document.querySelector(".loader-container");
   const introContainer = document.querySelector(".intro-container");
   const mainContent = document.querySelector(".main-content");
   const specsSection = document.querySelector(".specifications-section");
+  const video = document.getElementById("video");
 
   // After 5 seconds, hide loader and show intro video
   setTimeout(() => {
@@ -170,8 +171,10 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       loaderContainer.style.display = "none";
       introContainer.classList.remove("hidden");
+      video.currentTime = 0; // Set the video to start from the beginning
+      video.play();
     }, 500);
-  }, 5000);
+  }, 1000);
 
   // After 8 seconds total (5s loader + 3s intro), show main content
   setTimeout(() => {
@@ -183,8 +186,8 @@ document.addEventListener("DOMContentLoaded", () => {
         mainContent.classList.add("visible");
         specsSection.style.visibility = "visible";
       }, 100);
-    }, 1000);
-  }, 8000);
+    }, 500);
+  }, 4500);
 });
 </script>
 

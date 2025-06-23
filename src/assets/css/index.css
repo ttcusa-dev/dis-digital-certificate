@@ -59,12 +59,12 @@ body {
 
 .logo-container {
   text-align: center;
-  animation: scaleUp 0.8s ease-out;
+  /* animation: scaleUp 0.8s ease-out; */
 }
 
 .logo-video {
-  width: 50%;
-  height: 50%;
+  width: 99%;
+  height: 100%;
   object-fit: cover;
   object-position: center;
 }
@@ -221,7 +221,9 @@ body {
 .specs-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  /* gap: 5px; */
+  z-index: 99;
+  position: absolute;
+  width: 100%;
 }
 
 .spec-item {
@@ -243,7 +245,7 @@ body {
 
 .primary-gem {
   overflow: hidden;
-  /* height: 20%; */
+  height: 30%;
 }
 
 .primary-gem .spec-label {
@@ -1012,8 +1014,8 @@ body {
   }
 
   .gem-image {
-    width: 70px !important;
-    height: 65px !important;
+    width: 80px !important;
+    height: 85px !important;
   }
 
   .diamond-image {

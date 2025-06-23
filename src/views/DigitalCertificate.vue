@@ -76,7 +76,8 @@
                 alt="Emerald"
               />
               <div class="gem-type">
-                EMERALD<br /><span class="round">(PEAR)</span>
+                <p>EMERALD</p>
+                <p class="round">(PEAR)</p>
               </div>
             </div>
 
@@ -104,14 +105,22 @@
               <div class="specs-label">CLARITY</div>
             </div>
 
-            <div class="diamond-visual">
+            <div
+              class="diamond-visual"
+              style="display: flex; flex-direction: column; align-items: center"
+            >
               <img
                 src="../assets/images/labground.svg"
                 class="gem-image"
                 alt="Diamond"
               />
-              <div class="gem-type">
-                LAB GROWN DIAMOND<br /><span class="round">(ROUND)</span>
+              <div class="gem-type" style="width: fit-content">
+                <div style="width: 200px; font-size: 12px">
+                  LAB GROWN DIAMOND
+                </div>
+                <div style="width: 200px; font-size: 12px" class="round">
+                  (ROUND)
+                </div>
               </div>
             </div>
 

@@ -13,7 +13,7 @@
   <!-- Intro container (shows after loader) -->
   <div class="intro-container hidden">
     <div class="logo-container">
-      <video id="video" class="logo-video" autoplay loop muted playsinline>
+      <video id="video" class="logo-video" muted playsinline>
         <source src="../assets/images/helzberg-logo.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
@@ -34,7 +34,14 @@
         <div class="showcase-year">1915</div> -->
       </div>
       <!-- Replace the div with video element -->
-      <video class="jewelry-image" autoplay loop muted playsinline>
+      <video
+        id="jewelry-video"
+        class="jewelry-image"
+        autoplay
+        loop
+        muted
+        playsinline
+      >
         <source src="../assets/images/Emerlad.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
@@ -51,12 +58,12 @@
 
         <div class="specs-grid">
           <div class="spec-item">
-            <div class="spec-label">PENDANT</div>
-            <div class="spec-value">STYLE</div>
+            <div class="spec-value">PENDANT</div>
+            <div class="spec-label">STYLE</div>
           </div>
           <div class="spec-item">
-            <div class="spec-label">14KWG</div>
-            <div class="spec-value">METAL</div>
+            <div class="spec-value">14KWG</div>
+            <div class="spec-label">METAL</div>
           </div>
         </div>
       </div>
@@ -69,15 +76,18 @@
               <div class="specs-value">13.30X8.40MM</div>
               <div class="specs-label">GEM SIZE</div>
             </div>
-            <div class="gem-center">
+            <div
+              class="gem-center"
+              style="display: flex; flex-direction: column; align-items: center"
+            >
               <img
                 src="../assets/images/emerlad.svg"
                 class="gem-image"
                 alt="Emerald"
               />
               <div class="gem-type">
-                <p>EMERALD</p>
-                <p class="round">(PEAR)</p>
+                <div>EMERALD</div>
+                <div class="round">(PEAR)</div>
               </div>
             </div>
 
@@ -115,7 +125,7 @@
                 alt="Diamond"
               />
               <div class="gem-type" style="width: fit-content">
-                <div style="width: 200px; font-size: 12px">
+                <div style="width: 203px; font-size: 12px">
                   LAB GROWN DIAMOND
                 </div>
                 <div style="width: 200px; font-size: 12px" class="round">
@@ -158,12 +168,15 @@
 </template>
 
 <script setup>
-document.addEventListener("DOMContentLoaded", () => {
+import { onMounted } from "vue";
+
+onMounted(() => {
   const loaderContainer = document.querySelector(".loader-container");
   const introContainer = document.querySelector(".intro-container");
   const mainContent = document.querySelector(".main-content");
   const specsSection = document.querySelector(".specifications-section");
   const video = document.getElementById("video");
+  const jewelryVideo = document.getElementById("jewelry-video");
 
   // After 5 seconds, hide loader and show intro video
   setTimeout(() => {
@@ -185,10 +198,42 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => {
         mainContent.classList.add("visible");
         specsSection.style.visibility = "visible";
+        jewelryVideo.currentTime = 5;
       }, 100);
     }, 500);
   }, 4500);
 });
+// document.addEventListener("DOMContentLoaded", () => {
+//   const loaderContainer = document.querySelector(".loader-container");
+//   const introContainer = document.querySelector(".intro-container");
+//   const mainContent = document.querySelector(".main-content");
+//   const specsSection = document.querySelector(".specifications-section");
+//   const video = document.getElementById("video");
+
+//   // After 5 seconds, hide loader and show intro video
+//   setTimeout(() => {
+//     loaderContainer.style.animation = "fadeOut 0.5s ease-in-out forwards";
+//     setTimeout(() => {
+//       loaderContainer.style.display = "none";
+//       introContainer.classList.remove("hidden");
+//       video.currentTime = 0; // Set the video to start from the beginning
+//       video.play();
+//     }, 500);
+//   }, 1000);
+
+//   // After 8 seconds total (5s loader + 3s intro), show main content
+//   setTimeout(() => {
+//     introContainer.style.animation = "fadeOut 1s ease-in-out forwards";
+//     setTimeout(() => {
+//       introContainer.style.display = "none";
+//       mainContent.classList.remove("hidden");
+//       setTimeout(() => {
+//         mainContent.classList.add("visible");
+//         specsSection.style.visibility = "visible";
+//       }, 100);
+//     }, 500);
+//   }, 4500);
+// });
 </script>
 
 <style>

@@ -16,7 +16,7 @@
     }
   ],
   "hosting": {
-    "site": "diamond-usa-staging-cert",
+    "site": "digitalcertificate",
     "public": "dist",
     "ignore": [
       "firebase.json",

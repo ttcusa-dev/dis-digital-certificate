@@ -174,7 +174,7 @@ body {
   z-index: 1;
 }
 
-.client-logo{
+.client-logo {
   width: 200px;
   z-index: 99;
 }
@@ -182,7 +182,7 @@ body {
 .product-info {
   overflow-y: hidden;
   height: 15%;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .product-id {
@@ -231,13 +231,13 @@ body {
 }
 
 .spec-label {
-  color: #4c5a71;
+  color: #c0c0c0;
   font-weight: 400;
   font-family: "inter", sans-serif;
 }
 
 .spec-value {
-  color: #c0c0c0;
+  color: #4c5a71;
   font-size: 8px;
   font-weight: 400;
   font-family: "inter", sans-serif;
@@ -245,7 +245,7 @@ body {
 
 .primary-gem {
   overflow: hidden;
-  height: 30%;
+  height: 35%;
 }
 
 .primary-gem .spec-label {
@@ -850,7 +850,7 @@ body {
   }
 
   .description-card {
-    padding: 5px 2px 5px 2px;
+    padding: 5px 2px 25px 2px;
     width: 280px;
     max-width: 100%;
   }
@@ -863,7 +863,7 @@ body {
 
   .footer {
     padding: 0 30px;
-    margin-top: 20px;
+    /* margin-top: 20px; */
   }
 
   .ds-logo {
@@ -939,12 +939,18 @@ body {
     justify-content: space-between;
   }
 
+  .spec-label,
+  .specs-label {
+    font-size: 11px;
+  }
+
+  .specs-value,
+  .spec-value {
+    font-size: 14px !important;
+  }
+
   .product-id-main,
   .product-id-overlap,
-  .spec-label,
-  .spec-value,
-  .specs-label,
-  .specs-value,
   .gem-type,
   .round,
   .description-label,
@@ -963,7 +969,7 @@ body {
 
   .description-card {
     width: 100%;
-    padding: 10px;
+    /* padding: 10px; */
     box-sizing: border-box;
     margin: 0 auto;
   }
@@ -1144,7 +1150,7 @@ body {
   }
 
   .description-card {
-    padding-top: 2px;
+    /* padding-top: 2px; */
     overflow: hidden;
   }
 

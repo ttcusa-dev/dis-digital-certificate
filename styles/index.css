@@ -988,8 +988,12 @@ body {
 @media (max-width: 480px) {
     .jewelry-image {
         height: 160px;
-        margin-top: 40px;
-        margin-bottom: 0;
+        /* margin-top: 40px; */
+        margin-bottom: 0px;
+    }
+
+    .showcase-header{
+        margin-top: 10px;
     }
 
     .loader-gif {
@@ -1158,6 +1162,6 @@ body {
 
     .jewelry-image {
         height: 120px;
-        margin-bottom: 40px;
+        /* margin-bottom: 40px; */
     }
 }

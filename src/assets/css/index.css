@@ -1,0 +1,1168 @@
+/* Base styles - apply to all screen sizes */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+body {
+  background: #000;
+  margin: 0;
+  padding: 0;
+  /* overflow: hidden; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100vw;
+}
+
+/* Common components */
+.intro-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  z-index: 1000;
+  /* animation: fadeOut 1s ease-in-out 3s forwards; */
+}
+
+.loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  z-index: 1001; /* Higher than intro container */
+}
+
+.loader-content {
+  text-align: center;
+  animation: scaleUp 0.8s ease-out;
+}
+
+.loader-gif {
+  width: 100%; /* Adjust size as needed */
+  height: 100%; /* Adjust size as needed */
+  object-fit: contain;
+}
+
+.logo-container {
+  text-align: center;
+  /* animation: scaleUp 0.8s ease-out; */
+}
+
+.logo-video {
+  width: 99%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.main-content {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  background: none;
+  scroll-snap-type: y mandatory;
+  opacity: 0; /* Start with opacity 0 */
+  visibility: hidden;
+}
+
+.main-content.visible {
+  opacity: 1;
+  visibility: visible; /* Make it visible when the class is added */
+}
+
+.hidden {
+  display: none;
+}
+
+/* Jewelry showcase section */
+.jewelry-showcase {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url("../images/black-gradient.png");
+  background-size: cover;
+  background-position: center;
+  padding: 0;
+  /* justify-content: flex-end; */
+  position: relative;
+}
+
+.jewelry-image {
+  width: 100%;
+  display: block;
+  mix-blend-mode: lighten;
+  object-fit: cover;
+  object-position: center;
+}
+
+.showcase-header {
+  text-align: center;
+  overflow-y: hidden;
+  margin-top: 10px;
+}
+
+.showcase-logo {
+  letter-spacing: 4px;
+  color: #fff;
+  font-weight: 400;
+}
+
+.showcase-year {
+  color: #fff;
+  font-weight: 400;
+}
+
+/* Specifications section */
+.specifications-section {
+  padding: 0 0 0 0;
+  display: flex;
+  flex-direction: column;
+  background-image: url("../images/grey-geometric.png");
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  position: relative;
+  opacity: 1;
+  transform: none;
+  /* animation: slideUpFade 0.8s ease-out forwards;
+  animation-delay: 0.5s; */
+  /* border-radius: 0 0 18px 18px; */
+  flex: 1;
+}
+
+.specifications-section::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(40, 51, 71, 0.1),
+    rgba(40, 51, 71, 0.2)
+  );
+  pointer-events: none;
+}
+
+.specifications-section::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.2));
+  z-index: 1;
+}
+
+.client-logo {
+  width: 200px;
+  z-index: 99;
+}
+
+.product-info {
+  overflow-y: hidden;
+  height: 15%;
+  margin-bottom: 25px;
+}
+
+.product-id {
+  text-align: center;
+  color: #ff1493;
+  font-size: 28px;
+  letter-spacing: 1px;
+  font-weight: 600;
+  position: relative;
+}
+
+.product-id-main {
+  display: block;
+  color: white;
+  font-weight: 400;
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 2;
+  font-family: "inter", sans-serif;
+}
+
+.product-id-overlap {
+  display: block;
+  color: #4c5a71;
+  font-weight: 400;
+  letter-spacing: 1px;
+  position: absolute;
+  left: 50%;
+  top: 15px;
+  transform: translateX(-50%);
+  z-index: 1;
+  pointer-events: none;
+  font-family: "inter", sans-serif;
+}
+
+.specs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  z-index: 99;
+  position: absolute;
+  width: 100%;
+}
+
+.spec-item {
+  text-align: center;
+}
+
+.spec-label {
+  color: #c0c0c0;
+  font-weight: 400;
+  font-family: "inter", sans-serif;
+}
+
+.spec-value {
+  color: #4c5a71;
+  font-size: 8px;
+  font-weight: 400;
+  font-family: "inter", sans-serif;
+}
+
+.primary-gem {
+  overflow: hidden;
+  height: 35%;
+}
+
+.primary-gem .spec-label {
+  color: #4c5a71;
+  text-transform: uppercase;
+  border-bottom: 1px solid #4c5a71;
+  font-weight: 400;
+  font-family: "inter", sans-serif;
+}
+
+.gem-content-layout {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 0;
+  overflow: hidden;
+}
+
+.size-info {
+  text-align: left;
+  margin-top: 0;
+  /* padding-left: 30px; */
+}
+
+.size-value {
+  color: #4c5a71;
+  font-weight: 400;
+  font-family: "inter", sans-serif;
+}
+
+.size-label {
+  color: #c0c0c0;
+  font-weight: 400;
+  text-align: center;
+  font-family: "inter", sans-serif;
+}
+
+.gem-center {
+  text-align: center;
+}
+
+.gem-image {
+  margin-left: 0;
+}
+
+.gem-type {
+  width: 100px;
+  color: #4c5a71;
+  font-weight: 400;
+  font-family: "inter", sans-serif;
+}
+
+.secondary-diamonds {
+  margin: 0 0 90px 0;
+}
+
+.secondary-header {
+  color: #4c5a71;
+  text-transform: uppercase;
+  border-bottom: 1px solid #4c5a71;
+  font-weight: 400;
+  font-family: "inter", sans-serif;
+}
+
+.diamond-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: hidden;
+}
+
+.specs-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-content: center;
+  align-items: center;
+}
+
+.clarity-info,
+.specs-info {
+  text-align: right;
+  align-self: center;
+  width: 100px;
+}
+
+.specs-info {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 100px;
+  height: 100px;
+}
+
+.specs-value {
+  color: #4c5a71;
+  font-weight: 400;
+  text-align: center;
+  font-family: "inter", sans-serif;
+}
+
+.specs-label {
+  color: #c0c0c0;
+  text-align: center;
+  font-weight: 400;
+  font-family: "inter", sans-serif;
+}
+
+.diamond-visual {
+  text-align: center;
+}
+
+.diamond-image {
+  margin-bottom: 2px;
+}
+
+.diamond-type {
+  color: #4c5a71;
+  font-size: 13.4px;
+  line-height: 13.85px;
+  font-weight: 400;
+  font-family: "inter", sans-serif;
+}
+
+.round {
+  color: #4c5a71;
+  font-weight: 400;
+  font-family: "inter", sans-serif;
+}
+
+.product-description {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 8rem;
+}
+
+.description-label {
+  color: #4c5a71;
+  text-transform: uppercase;
+  text-align: center;
+  font-family: "inter", sans-serif;
+  font-weight: 400;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 0 auto 4px auto;
+  overflow: hidden;
+}
+
+.description-label::before,
+.description-label::after {
+  content: "";
+  display: block;
+  height: 0.5px;
+  background-color: #5e7697;
+  flex: 1;
+}
+
+.description-card {
+  background: #434c5e;
+  border-radius: 0;
+  box-sizing: border-box;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.description-text {
+  color: #c0c0c0;
+  text-align: center;
+  font-weight: 400;
+  font-family: "inter", sans-serif;
+}
+
+.custom-divider {
+  width: 500px;
+  height: 5.333px;
+  background: #5e7697;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.website {
+  color: #4c5a71;
+  font-weight: 400;
+}
+
+/* Animations */
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes slideUpFade {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes modalSlideUp {
+  0% {
+    transform: translateY(100px) scale(0.9);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes modalSlideLeft {
+  0% {
+    transform: translateX(-100px) rotateY(-10deg);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0) rotateY(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes modalSlideRight {
+  0% {
+    transform: translateX(100px) rotateY(10deg);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0) rotateY(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes modalZoomIn {
+  0% {
+    transform: scale(0.8) rotateX(10deg);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1) rotateX(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Media Queries */
+
+/* Large Desktop (1920px+) */
+@media screen and (min-width: 1920px) and (min-height: 1080px) {
+  body {
+    align-items: flex-start;
+  }
+
+  .main-content {
+    width: 500px;
+    height: 100vh;
+  }
+
+  .jewelry-image {
+    height: 256px;
+  }
+
+  .showcase-header {
+    margin-bottom: 10px;
+    margin-top: 20px;
+  }
+
+  .showcase-logo {
+    font-size: 22px;
+    margin-bottom: 2px;
+  }
+
+  .showcase-year {
+    font-size: 12px;
+  }
+
+  .specifications-section {
+    height: 750.33px;
+  }
+
+  .product-id {
+    margin: 10px 0 10px;
+    height: 40px;
+  }
+
+  .product-id-main {
+    font-size: 13.653px;
+  }
+
+  .product-id-overlap {
+    font-size: 13.653px;
+  }
+
+  .specs-grid {
+    padding: 0 30px;
+    margin-bottom: 0;
+    margin-top: 20px;
+  }
+
+  .spec-label {
+    font-size: 16px;
+  }
+
+  .primary-gem {
+    padding: 0 50px 0 50px;
+  }
+
+  .primary-gem .spec-label {
+    font-size: 12.58px;
+    padding-bottom: 5px;
+    margin-bottom: 8px;
+  }
+
+  .gem-content-layout {
+    gap: 67px;
+  }
+
+  .size-value {
+    font-size: 16px;
+    margin-bottom: 2px;
+  }
+
+  .size-label {
+    font-size: 10.67px;
+    margin-bottom: 5px;
+  }
+
+  .gem-center {
+    margin-top: 10px;
+  }
+
+  .gem-image {
+    width: 100.74px;
+    height: 120.69px;
+    margin-bottom: 2px;
+  }
+
+  .gem-type {
+    font-size: 13.4px;
+    line-height: 13.85px;
+  }
+
+  .secondary-diamonds {
+    padding: 0 30px;
+    margin: 15px 0 0 0;
+  }
+
+  .secondary-header {
+    font-size: 12.58px;
+    padding-bottom: 5px;
+    margin-bottom: 8px;
+  }
+
+  .specs-container {
+    gap: 65px;
+  }
+
+  .specs-value {
+    font-size: 16px;
+    margin-bottom: 2px;
+  }
+
+  .specs-label {
+    font-size: 10.67px;
+    margin-bottom: 5px;
+  }
+
+  .diamond-visual {
+    margin-right: 0;
+  }
+
+  .diamond-image {
+    width: 93.19px;
+    height: 93.19px;
+  }
+
+  .round {
+    font-size: 10px;
+    line-height: 13.85px;
+  }
+
+  .product-description {
+    margin-top: auto;
+    padding-bottom: 20px;
+  }
+
+  .description-label {
+    font-size: 11.07px;
+    width: 420.53px;
+  }
+
+  .description-card {
+    padding: 8px 8px 8px 8px;
+    width: 358.6px;
+    max-width: 120%;
+  }
+
+  .description-text {
+    font-size: 13px;
+  }
+
+  .footer {
+    margin-top: auto;
+    padding: 15px 30px;
+  }
+
+  .ds-logo {
+    width: 38.82px;
+    height: 22.64px;
+  }
+
+  .website {
+    font-size: 12.46px;
+  }
+}
+
+/* Tablet and smaller desktop (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .main-content {
+    width: min(90vw, 450px);
+    /* height: min(95vh, 900px); */
+    /* border-radius: 12px; */
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+    margin: 2.5vh auto;
+    justify-content: center;
+  }
+
+  .jewelry-image {
+    height: 256px;
+  }
+
+  .showcase-logo {
+    font-size: 18px;
+  }
+
+  .showcase-year {
+    font-size: 12px;
+  }
+
+  .gem-image {
+    width: 60px;
+    height: 60px;
+  }
+
+  .diamond-image {
+    width: 55px;
+    height: 55px;
+  }
+}
+
+@media not screen and (min-width: 1920px) and (min-height: 1080px) {
+  .main-content {
+    width: min(90vw, 350px);
+    /* height: min(93vh, 800px); */
+  }
+
+  .jewelry-image {
+    height: 256px;
+  }
+
+  .showcase-logo {
+    font-size: 16px;
+  }
+
+  .showcase-year {
+    font-size: 11px;
+  }
+
+  .product-id {
+    margin-top: 2px;
+    height: 40px;
+  }
+
+  .product-id-main {
+    font-size: 12px;
+  }
+
+  .product-id-overlap {
+    font-size: 12px;
+  }
+
+  .specs-grid {
+    padding: 0 0;
+  }
+
+  .spec-label {
+    font-size: 12px;
+  }
+
+  .primary-gem {
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+
+  .primary-gem .spec-label {
+    font-size: 11px;
+    padding-bottom: 2px;
+    margin-bottom: 6px;
+  }
+
+  .gem-content-layout {
+    gap: 45px;
+  }
+
+  .size-value {
+    font-size: 12px;
+    margin-bottom: 1px;
+  }
+
+  .size-label {
+    font-size: 9px;
+    margin-bottom: 3px;
+  }
+
+  .gem-image {
+    width: 45px;
+    height: 50px;
+  }
+
+  .gem-type {
+    font-size: 9px;
+    line-height: 8px;
+    padding-top: 2px;
+  }
+
+  .secondary-diamonds {
+    padding: 0 25px;
+  }
+
+  .secondary-header {
+    font-size: 11px;
+    padding-bottom: 2px;
+    margin-bottom: 6px;
+  }
+
+  .specs-container {
+    gap: 20px;
+  }
+
+  .specs-value {
+    font-size: 12px;
+    margin-bottom: 1px;
+  }
+
+  .specs-label {
+    font-size: 9px;
+    margin-bottom: 3px;
+  }
+
+  /* .diamond-visual {
+      margin-left: 25px;
+  } */
+
+  .diamond-image {
+    width: 50px;
+    height: 50px;
+  }
+
+  .round {
+    font-size: 8px;
+    line-height: 10px;
+  }
+
+  .product-description {
+    margin: 10px 0 0 0;
+  }
+
+  .description-label {
+    font-size: 11px;
+    width: 340.53px;
+  }
+
+  .description-card {
+    padding: 5px 2px 25px 2px;
+    width: 280px;
+    max-width: 100%;
+  }
+
+  .description-text {
+    font-size: 10px;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  .footer {
+    padding: 0 30px;
+    /* margin-top: 20px; */
+  }
+
+  .ds-logo {
+    width: 35px;
+    height: 20px;
+  }
+
+  .website {
+    font-size: 10px;
+  }
+}
+
+/* Medium tablet styles (769px+) */
+@media (min-width: 769px) {
+  .main-content {
+    width: 350px;
+    /* border-radius: 12px; */
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+    margin: 2.5vh auto;
+  }
+}
+
+@media (max-width: 768px) {
+  html,
+  body {
+    height: 100dvh;
+    overflow-y: auto;
+    /* enable swipe gesture */
+    -webkit-overflow-scrolling: touch;
+    font-size: 14px;
+  }
+
+  .main-content {
+    width: 100vw !important;
+    height: 100vh !important;
+    padding: 0;
+    margin: 0;
+    max-width: 100vw;
+    max-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    scroll-snap-type: y mandatory;
+  }
+
+  body::-webkit-scrollbar {
+    display: none; /* hide scroll bar */
+  }
+
+  .jewelry-showcase {
+    flex: 0 0 38%;
+    height: 38%;
+    padding: 0;
+  }
+
+  .jewelry-image {
+    height: 256px;
+  }
+
+  .loader-gif {
+    width: 100%;
+    height: 100%;
+  }
+
+  .specifications-section {
+    flex: 1;
+    height: 62%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .spec-label,
+  .specs-label {
+    font-size: 11px;
+  }
+
+  .specs-value,
+  .spec-value {
+    font-size: 14px !important;
+  }
+
+  .product-id-main,
+  .product-id-overlap,
+  .gem-type,
+  .round,
+  .description-label,
+  .description-text,
+  .website {
+    font-size: 13px !important;
+    line-height: 1.2;
+    font-weight: 500;
+  }
+
+  .gem-image,
+  .diamond-image {
+    width: 80px !important;
+    height: auto !important;
+  }
+
+  .description-card {
+    width: 100%;
+    /* padding: 10px; */
+    box-sizing: border-box;
+    margin: 0 auto;
+  }
+
+  .product-description {
+    padding: 0 15px;
+  }
+
+  .footer {
+    padding: 10px 15px;
+  }
+
+  .ds-logo {
+    width: 40px;
+    height: auto;
+  }
+
+  .gem-content-layout {
+    align-items: center;
+  }
+  .specs-container {
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .jewelry-image {
+    height: 300px;
+  }
+
+  .loader-gif {
+    width: 100%;
+    height: 100%;
+  }
+
+  .showcase-logo {
+    font-size: 20px;
+  }
+
+  .gem-content-layout {
+    gap: 55px;
+    align-items: center;
+  }
+
+  .specs-container {
+    /* gap: 20px; */
+    align-items: center;
+  }
+
+  .gem-image {
+    width: 80px !important;
+    height: 85px !important;
+  }
+
+  .diamond-image {
+    width: 65px !important;
+    height: 65px !important;
+  }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+  .main-content {
+    height: 100vh !important;
+  }
+
+  .jewelry-showcase {
+    height: 40vh;
+    min-height: 200px;
+  }
+
+  .jewelry-image {
+    height: 256px;
+  }
+
+  .specifications-section {
+    height: 60vh !important;
+    min-height: 300px;
+  }
+
+  .showcase-logo {
+    font-size: 20px;
+  }
+
+  .primary-gem {
+    margin-bottom: 15px;
+  }
+
+  .secondary-diamonds {
+    margin: 15px 0 20px 0;
+  }
+
+  .footer {
+    margin-bottom: 10px;
+    padding: 15px 40px;
+  }
+}
+
+/* Custom style for 360px devices (e.g., Galaxy S8, Pixel 3) */
+@media (max-width: 360px) {
+  .main-content {
+    font-size: 12px;
+  }
+
+  .gem-image,
+  .diamond-image {
+    width: 60px !important;
+    height: 50px !important;
+  }
+
+  .product-id-main,
+  .spec-label,
+  .specs-label,
+  .description-text {
+    font-size: 12px !important;
+  }
+
+  .gem-content-layout {
+    gap: 35px;
+  }
+}
+
+/* Custom style for 375px devices (e.g., iPhone X, 11 Pro) */
+@media (max-width: 375px) {
+  .main-content {
+    font-size: 13px;
+  }
+
+  .gem-image,
+  .diamond-image {
+    width: 74px !important;
+    height: 74px !important;
+  }
+
+  .gem-content-layout {
+    gap: 40px;
+  }
+
+  .description-text {
+    font-size: 13px !important;
+  }
+}
+
+/* Custom style for 390px devices (e.g., iPhone 12/13/14 Pro Max) */
+@media (max-width: 390px) {
+  .main-content {
+    font-size: 13.5px;
+  }
+
+  .round {
+    font-size: 7px;
+  }
+
+  .gem-image,
+  .diamond-image {
+    width: 60px !important;
+    height: 60px !important;
+  }
+
+  .gem-content-layout {
+    gap: 35px;
+    align-items: center;
+  }
+
+  .specs-container {
+    /* gap: 10px; */
+    align-items: center;
+  }
+
+  .footer {
+    margin-top: 0;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .specifications-section {
+    padding-bottom: 10px;
+  }
+
+  .description-card {
+    /* padding-top: 2px; */
+    overflow: hidden;
+  }
+
+  .description-label {
+    width: 310px;
+  }
+
+  .description-text {
+    font-size: 10.5px !important;
+  }
+
+  .jewelry-image {
+    height: 262px;
+  }
+}

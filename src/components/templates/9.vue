@@ -51,16 +51,6 @@
         <div class="label">Polish</div>
       </div>
     </div>
-
-    <!-- Side‐stones summary -->
-    <div class="jewelry-info__sides">
-      <div class="value">
-        {{
-          `${certificate.SideStoneWeight} | ${certificate.SideStoneColor.value} | ${certificate.SideStoneClarity.value}`
-        }}
-      </div>
-      <div class="label">Sidestones / Color / Clarity</div>
-    </div>
   </section>
 </template>
 
@@ -106,8 +96,11 @@ defineProps({
 
 .jewelry-info__top {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   margin-bottom: 1.5rem;
+  padding-left: 5rem;
+  padding-right: 5rem;
+  width: 100%;
 }
 
 .jewelry-info__item .label {

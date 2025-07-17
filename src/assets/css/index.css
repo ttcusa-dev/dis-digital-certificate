@@ -408,7 +408,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 11rem;
+  height: 12rem;
 }
 
 .description-label {

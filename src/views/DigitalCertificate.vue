@@ -92,7 +92,9 @@ async function fetchCertificate() {
 
 const templateComponent = computed(() =>
   defineAsyncComponent(() =>
-    import(`../components/templates/${certificate.value.Template.id}.vue`)
+    // import(`../components/templates/${certificate.value.Template.id}.vue`)
+    import(`../components/templates/1.vue`)
+
   )
 );
 

@@ -1,26 +1,24 @@
 //PRODUCTION
 
 let config = {
-  PRODUCTION: {
-    apiKey: process.env.VUE_APP_PRODUCTION_FIREBASE_API_KEY,
-    authDomain: process.env.VUE_APP_PRODUCTION_AUTH_DOMAIN,
-    databaseURL: process.env.VUE_APP_PRODUCTION_DATABASE_URL,
-    projectId: process.env.VUE_APP_PRODUCTION_PROJECT_ID,
-    storageBucket: process.env.VUE_APP_PRODUCTION_STORAGE_BUCKET,
-    messagingSenderId: process.env.VUE_APP_PRODUCTION_MESSAGING_SENDER_ID,
-    appId: process.env.VUE_APP_PRODUCTION_APP_ID,
-    measurementId: process.env.VUE_APP_PRODUCTION_MEASUREMENT_ID,
-  },
   STAGING: {
-    apiKey: process.env.VUE_APP_STAGING_FIREBASE_API_KEY,
-    authDomain: process.env.VUE_APP_STAGING_AUTH_DOMAIN,
-    databaseURL: process.env.VUE_APP_STAGING_DATABASE_URL,
-    projectId: process.env.VUE_APP_STAGING_PROJECT_ID,
-    storageBucket: process.env.VUE_APP_STAGING_STORAGE_BUCKET,
-    messagingSenderId: process.env.VUE_APP_STAGING_MESSAGING_SENDER_ID,
-    appId: process.env.VUE_APP_STAGING_APP_ID,
-    measurementId: process.env.VUE_APP_STAGING_MEASUREMENT_ID,
+    apiKey: import.meta.env.VITE_STAGING_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_STAGING_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_STAGING_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_STAGING_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env
+      .VITE_STAGING_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_STAGING_FIREBASE_APP_ID,
+  },
+
+  PRODUCTION: {
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
   },
 };
 
-export default config[process.env.VUE_APP_MODE];
+export default config[import.meta.env.VITE_APP_MODE];

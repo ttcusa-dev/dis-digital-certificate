@@ -133,6 +133,7 @@ body {
   mix-blend-mode: lighten;
   object-fit: cover;
   object-position: center;
+  margin-top: 30px;
 }
 
 .showcase-header {
@@ -180,9 +181,11 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to bottom,
-      rgba(40, 51, 71, 0.1),
-      rgba(40, 51, 71, 0.2));
+  background: linear-gradient(
+    to bottom,
+    rgba(40, 51, 71, 0.1),
+    rgba(40, 51, 71, 0.2)
+  );
   pointer-events: none;
 }
 
@@ -197,8 +200,6 @@ body {
   z-index: 1;
 }
 
-
-
 .client-logo {
   width: 150px;
   z-index: 99;
@@ -207,7 +208,7 @@ body {
 
 .product-info {
   overflow-y: hidden;
-  height: 15%;
+  height: 6%;
   /* margin-bottom: 25px; */
 }
 
@@ -407,7 +408,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 8rem;
+  height: 11rem;
 }
 
 .description-label {
@@ -920,7 +921,6 @@ body {
 }
 
 @media (max-width: 768px) {
-
   html,
   body {
     height: 100dvh;

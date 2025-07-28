@@ -91,10 +91,9 @@ async function fetchCertificate() {
 }
 
 const templateComponent = computed(() =>
-  defineAsyncComponent(() =>
-    // import(`../components/templates/${certificate.value.Template.id}.vue`)
-    import(`../components/templates/7.vue`)
-
+  defineAsyncComponent(
+    () => import(`../components/templates/${certificate.value.Template.id}.vue`)
+    // import(`../components/templates/7.vue`)
   )
 );
 
@@ -102,7 +101,7 @@ onMounted(async () => {
   await fetchCertificate();
   // After 5 seconds, hide loader and show intro
   if (certificate.value) {
-     const introContainer = document.querySelector(".intro-container");
+    const introContainer = document.querySelector(".intro-container");
     const loaderContainer = document.querySelector(".loader-container");
     const video = document.getElementById("video");
 
@@ -118,13 +117,12 @@ onMounted(async () => {
 
     // After 8 seconds total (5s loader + 3s intro), show main content
     setTimeout(() => {
-     
       const mainContent = document.querySelector(".main-content");
       const templateContainer = document.querySelector(".template-container");
       const specsSection = document.querySelector(".specifications-section");
 
       const jewelryVideo = document.getElementById("jewelry-video");
-      const productInfo = document.querySelector(".product-info");
+      const animatedPhase = document.querySelector(".animated-phase");
       const specInfo = document.querySelector(".specs-info");
       const productDesc = document.querySelector(".product-description");
       const primaryCont = document.querySelector(".primary-gem");
@@ -136,15 +134,16 @@ onMounted(async () => {
         templateContainer.classList.remove("hidden");
 
         setTimeout(() => {
+          console.log(animatedPhase)
           templateContainer.classList.add("visible");
           mainContent.classList.add("visible");
           specsSection.style.visibility = "visible";
           jewelryVideo.currentTime = 5;
-          specInfo.style.animation = "scaleUp 0.7s ease-in forwards";
-          productInfo.style.animation = "scaleUp 0.7s ease-in forwards";
-          productDesc.style.animation = "scaleUp 0.7s ease-in forwards";
-          primaryCont.style.animation = "scaleUp 0.7s ease-in forwards";
-          secondaryCont.style.animation = "scaleUp 0.7s ease-in forwards";
+          // specInfo.style.animation = "scaleUp 0.7s ease-in forwards";
+          animatedPhase.style.animation = "scaleUp 0.7s ease-in forwards";
+          // productDesc.style.animation = "scaleUp 0.7s ease-in forwards";
+          // primaryCont.style.animation = "scaleUp 0.7s ease-in forwards";
+          // secondaryCont.style.animation = "scaleUp 0.7s ease-in forwards";
         }, 100);
       }, 500);
     }, 4500);

@@ -233,7 +233,7 @@ body {
 
 .product-id-overlap {
   display: block;
-  color: #4c5a71;
+  color: #c7ceda;
   font-weight: 400;
   letter-spacing: 1px;
   position: absolute;
@@ -374,6 +374,14 @@ body {
   font-family: "inter", sans-serif;
 }
 
+.value {
+  color: #7c9cc8 !important;
+}
+
+.label {
+  color: #c7ceda !important;
+}
+
 .specs-label {
   color: #c0c0c0;
   text-align: center;
@@ -412,7 +420,7 @@ body {
 }
 
 .description-label {
-  color: #4c5a71;
+  color: #7c9cc8;
   text-transform: uppercase;
   text-align: center;
   font-family: "inter", sans-serif;
@@ -466,7 +474,7 @@ body {
 }
 
 .website {
-  color: #4c5a71;
+  color: #7c9cc8;
   font-weight: 400;
 }
 

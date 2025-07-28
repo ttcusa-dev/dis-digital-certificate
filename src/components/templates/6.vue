@@ -1,6 +1,6 @@
 
 <template>
-  <section class="jewelry-info">
+  <section class="jewelry-info animated-phase">
     <div class="jewelry-info__top">
       <div class="jewelry-info__item">
         <div class="value">{{ certificate.JewelryType }}</div>
@@ -113,7 +113,7 @@ defineProps({
 .jewelry-info__item .label {
   font-size: 0.75rem;
   text-transform: uppercase;
-  opacity: 0.6;
+
   text-align: center;
 }
 
@@ -127,7 +127,7 @@ defineProps({
 .jewelry-info__color .label {
   font-size: 0.75rem;
   text-transform: uppercase;
-  opacity: 0.6;
+
   margin-top: 10px;
   text-align: center;
 }
@@ -199,7 +199,7 @@ defineProps({
 
 .stat .label {
   font-size: 0.75rem;
-  opacity: 0.6;
+
   margin-top: 0.25rem;
 }
 
@@ -221,7 +221,7 @@ defineProps({
 
 .gauge .label {
   font-size: 0.75rem;
-  opacity: 0.6;
+
   margin-top: 0.25rem;
 }
 
@@ -233,7 +233,7 @@ defineProps({
 .jewelry-info__sides .label {
   font-size: 0.75rem;
   text-transform: uppercase;
-  opacity: 0.6;
+
   margin-bottom: 0.25rem;
 }
 

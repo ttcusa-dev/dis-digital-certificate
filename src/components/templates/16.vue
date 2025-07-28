@@ -1,5 +1,5 @@
 <template>
-  <div class="product-info">
+  <div class="product-info animated-phase">
     <div class="specs-grid">
       <div class="spec-item">
         <div class="spec-value">{{ props.certificate.JewelryType }}</div>
@@ -12,7 +12,7 @@
     </div>
   </div>
 
-  <div class="primary-gem secondary">
+  <div class="primary-gem secondary animated-phase">
     <div class="spec-label">PRIMARY:: DIAMOND(S)</div>
 
     <div class="diamond-section">

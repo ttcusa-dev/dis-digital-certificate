@@ -1,14 +1,14 @@
 <!-- components/RingInfoVariant.vue -->
 <template>
-  <section class="ring-info-v2">
+  <section class="ring-info-v2 animated-phase">
     <!-- Style & Shape (stacked, centered) -->
     <div class="top">
       <div class="block">
-        <div class="label">RING</div>
-        <div class="value">{{ styleValue }}</div>
+        <div class="value">{{ certificate.JewelryType }}</div>
+        <div class="label">STYLE</div>
       </div>
       <div class="block">
-        <div class="value">{{ shapeValue }}</div>
+        <div class="value">{{ certificate.MainStoneShape }}</div>
         <div class="label">CENTER STONE SHAPE</div>
       </div>
     </div>
@@ -31,7 +31,7 @@
     <!-- Measurements & Weight -->
     <div class="stats">
       <div class="col">
-        <div class="value">{{ weight }} ct.</div>
+        <div class="value">{{ certificate.MainStoneWeight }} ct.</div>
         <div class="label">CENTER STONE WEIGHT</div>
       </div>
     </div>
@@ -49,14 +49,19 @@
 
     <!-- Side‑stones summary -->
     <div class="sides">
-      <div class="value">{{ sideStones }}</div>
-      <div class="label">SIDESTONES / COLOR / CLARITY</div>
+      <div class="value">
+        {{
+          `${certificate.SideStoneWeight} | ${certificate.SideStoneColor.value} | ${certificate.SideStoneClarity.value}`
+        }}
+      </div>
+      <div class="label">Sidestones / Color / Clarity</div>
     </div>
   </section>
 </template>
 
 <script setup>
 defineProps({
+  certificate: { type: Object, default: {} },
   ringNumber: { type: String, default: "2703655" },
   styleValue: { type: String, default: "STYLE" },
   shapeValue: { type: String, default: "Radiant" },
@@ -86,7 +91,7 @@ defineProps({
 }
 .number {
   font-size: 1.2rem;
-  opacity: 0.6;
+
   margin-bottom: 1.5rem;
 }
 .top {
@@ -97,7 +102,7 @@ defineProps({
 }
 .top .block .label {
   font-size: 0.75rem;
-  opacity: 0.6;
+
   text-transform: uppercase;
 }
 .top .block .value {
@@ -149,7 +154,7 @@ defineProps({
 }
 .color-slider .label {
   font-size: 0.75rem;
-  opacity: 0.6;
+
   text-transform: uppercase;
   margin-top: 0.5rem;
 }
@@ -167,7 +172,7 @@ defineProps({
 }
 .stats .col .label {
   font-size: 0.75rem;
-  opacity: 0.6;
+
   text-transform: uppercase;
   margin-top: 0.25rem;
 }
@@ -183,7 +188,7 @@ defineProps({
 }
 .quality .label {
   font-size: 0.75rem;
-  opacity: 0.6;
+
   text-transform: uppercase;
   margin-top: 0.5rem;
 }
@@ -196,7 +201,7 @@ defineProps({
 }
 .sides .label {
   font-size: 0.75rem;
-  opacity: 0.6;
+
   text-transform: uppercase;
   margin-top: 0.25rem;
 }

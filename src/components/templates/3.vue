@@ -2,13 +2,13 @@
 <template>
   <section class="ring-info-v2">
     <!-- Style & Shape (stacked, centered) -->
-    <div class="top">
+    <div class="top animated-phase-one">
       <div class="block">
-        <div class="label">RING</div>
-        <div class="value">{{ styleValue }}</div>
+        <div class="value">{{ certificate.JewelryType }}</div>
+        <div class="label">Style</div>
       </div>
-      <div class="block">
-        <div class="value">{{ shapeValue }}</div>
+      <div class="block animated-phase-one">
+        <div class="value">{{ certificate.MainStoneShape }}</div>
         <div class="label">CENTER STONE SHAPE</div>
       </div>
     </div>
@@ -29,31 +29,36 @@
     </div>
 
     <!-- Measurements & Weight -->
-    <div class="stats">
+    <div class="stats animated-phase-one">
       <div class="col">
-        <div class="value">{{ measurements }}</div>
+        <div class="value">{{ certificate.MainStoneMeasurements }}</div>
         <div class="label">MEASUREMENTS</div>
       </div>
       <div class="col">
-        <div class="value">{{ weight }}</div>
+        <div class="value">{{ certificate.MainStoneWeight }} ct.</div>
         <div class="label">CENTER STONE WEIGHT</div>
       </div>
     </div>
 
     <!-- Clarity gauge -->
-    <div class="quality">
-      <div class="clarity-gauge">
-        <!-- insert your gauge component or SVG here -->
+    <div class="guage animated-phase-two">
+      <div class="value">{{ certificate.MainStoneClarity.value }}</div>
+      <!-- <div class="clarity-gauge">
+        insert your gauge component or SVG here
         <slot name="clarity-gauge"></slot>
-      </div>
+      </div> -->
       <div class="label">CLARITY</div>
     </div>
 
     <hr class="divider" />
 
     <!-- Side‑stones summary -->
-    <div class="sides">
-      <div class="value">{{ sideStones }}</div>
+    <div class="sides animated-phase-one">
+      <div class="value">
+        {{
+          `${certificate.SideStoneWeight} | ${certificate.SideStoneColor.value} | ${certificate.SideStoneClarity.value}`
+        }}
+      </div>
       <div class="label">SIDESTONES / COLOR / CLARITY</div>
     </div>
   </section>
@@ -61,6 +66,7 @@
 
 <script setup>
 defineProps({
+  certificate: { type: Object, default: {} },
   ringNumber: { type: String, default: "2703655" },
   styleValue: { type: String, default: "STYLE" },
   shapeValue: { type: String, default: "Radiant" },
@@ -185,12 +191,12 @@ defineProps({
   width: 80px;
   height: 80px;
 }
-.quality .label {
+/* .quality .label {
   font-size: 0.75rem;
-  opacity: 0.6;
   text-transform: uppercase;
-  margin-top: 0.5rem;
-}
+  opacity: 0.6;
+  text-align: center;
+} */
 .sides {
   margin-bottom: 1.5rem;
 }
@@ -211,5 +217,12 @@ defineProps({
   font-size: 0.75rem;
   line-height: 1.4;
   text-align: left;
+}
+
+.label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  opacity: 0.6;
+  text-align: center;
 }
 </style>

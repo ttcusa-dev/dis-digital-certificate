@@ -13,7 +13,7 @@
     </div>
 
     <!-- Color slider -->
-    <div class="jewelry-info__color animated-phase-two">
+    <div class="jewelry-info__color">
       <div class="color">{{ certificate.MainStoneColor.value }}</div>
       <div class="thumb" :style="{ left: colorPercent + '%' }"></div>
       <div class="slider">
@@ -22,44 +22,19 @@
       <div class="label">Color</div>
     </div>
 
-    <!-- Weight / Measurements / Diagram -->
-    <div class="jewelry-info__stats animated-phase-one">
-      <div class="stat">
-        <div class="value">{{ certificate.MainStoneWeight }} ct.</div>
-        <div class="label">Center Stone Weight</div>
-      </div>
-      <div class="stat">
-        <div class="value">{{ certificate.MainStoneMeasurements }}</div>
-        <div class="label">Center Stone Measurements</div>
-      </div>
-    </div>
-    <div class="stat diagram">
-      <!-- drop in your SVG icon here -->
-    </div>
     <!-- Clarity / Symmetry / Polish gauges -->
     <div class="jewelry-info__quality">
       <div class="gauge animated-phase-two">
         <div class="value">{{ certificate.MainStoneClarity.value }}</div>
         <div class="label">Clarity</div>
       </div>
-      <div class="gauge animated-phase-three">
-        <div class="value">{{ certificate.MainStoneSymmetry }}</div>
-        <div class="label">Symmetry</div>
+      <div class="stat diagram">
+        <div v-if="certificate.MainStoneWeight != 0" class="value">
+          {{ certificate.MainStoneWeight }}
+        </div>
+        <div class="label">{{ certificate.MainStoneType }}</div>
+        <!-- drop in your SVG icon here -->
       </div>
-      <div class="gauge animated-phase-four">
-        <div class="value">{{ certificate.MainStonePolish }}</div>
-        <div class="label">Polish</div>
-      </div>
-    </div>
-
-    <!-- Side‐stones summary -->
-    <div class="jewelry-info__sides animated-phase-one">
-      <div class="value">
-        {{
-          `${certificate.SideStoneWeight} | ${certificate.SideStoneColor.value} | ${certificate.SideStoneClarity.value}`
-        }}
-      </div>
-      <div class="label">Sidestones / Color / Clarity</div>
     </div>
   </section>
 </template>
@@ -106,14 +81,17 @@ defineProps({
 
 .jewelry-info__top {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   margin-bottom: 1.5rem;
+  padding-left: 5rem;
+  padding-right: 5rem;
+  width: 100%;
 }
 
 .jewelry-info__item .label {
   font-size: 0.75rem;
   text-transform: uppercase;
-
+  opacity: 0.6;
   text-align: center;
 }
 
@@ -127,7 +105,7 @@ defineProps({
 .jewelry-info__color .label {
   font-size: 0.75rem;
   text-transform: uppercase;
-
+  opacity: 0.6;
   margin-top: 10px;
   text-align: center;
 }
@@ -199,7 +177,7 @@ defineProps({
 
 .stat .label {
   font-size: 0.75rem;
-
+  opacity: 0.6;
   margin-top: 0.25rem;
 }
 
@@ -221,7 +199,7 @@ defineProps({
 
 .gauge .label {
   font-size: 0.75rem;
-
+  opacity: 0.6;
   margin-top: 0.25rem;
 }
 
@@ -233,7 +211,7 @@ defineProps({
 .jewelry-info__sides .label {
   font-size: 0.75rem;
   text-transform: uppercase;
-
+  opacity: 0.6;
   margin-bottom: 0.25rem;
 }
 

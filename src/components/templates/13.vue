@@ -26,10 +26,6 @@
         <div class="value">{{ stone.MainStoneShape }}</div>
         <div class="label">CENTER STONE SHAPE</div>
 
-        <!-- cut -->
-        <div class="value">{{ stone.MainStoneCut }}</div>
-        <div class="label">CUT</div>
-
         <!-- color slider -->
         <div class="slider">
           <div class="fill" :style="{ width: colorPercent + '%' }"></div>

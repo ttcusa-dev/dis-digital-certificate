@@ -1,6 +1,6 @@
 <!-- components/RingInfoVariant.vue -->
 <template>
-  <section class="ring-info-v2 animated-phase">
+  <section class="ring-info-v2 animated-phase-one">
     <!-- Style & Shape (stacked, centered) -->
     <div class="top">
       <div class="block">

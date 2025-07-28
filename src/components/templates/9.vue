@@ -1,7 +1,7 @@
 
 <template>
   <section class="jewelry-info">
-    <div class="jewelry-info__top">
+    <div class="jewelry-info__top animated-phase-one">
       <div class="jewelry-info__item">
         <div class="value">{{ certificate.JewelryType }}</div>
         <div class="label">Style</div>
@@ -23,7 +23,7 @@
     </div>
 
     <!-- Weight / Measurements / Diagram -->
-    <div class="jewelry-info__stats">
+    <div class="jewelry-info__stats animated-phase-one">
       <div class="stat">
         <div class="value">{{ certificate.MainStoneWeight }} ct.</div>
         <div class="label">Center Stone Weight</div>
@@ -38,15 +38,15 @@
     </div>
     <!-- Clarity / Symmetry / Polish gauges -->
     <div class="jewelry-info__quality">
-      <div class="gauge">
+      <div class="gauge animated-phase-two">
         <div class="value">{{ certificate.MainStoneClarity.value }}</div>
         <div class="label">Clarity</div>
       </div>
-      <div class="gauge">
+      <div class="gauge animated-phase-three">
         <div class="value">{{ certificate.MainStoneSymmetry }}</div>
         <div class="label">Symmetry</div>
       </div>
-      <div class="gauge">
+      <div class="gauge animated-phase-four">
         <div class="value">{{ certificate.MainStonePolish }}</div>
         <div class="label">Polish</div>
       </div>

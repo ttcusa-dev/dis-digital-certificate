@@ -60,8 +60,10 @@
       <div class="template-container">
         <component :is="templateComponent" :certificate="certificate" />
       </div>
-      <div class="product-description">
-        <div class="description-label">COMMENTS</div>
+      <div style="visibility: hidden" class="product-description">
+        <div class="description-label">
+          <p class="comment-label">COMMENTS</p>
+        </div>
         <div class="description-card">
           <div class="description-text">
             {{ certificate.CertificateComments }}
@@ -93,7 +95,7 @@ async function fetchCertificate() {
 const templateComponent = computed(() =>
   defineAsyncComponent(
     () => import(`../components/templates/${certificate.value.Template.id}.vue`)
-    // import(`../components/templates/7.vue`)
+    // import(`../components/templates/9.vue`)
   )
 );
 
@@ -122,8 +124,19 @@ onMounted(async () => {
       const specsSection = document.querySelector(".specifications-section");
 
       const jewelryVideo = document.getElementById("jewelry-video");
-      const animatedPhase = document.querySelector(".animated-phase");
-      const specInfo = document.querySelector(".specs-info");
+      const animatedPhaseOneElements = document.querySelectorAll(
+        ".animated-phase-one"
+      );
+      const animatedPhaseTwoElements = document.querySelectorAll(
+        ".animated-phase-two"
+      );
+      const animatedPhaseThreeElements = document.querySelectorAll(
+        ".animated-phase-three"
+      );
+      const animatedPhaseFourElements = document.querySelectorAll(
+        ".animated-phase-four"
+      );
+      const descriptionLabel = document.querySelector(".description-label");
       const productDesc = document.querySelector(".product-description");
       const primaryCont = document.querySelector(".primary-gem");
       const secondaryCont = document.querySelector(".secondary");
@@ -134,14 +147,37 @@ onMounted(async () => {
         templateContainer.classList.remove("hidden");
 
         setTimeout(() => {
-          console.log(animatedPhase)
           templateContainer.classList.add("visible");
           mainContent.classList.add("visible");
           specsSection.style.visibility = "visible";
           jewelryVideo.currentTime = 5;
           // specInfo.style.animation = "scaleUp 0.7s ease-in forwards";
-          animatedPhase.style.animation = "scaleUp 0.7s ease-in forwards";
-          // productDesc.style.animation = "scaleUp 0.7s ease-in forwards";
+          animatedPhaseOneElements.forEach((el) => {
+            el.style.animation = "scaleUp 0.7s ease-in forwards";
+          });
+          setTimeout(() => {
+            animatedPhaseTwoElements.forEach((el) => {
+              el.style.animation = "scaleUp 0.7s ease-in forwards";
+            });
+            setTimeout(() => {
+              animatedPhaseThreeElements.forEach((el) => {
+                el.style.animation = "scaleUp 0.7s ease-in forwards";
+              });
+              setTimeout(() => {
+                animatedPhaseFourElements.forEach((el) => {
+                  el.style.animation = "scaleUp 0.7s ease-in forwards";
+                });
+                setTimeout(() => {
+                  productDesc.style.visibility = "visible";
+                  productDesc.style.animation = "scaleUp 0.7s ease-in forwards";
+
+                  descriptionLabel.classList.remove("hidden");
+                  descriptionLabel.style.animation =
+                    "scaleUp 0.7s ease-in forwards";
+                }, 300);
+              }, 300);
+            }, 300);
+          }, 200);
           // primaryCont.style.animation = "scaleUp 0.7s ease-in forwards";
           // secondaryCont.style.animation = "scaleUp 0.7s ease-in forwards";
         }, 100);

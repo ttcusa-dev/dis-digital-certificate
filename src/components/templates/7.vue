@@ -38,11 +38,14 @@
 
     <!-- Clarity gauge -->
     <div class="quality">
-      <div class="clarity-gauge">
-        <!-- insert your gauge component or SVG here -->
-        <slot name="clarity-gauge"></slot>
+      <div class="gauge animated-phase-two">
+        <gauge
+          :idPrefix="'1'"
+          :value="certificate.MainStoneClarity.value"
+          :percentage="percentages[certificate.MainStoneClarity.value]"
+        />
+        <div class="label">Clarity</div>
       </div>
-      <div class="label">CLARITY</div>
     </div>
 
     <hr class="divider" />
@@ -60,6 +63,10 @@
 </template>
 
 <script setup>
+import gauge from "../animations/gauge.vue";
+import { usePercentages } from "../../composables/getGuagePercent";
+const { percentages } = usePercentages();
+
 defineProps({
   certificate: { type: Object, default: {} },
   ringNumber: { type: String, default: "2703655" },

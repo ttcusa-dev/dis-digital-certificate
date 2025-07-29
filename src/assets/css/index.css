@@ -231,8 +231,6 @@ body {
   font-family: "inter", sans-serif;
 }
 
-
-
 .product-id-overlap {
   display: block;
   color: #c7ceda;
@@ -376,6 +374,33 @@ body {
   font-family: "inter", sans-serif;
 }
 
+.gauge {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.gauge .value {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.gauge .label {
+  font-size: 0.75rem;
+  opacity: 0.6;
+  margin-top: 0.25rem;
+}
+
+.gauges {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
 .value {
   color: #7c9cc8 !important;
 }
@@ -460,6 +485,7 @@ body {
   text-align: center;
   font-weight: 400;
   font-family: "inter", sans-serif;
+  height: 60px !important;
 }
 
 .custom-divider {

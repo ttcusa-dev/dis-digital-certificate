@@ -53,19 +53,29 @@
 
         <!-- clarity & polish gauges (same as left side) -->
         <div class="gauges">
-          <!-- <Gauge :value="stone.clarity"  label="Clarity" />
-          <Gauge :value="stone.polish"   label="Polish"  /> -->
           <div class="gauge animated-phase-two">
-            <div class="value">{{ stone.MainStoneClarity.value }}</div>
+            <gauge
+              :idPrefix="(i + 1) * Math.random()"
+              :value="stone.MainStoneClarity.value"
+              :percentage="percentages[stone.MainStoneClarity.value]"
+            />
             <div class="label">Clarity</div>
           </div>
           <div class="gauge animated-phase-three">
-            <div class="value">{{ stone.MainStonePolish }}</div>
-            <div class="label">Polish</div>
+            <gauge
+              :idPrefix="(i + 1) * Math.random() + Math.random()"
+              :value="stone.MainStoneSymmetry"
+              :percentage="percentages[stone.MainStoneSymmetry]"
+            />
+            <div class="label">Symmetry</div>
           </div>
           <div class="gauge animated-phase-four">
-            <div class="value">{{ stone.MainStoneSymmetry }}</div>
-            <div class="label">Symmetry</div>
+            <gauge
+              :idPrefix="(i + 1) * Math.random() * Math.random()"
+              :value="stone.MainStonePolish"
+              :percentage="percentages[stone.MainStonePolish]"
+            />
+            <div class="label">Polish</div>
           </div>
         </div>
       </div>
@@ -74,7 +84,9 @@
 </template>
 
 <script setup>
-// import Gauge from './Gauge.vue'   // your existing gauge component
+import gauge from "../animations/gauge.vue";
+import { usePercentages } from "../../composables/getGuagePercent";
+const { percentages } = usePercentages();
 
 defineProps({
   certificate: { type: Object, default: {} },
@@ -258,11 +270,11 @@ defineProps({
   text-transform: uppercase;
 }
 
-.gauges {
+/* .gauges {
   display: flex;
   justify-content: center;
   gap: 0.5rem;
-}
+} */
 
 .comments {
   background: rgba(255, 255, 255, 0.05);

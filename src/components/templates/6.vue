@@ -39,15 +39,27 @@
     <!-- Clarity / Symmetry / Polish gauges -->
     <div class="jewelry-info__quality">
       <div class="gauge animated-phase-two">
-        <div class="value">{{ certificate.MainStoneClarity.value }}</div>
+        <gauge
+          :idPrefix="'1'"
+          :value="certificate.MainStoneClarity.value"
+          :percentage="percentages[certificate.MainStoneClarity.value]"
+        />
         <div class="label">Clarity</div>
       </div>
       <div class="gauge animated-phase-three">
-        <div class="value">{{ certificate.MainStoneSymmetry }}</div>
+        <gauge
+          :idPrefix="'2'"
+          :value="certificate.MainStoneSymmetry"
+          :percentage="percentages[certificate.MainStoneSymmetry]"
+        />
         <div class="label">Symmetry</div>
       </div>
       <div class="gauge animated-phase-four">
-        <div class="value">{{ certificate.MainStonePolish }}</div>
+        <gauge
+          :idPrefix="'3'"
+          :value="certificate.MainStonePolish"
+          :percentage="percentages[certificate.MainStonePolish]"
+        />
         <div class="label">Polish</div>
       </div>
     </div>
@@ -65,6 +77,10 @@
 </template>
 
 <script setup>
+import gauge from "../animations/gauge.vue";
+import { usePercentages } from '../../composables/getGuagePercent';
+const { percentages } = usePercentages();
+
 defineProps({
   certificate: { type: Object, default: {} },
   ringNumber: { type: String, default: "2703662" },

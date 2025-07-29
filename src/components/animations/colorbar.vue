@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Responsive Horizontal Bar with Adjustable Text Offset</title>
+  <style>
+    /* reset & base */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #121212;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: sans-serif;
+    }
+
+    /* container scales with parent */
+    .bar-wrapper {
+      width: 90vmin;
+      max-width: 400px;
+      aspect-ratio: 4 / 1;
+    }
+    .bar-container {
+      width: 100%;
+      height: 100%;
+      animation: scaleIn 1s ease-out forwards;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    @keyframes scaleIn {
+      0%   { transform: scale(0); }
+      80%  { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    /* Style the letter inside the arrow */
+    #pointerText {
+      font-family: "Roboto", Arial, sans-serif;
+      font-size: 0.8vmin;        /* scales with container */
+      font-weight: 700;
+      fill: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bar-wrapper">
+    <div class="bar-container">
+      <svg viewBox="0 0 200 50" preserveAspectRatio="xMidYMid meet">
+        <!-- static background bar with flat ends -->
+        <line
+          x1="10" y1="25" x2="190" y2="25"
+          stroke="white" stroke-width="5" stroke-linecap="butt"
+        />
+
+        <!-- animated progress bar with flat ends -->
+        <line
+          id="barProg"
+          x1="10" y1="25" x2="10" y2="25"
+          stroke="#00BFFF" stroke-width="5" stroke-linecap="butt"
+        />
+
+        <!-- pointer + letter group -->
+        <g id="pointer">
+          <!-- arrow subgroup (scaled in JS) -->
+          <g id="arrow">
+            <polygon points="0,0 -7,-10 7,-10" fill="#00BFFF"/>
+          </g>
+          <!-- text travels with the arrow -->
+          <text id="pointerText" x="0" y="0" text-anchor="middle">A</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <script>
+    // scale for the triangle (1 = original size, 0.5 = half size, etc.)
+    const arrowScale = 0.5;
+    // vertical text offset (negative moves up, positive moves down)
+    const textYOffset = -7;
+
+    function initBar(progId, ptrId, textId, percent) {
+      const bar   = document.getElementById(progId);
+      const ptr   = document.getElementById(ptrId);
+      const arrow = document.getElementById('arrow');
+      const txt   = document.getElementById(textId);
+
+      // apply scale to the arrow subgroup
+      arrow.setAttribute('transform', `scale(${arrowScale})`);
+      // set the text vertical offset
+      txt.setAttribute('y', textYOffset);
+
+      const startX    = 10;        // bar start x
+      const length    = 180;       // total available length (190 − 10)
+      const centerY   = 25;        // bar center-line y
+
+      // read stroke-width and compute pointerY so arrow tip flushes with top edge
+      const strokeWidth = Number(bar.getAttribute('stroke-width'));
+      const pointerY    = centerY - strokeWidth / 2;
+
+      // initial state: 0% progress
+      bar.setAttribute('x2', startX);
+      ptr.setAttribute('transform', `translate(${startX},${pointerY})`);
+
+      // animate after scale-in
+      setTimeout(() => {
+        const duration = 2000;
+        const t0 = performance.now();
+
+        function easeOut(t) {
+          return 1 - Math.pow(1 - t, 3);
+        }
+
+        function animate(time) {
+          const frac = Math.min((time - t0) / duration, 1);
+          const eased = easeOut(frac);
+          const curX  = startX + length * (percent * eased);
+
+          // update bar length
+          bar.setAttribute('x2', curX);
+          // move arrow + letter
+          ptr.setAttribute('transform', `translate(${curX},${pointerY})`);
+
+          if (frac < 1) {
+            requestAnimationFrame(animate);
+          }
+        }
+
+        requestAnimationFrame(animate);
+      }, 300);
+    }
+
+    // initialize at 60% progress (0.6)
+    initBar('barProg', 'pointer', 'pointerText', 0.6);
+  </script>
+
+</body>
+</html>

@@ -17,13 +17,17 @@
     </div>
 
     <!-- Color slider -->
-    <div class="jewelry-info__color animated-phase-two">
-      <div class="color">{{ certificate.MainStoneColor.value }}</div>
-      <div class="thumb" :style="{ left: colorPercent + '%' }"></div>
-      <div class="slider">
-        <div class="fill" :style="{ width: colorPercent + '%' }"></div>
-      </div>
-      <div class="label">Color</div>
+    <div class=" animated-phase-two">
+      <colorbar
+    
+        :idPrefix="'1'"
+        :value="certificate.MainStoneColor.value"
+        :percentage="
+          percentages[certificate.MainStoneColor.template][
+            certificate.MainStoneColor.value
+          ]
+        "
+      />
     </div>
 
     <!-- Weight / Measurements / Diagram -->
@@ -81,8 +85,10 @@
 </template>
 
 <script setup>
+import colorbar from "../animations/colorbar.vue";
 import gauge from "../animations/gauge.vue";
-import { usePercentages } from '../../composables/getGuagePercent';
+import { usePercentages } from "../../composables/getGuagePercent";
+import Colorbar from "../animations/colorbar.vue";
 const { percentages } = usePercentages();
 
 defineProps({
@@ -104,34 +110,6 @@ defineProps({
       "Diamond jewelry with 1 center round lab grown diamond and 24 round lab grown diamonds weighing approximately 3.25 ct. tw. in 14K Yellow Gold. Diamond weight estimated. Graded as mounting permits. Inscription LG708573043.",
   },
 });
-
-// let percentage = {
-//   IF: 0.3,
-//   I1: 0.07,
-//   I2: 0.14,
-//   I3: 0.21,
-//   SI: 0.28,
-//   SI1: 0.35,
-//   SI2: 0.42,
-//   SI3: 0.49,
-//   VS: 0.56,
-//   VS2: 0.63,
-//   VS1: 0.70,
-//   VVS2: 0.77,
-//   VVS1: 0.84,
-//   INFLAWLESS: 0.91,
-//   FLAWLESS: 1,
-//   Poor: 0.17,
-//   Fair: 0.37,
-//   Good: 0.60,
-//   "Very Good": 0.80,
-//   Excellent: 1,
-//   "Very Strong": 1,
-//   Strong: 0.80,
-//   Medium: 0.60,
-//   Faint: 0.40,
-//   None: 1,
-// };
 </script>
 
 <style scoped>
@@ -155,7 +133,7 @@ defineProps({
 .jewelry-info__top {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
+
 }
 
 .jewelry-info__item .label {

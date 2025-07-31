@@ -31,15 +31,17 @@
         <div class="label">CUT</div>
 
         <!-- color slider -->
-        <div class="slider">
-          <div class="fill" :style="{ width: colorPercent + '%' }"></div>
-          <div
-            class="thumb"
-            :style="{ left: colorPercent + '%' }"
-            :data-label="stone.MainStoneColor.value"
-          ></div>
+        <div class="">
+          <colorbar
+            :idPrefix="`${i}`"
+            :value="stone.MainStoneColor.value"
+            :percentage="
+              percentages[stone.MainStoneColor.template][
+                stone.MainStoneColor.value
+              ]
+            "
+          />
         </div>
-        <div class="label">COLOR</div>
 
         <!-- diagram + CTW / table / depth -->
         <div class="diagram">
@@ -84,6 +86,7 @@
 </template>
 
 <script setup>
+import colorbar from "../animations/colorbar.vue";
 import gauge from "../animations/gauge.vue";
 import { usePercentages } from "../../composables/getGuagePercent";
 const { percentages } = usePercentages();

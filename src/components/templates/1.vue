@@ -19,7 +19,6 @@
     <!-- Color slider -->
     <div class=" animated-phase-two">
       <colorbar
-    
         :idPrefix="'1'"
         :value="certificate.MainStoneColor.value"
         :percentage="
@@ -88,7 +87,6 @@
 import colorbar from "../animations/colorbar.vue";
 import gauge from "../animations/gauge.vue";
 import { usePercentages } from "../../composables/getGuagePercent";
-import Colorbar from "../animations/colorbar.vue";
 const { percentages } = usePercentages();
 
 defineProps({

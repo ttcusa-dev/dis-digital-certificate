@@ -17,15 +17,15 @@
 
     <!-- Color slider -->
     <div class="color-slider">
-      <div class="slider">
-        <div class="fill" :style="{ width: colorPercent + '%' }"></div>
-        <div
-          class="thumb"
-          :style="{ left: colorPercent + '%' }"
-          :data-label="colorGrade"
-        ></div>
-      </div>
-      <div class="label">COLOR</div>
+       <colorbar
+        :idPrefix="'1'"
+        :value="certificate.MainStoneColor.value"
+        :percentage="
+          percentages[certificate.MainStoneColor.template][
+            certificate.MainStoneColor.value
+          ]
+        "
+      />
     </div>
 
     <!-- Measurements & Weight -->
@@ -63,25 +63,14 @@
 </template>
 
 <script setup>
+import colorbar from "../animations/colorbar.vue";
 import gauge from "../animations/gauge.vue";
 import { usePercentages } from "../../composables/getGuagePercent";
 const { percentages } = usePercentages();
 
 defineProps({
   certificate: { type: Object, default: {} },
-  ringNumber: { type: String, default: "2703655" },
-  styleValue: { type: String, default: "STYLE" },
-  shapeValue: { type: String, default: "Radiant" },
-  colorGrade: { type: String, default: "H" },
-  colorPercent: { type: Number, default: 85 }, // 0–100
-  measurements: { type: String, default: "7.46 × 6.05 × 4.03 MM" },
-  weight: { type: String, default: "1.50" },
-  sideStones: { type: String, default: "0.42 | H‑I | SI1‑SI2" },
-  comments: {
-    type: String,
-    default:
-      "Diamond Ring with 1 center radiant lab grown diamond and 82 round lab grown diamonds weighing approximately 1.92 ctw. in 14K WG. Inscription LG414099312. Diamond weight estimated. Graded as mounting permits.",
-  },
+ 
 });
 </script>
 

@@ -17,15 +17,15 @@
 
     <!-- Color slider -->
     <div class="color-slider">
-      <div class="slider">
-        <div class="fill" :style="{ width: colorPercent + '%' }"></div>
-        <div
-          class="thumb"
-          :style="{ left: colorPercent + '%' }"
-          :data-label="colorGrade"
-        ></div>
-      </div>
-      <div class="label">COLOR</div>
+      <colorbar
+        :idPrefix="'1'"
+        :value="certificate.MainStoneColor.value"
+        :percentage="
+          percentages[certificate.MainStoneColor.template][
+            certificate.MainStoneColor.value
+          ]
+        "
+      />
     </div>
 
     <!-- Measurements & Weight -->
@@ -65,6 +65,7 @@
 </template>
 
 <script setup>
+import colorbar from "../animations/colorbar.vue";
 import gauge from "../animations/gauge.vue";
 import { usePercentages } from "../../composables/getGuagePercent";
 const { percentages } = usePercentages();
@@ -131,6 +132,15 @@ defineProps({
   height: 4px;
   background: #2c3742;
   border-radius: 2px;
+}
+.gauge {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
 }
 .fill {
   position: absolute;

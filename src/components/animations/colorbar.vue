@@ -3,7 +3,7 @@
     style="
       display: flex;
       flex-direction: column;
-      align-content: center;
+      align-items: center;
       overflow: hidden;
     "
   >
@@ -23,7 +23,7 @@
 
           <!-- animated progress bar with flat ends -->
           <line
-            id="barProg"
+            :id="`barProg-${idPrefix}`"
             x1="10"
             y1="25"
             x2="10"
@@ -34,13 +34,21 @@
           />
 
           <!-- pointer + letter group -->
-          <g id="pointer">
+          <g :id="`_pointer-${idPrefix}`">
             <!-- arrow subgroup (scaled in JS) -->
-            <g id="arrow">
+            <g :id="`arrow-${idPrefix}`">
               <polygon points="0,0 -7,-10 7,-10" fill="#00BFFF" />
             </g>
             <!-- text travels with the arrow -->
-            <text id="pointerText" x="0" y="0" text-anchor="middle">A</text>
+            <text
+              class="colorText"
+              :id="`pointerText-${idPrefix}`"
+              x="0"
+              y="0"
+              text-anchor="middle"
+            >
+              {{ value }}
+            </text>
           </g>
         </svg>
       </div>
@@ -50,17 +58,23 @@
 </template>
 
 <script setup>
-import { defineAsyncComponent, onMounted, ref, computed } from "vue";
+import { onMounted } from "vue";
+
+const props = defineProps({
+  value: { type: String, default: "" },
+  idPrefix: { type: String, default: "" },
+  percentage: { type: Number, default: 0 },
+});
 
 // scale for the triangle (1 = original size, 0.5 = half size, etc.)
 const arrowScale = 0.5;
 // vertical text offset (negative moves up, positive moves down)
 const textYOffset = -7;
 
-function initBar(progId, ptrId, textId, percent) {
+function initBar(progId, ptrId, textId, arrowId, percent) {
   const bar = document.getElementById(progId);
   const ptr = document.getElementById(ptrId);
-  const arrow = document.getElementById("arrow");
+  const arrow = document.getElementById(arrowId);
   const txt = document.getElementById(textId);
 
   // apply scale to the arrow subgroup
@@ -108,12 +122,20 @@ function initBar(progId, ptrId, textId, percent) {
   }, 300);
 }
 onMounted(() => {
-  initBar("barProg", "pointer", "pointerText", 0.6);
+  setTimeout(() => {
+    initBar(
+      `barProg-${props.idPrefix}`,
+      `_pointer-${props.idPrefix}`,
+      `pointerText-${props.idPrefix}`,
+      `arrow-${props.idPrefix}`,
+      props.percentage
+    );
+  }, 300);
 });
 // initialize at 60% progress (0.6)
 </script>
 
- <style scoped>
+<style scoped>
 .bar-wrapper {
   width: 90vmin;
   max-width: 400px;
@@ -148,10 +170,9 @@ svg {
   }
 }
 
-/* Style the letter inside the arrow */
-#pointerText {
+.colorText {
   font-family: "Roboto", Arial, sans-serif;
-  font-size: 0.8vmin; /* scales with container */
+  font-size: 8px; /* scales with container */
   font-weight: 700;
   fill: #ffffff;
 }

@@ -14,12 +14,15 @@
 
     <!-- Color slider -->
     <div class="jewelry-info__color">
-      <div class="color">{{ certificate.MainStoneColor.value }}</div>
-      <div class="thumb" :style="{ left: colorPercent + '%' }"></div>
-      <div class="slider">
-        <div class="fill" :style="{ width: colorPercent + '%' }"></div>
-      </div>
-      <div class="label">Color</div>
+      <colorbar
+        :idPrefix="'1'"
+        :value="certificate.MainStoneColor.value"
+        :percentage="
+          percentages[certificate.MainStoneColor.template][
+            certificate.MainStoneColor.value
+          ]
+        "
+      />
     </div>
 
     <!-- Weight / Measurements / Diagram -->
@@ -67,28 +70,14 @@
 </template>
 
 <script setup>
+import colorbar from "../animations/colorbar.vue";
 import gauge from "../animations/gauge.vue";
 import { usePercentages } from "../../composables/getGuagePercent";
 const { percentages } = usePercentages();
 
 defineProps({
   certificate: { type: Object, default: {} },
-  ringNumber: { type: String, default: "2703662" },
-  ringStyle: { type: String, default: "Round Brilliant" },
-  centerStoneShape: { type: String, default: "Round Brilliant" },
-  colorGrade: { type: String, default: "F" },
-  colorPercent: { type: Number, default: 80 }, // 0–100
-  centerStoneWeight: { type: String, default: "3.00 ct." },
-  centerStoneMeasurements: { type: String, default: "9.27 × 9.33 × 5.67 mm" },
-  clarity: { type: String, default: "VS1" },
-  symmetry: { type: String, default: "EXCL" },
-  polish: { type: String, default: "EXCL" },
-  sideStones: { type: String, default: "0.25 | H-I | SI1-SI2" },
-  comments: {
-    type: String,
-    default:
-      "Diamond jewelry with 1 center round lab grown diamond and 24 round lab grown diamonds weighing approximately 3.25 ct. tw. in 14K Yellow Gold. Diamond weight estimated. Graded as mounting permits. Inscription LG708573043.",
-  },
+
 });
 </script>
 

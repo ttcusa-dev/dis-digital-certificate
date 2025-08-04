@@ -1,10 +1,14 @@
 
 <template>
   <section class="jewelry-info">
+    <div class="jewelry-info__item animated-phase-one">
+      <div class="value">{{ certificate.JewelryType }}</div>
+      <div class="label">Style</div>
+    </div>
     <div class="jewelry-info__top animated-phase-one">
       <div class="jewelry-info__item">
-        <div class="value">{{ certificate.JewelryType }}</div>
-        <div class="label">Style</div>
+        <div class="value">{{ certificate.MainStoneCut }}</div>
+        <div class="label">Cut</div>
       </div>
       <div class="jewelry-info__item">
         <div class="value">{{ certificate.MainStoneShape }}</div>
@@ -13,8 +17,8 @@
     </div>
 
     <!-- Color slider -->
-    <div class="jewelry-info__color animated-phase-one">
-     <colorbar
+    <div class="animated-phase-two">
+      <colorbar
         :idPrefix="'1'"
         :value="certificate.MainStoneColor.value"
         :percentage="
@@ -80,13 +84,13 @@
 </template>
 
 <script setup>
-import colorbar from "../animations/colorbar.vue";
-import gauge from "../animations/gauge.vue";
-import { usePercentages } from "../../composables/getGuagePercent";
+import colorbar from "../../animations/colorbar.vue";
+import gauge from "../../animations/gauge.vue";
+import { usePercentages } from "../../../composables/getGuagePercent";
 const { percentages } = usePercentages();
+
 defineProps({
   certificate: { type: Object, default: {} },
-
 });
 </script>
 
@@ -110,9 +114,7 @@ defineProps({
 
 .jewelry-info__top {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 0.5rem;
+  justify-content: space-between;
 }
 
 .jewelry-info__item .label {
@@ -217,6 +219,11 @@ defineProps({
 .gauge {
   flex: 1;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
 }
 
 .gauge .value {

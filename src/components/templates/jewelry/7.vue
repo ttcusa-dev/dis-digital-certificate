@@ -1,13 +1,13 @@
 <!-- components/RingInfoVariant.vue -->
 <template>
-  <section class="ring-info-v2">
+  <section class="ring-info-v2 animated-phase-one">
     <!-- Style & Shape (stacked, centered) -->
-    <div class="top animated-phase-one">
+    <div class="top">
       <div class="block">
         <div class="value">{{ certificate.JewelryType }}</div>
-        <div class="label">Style</div>
+        <div class="label">STYLE</div>
       </div>
-      <div class="block animated-phase-one">
+      <div class="block">
         <div class="value">{{ certificate.MainStoneShape }}</div>
         <div class="label">CENTER STONE SHAPE</div>
       </div>
@@ -17,7 +17,7 @@
 
     <!-- Color slider -->
     <div class="color-slider">
-      <colorbar
+       <colorbar
         :idPrefix="'1'"
         :value="certificate.MainStoneColor.value"
         :percentage="
@@ -29,11 +29,7 @@
     </div>
 
     <!-- Measurements & Weight -->
-    <div class="stats animated-phase-one">
-      <div class="col">
-        <div class="value">{{ certificate.MainStoneMeasurements }}</div>
-        <div class="label">MEASUREMENTS</div>
-      </div>
+    <div class="stats">
       <div class="col">
         <div class="value">{{ certificate.MainStoneWeight }} ct.</div>
         <div class="label">CENTER STONE WEIGHT</div>
@@ -41,50 +37,40 @@
     </div>
 
     <!-- Clarity gauge -->
-    <div class="guage animated-phase-two">
-      <gauge
-        :idPrefix="'1'"
-        :value="certificate.MainStoneClarity.value"
-        :percentage="percentages[certificate.MainStoneClarity.value]"
-      />
-      <div class="label">CLARITY</div>
+    <div class="quality">
+      <div class="gauge animated-phase-two">
+        <gauge
+          :idPrefix="'1'"
+          :value="certificate.MainStoneClarity.value"
+          :percentage="percentages[certificate.MainStoneClarity.value]"
+        />
+        <div class="label">Clarity</div>
+      </div>
     </div>
 
     <hr class="divider" />
 
     <!-- Side‑stones summary -->
-    <div class="sides animated-phase-one">
+    <div class="sides">
       <div class="value">
         {{
           `${certificate.SideStoneWeight} | ${certificate.SideStoneColor.value} | ${certificate.SideStoneClarity.value}`
         }}
       </div>
-      <div class="label">SIDESTONES / COLOR / CLARITY</div>
+      <div class="label">Sidestones / Color / Clarity</div>
     </div>
   </section>
 </template>
 
 <script setup>
-import colorbar from "../animations/colorbar.vue";
-import gauge from "../animations/gauge.vue";
-import { usePercentages } from "../../composables/getGuagePercent";
+import colorbar from "../../animations/colorbar.vue";
+import gauge from "../../animations/gauge.vue";
+import { usePercentages } from "../../../composables/getGuagePercent";
 const { percentages } = usePercentages();
 
 defineProps({
   certificate: { type: Object, default: {} },
-  ringNumber: { type: String, default: "2703655" },
-  styleValue: { type: String, default: "STYLE" },
-  shapeValue: { type: String, default: "Radiant" },
-  colorGrade: { type: String, default: "H" },
-  colorPercent: { type: Number, default: 85 }, // 0–100
-  measurements: { type: String, default: "7.46 × 6.05 × 4.03 MM" },
-  weight: { type: String, default: "1.50" },
-  sideStones: { type: String, default: "0.42 | H‑I | SI1‑SI2" },
-  comments: {
-    type: String,
-    default:
-      "Diamond Ring with 1 center radiant lab grown diamond and 82 round lab grown diamonds weighing approximately 1.92 ctw. in 14K WG. Inscription LG414099312. Diamond weight estimated. Graded as mounting permits.",
-  },
+ 
 });
 </script>
 
@@ -101,7 +87,7 @@ defineProps({
 }
 .number {
   font-size: 1.2rem;
-  opacity: 0.6;
+
   margin-bottom: 1.5rem;
 }
 .top {
@@ -112,7 +98,7 @@ defineProps({
 }
 .top .block .label {
   font-size: 0.75rem;
-  opacity: 0.6;
+
   text-transform: uppercase;
 }
 .top .block .value {
@@ -132,15 +118,6 @@ defineProps({
   height: 4px;
   background: #2c3742;
   border-radius: 2px;
-}
-.gauge {
-  flex: 1;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  overflow: hidden;
 }
 .fill {
   position: absolute;
@@ -173,7 +150,7 @@ defineProps({
 }
 .color-slider .label {
   font-size: 0.75rem;
-  opacity: 0.6;
+
   text-transform: uppercase;
   margin-top: 0.5rem;
 }
@@ -191,7 +168,7 @@ defineProps({
 }
 .stats .col .label {
   font-size: 0.75rem;
-  opacity: 0.6;
+
   text-transform: uppercase;
   margin-top: 0.25rem;
 }
@@ -205,12 +182,12 @@ defineProps({
   width: 80px;
   height: 80px;
 }
-/* .quality .label {
+.quality .label {
   font-size: 0.75rem;
+
   text-transform: uppercase;
-  opacity: 0.6;
-  text-align: center;
-} */
+  margin-top: 0.5rem;
+}
 .sides {
   margin-bottom: 1.5rem;
 }
@@ -220,7 +197,7 @@ defineProps({
 }
 .sides .label {
   font-size: 0.75rem;
-  opacity: 0.6;
+
   text-transform: uppercase;
   margin-top: 0.25rem;
 }
@@ -231,12 +208,5 @@ defineProps({
   font-size: 0.75rem;
   line-height: 1.4;
   text-align: left;
-}
-
-.label {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  opacity: 0.6;
-  text-align: center;
 }
 </style>

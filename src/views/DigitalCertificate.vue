@@ -88,13 +88,18 @@ const certificate = ref(null);
 const route = useRoute();
 
 async function fetchCertificate() {
-  let certificateDoc = await getDoc(doc(db, "jewelry", route.params.certId));
+  let certificateDoc = await getDoc(
+    doc(db, route.params.certType, route.params.certId)
+  );
   certificate.value = certificateDoc.data();
 }
 
 const templateComponent = computed(() =>
   defineAsyncComponent(
-    () => import(`../components/templates/${certificate.value.Template.id}.vue`)
+    () =>
+      import(
+        `../components/templates/${route.params.certType}/${certificate.value.Template.id}.vue`
+      )
     // import(`../components/templates/9.vue`)
   )
 );

@@ -1,3 +1,4 @@
+
 <template>
   <section class="jewelry-info">
     <div class="jewelry-info__top animated-phase-one">
@@ -12,8 +13,8 @@
     </div>
 
     <!-- Color slider -->
-    <div class="jewelry-info__color animated-phase-two">
-      <colorbar
+    <div class="jewelry-info__color animated-phase-one">
+     <colorbar
         :idPrefix="'1'"
         :value="certificate.MainStoneColor.value"
         :percentage="
@@ -79,13 +80,13 @@
 </template>
 
 <script setup>
-import colorbar from "../animations/colorbar.vue";
-import gauge from "../animations/gauge.vue";
-import { usePercentages } from "../../composables/getGuagePercent";
+import colorbar from "../../animations/colorbar.vue";
+import gauge from "../../animations/gauge.vue";
+import { usePercentages } from "../../../composables/getGuagePercent";
 const { percentages } = usePercentages();
-
 defineProps({
   certificate: { type: Object, default: {} },
+
 });
 </script>
 
@@ -110,13 +111,14 @@ defineProps({
 .jewelry-info__top {
   display: flex;
   flex-direction: column;
-  margin-bottom: 1.5rem;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .jewelry-info__item .label {
   font-size: 0.75rem;
   text-transform: uppercase;
-
+  opacity: 0.6;
   text-align: center;
 }
 
@@ -130,7 +132,7 @@ defineProps({
 .jewelry-info__color .label {
   font-size: 0.75rem;
   text-transform: uppercase;
-
+  opacity: 0.6;
   margin-top: 10px;
   text-align: center;
 }
@@ -202,7 +204,7 @@ defineProps({
 
 .stat .label {
   font-size: 0.75rem;
-
+  opacity: 0.6;
   margin-top: 0.25rem;
 }
 
@@ -224,7 +226,7 @@ defineProps({
 
 .gauge .label {
   font-size: 0.75rem;
-
+  opacity: 0.6;
   margin-top: 0.25rem;
 }
 
@@ -236,7 +238,7 @@ defineProps({
 .jewelry-info__sides .label {
   font-size: 0.75rem;
   text-transform: uppercase;
-
+  opacity: 0.6;
   margin-bottom: 0.25rem;
 }
 
@@ -252,3 +254,4 @@ defineProps({
   line-height: 1.4;
 }
 </style>
+

@@ -13,7 +13,7 @@
   </div>
 
   <div class="primary-gem">
-    <div class="spec-label">PRIMARY:GEM STONE</div>
+    <div class="spec-label label">PRIMARY:GEM STONE</div>
     <div class="gem-content-layout">
       <div class="specs-container">
         <div class="size-info">
@@ -26,15 +26,11 @@
           class="gem-center"
           style="display: flex; flex-direction: column; align-items: center"
         >
-          <img
-            src="../../assets/images/emerlad.svg"
-            class="gem-image"
-            alt="Emerald"
+          <stones
+            :stoneShape="certificate.MainStoneShape"
+            :stoneType="certificate.MainStoneType"
+            :colorHex="certificate.MainStoneColorCode"
           />
-          <div class="gem-type">
-            <div class="value">{{ props.certificate.MainStoneType }}</div>
-            <div class="round label">({{ props.certificate.MainStoneShape }})</div>
-          </div>
         </div>
 
         <div class="specs-info">
@@ -52,7 +48,7 @@
   </div>
 
   <div class="primary-gem">
-    <div class="spec-label">SIDE STONE:GEM STONE</div>
+    <div class="spec-label label">SIDE STONE:GEM STONE</div>
     <div class="gem-content-layout">
       <div class="specs-container">
         <div class="size-info">
@@ -65,15 +61,11 @@
           class="gem-center"
           style="display: flex; flex-direction: column; align-items: center"
         >
-          <img
-            src="../../assets/images/emerlad.svg"
-            class="gem-image"
-            alt="Emerald"
+          <stones
+            :stoneShape="certificate.SideStoneShape"
+            :stoneType="certificate.SideStoneType"
+            :colorHex="certificate.SideStoneColorCode"
           />
-          <div class="gem-type">
-            <div class="value">{{ props.certificate.MainStoneType }}</div>
-            <div class="round label">({{ props.certificate.MainStoneShape }})</div>
-          </div>
         </div>
 
         <div class="specs-info">
@@ -92,6 +84,8 @@
 </template>
 
 <script setup>
+import Stones from "../../animations/Stones.vue";
+
 const props = defineProps(["certificate"]);
 </script>
 

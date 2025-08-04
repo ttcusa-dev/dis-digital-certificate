@@ -3,7 +3,7 @@ import DigitalCertificate from "../views/DigitalCertificate.vue";
 
 const routes = [
   {
-    path: "/:certId",
+    path: "/:certType/:certId",
     name: "DigitalCertificate",
     component: DigitalCertificate,
   },

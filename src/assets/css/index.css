@@ -281,7 +281,6 @@ body {
   border-bottom: 1px solid #4c5a71;
   font-weight: 400;
   font-family: "inter", sans-serif;
-
 }
 
 .gem-content-layout {
@@ -399,7 +398,7 @@ body {
 .gauges {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
+  /* margin-bottom: 1.5rem; */
 }
 
 .value {
@@ -660,7 +659,7 @@ body {
   .primary-gem .spec-label {
     font-size: 12.58px;
     padding-bottom: 5px;
-   margin-bottom: 20px;
+    margin-bottom: 20px;
   }
 
   .gem-content-layout {

@@ -17,15 +17,7 @@
 
     <!-- Color slider -->
     <div class="color-slider">
-       <colorbar
-        :idPrefix="'1'"
-        :value="certificate.MainStoneColor.value"
-        :percentage="
-          percentages[certificate.MainStoneColor.template][
-            certificate.MainStoneColor.value
-          ]
-        "
-      />
+      <colorbar :idPrefix="'1'" :color="certificate.MainStoneColor" />
     </div>
 
     <!-- Measurements & Weight -->
@@ -39,11 +31,7 @@
     <!-- Clarity gauge -->
     <div class="quality">
       <div class="gauge animated-phase-two">
-        <gauge
-          :idPrefix="'1'"
-          :value="certificate.MainStoneClarity.value"
-          :percentage="percentages[certificate.MainStoneClarity.value]"
-        />
+        <gauge :idPrefix="'1'" :value="certificate.MainStoneClarity.value" />
         <div class="label">Clarity</div>
       </div>
     </div>
@@ -65,12 +53,9 @@
 <script setup>
 import colorbar from "../../animations/colorbar.vue";
 import gauge from "../../animations/gauge.vue";
-import { usePercentages } from "../../../composables/getGuagePercent";
-const { percentages } = usePercentages();
 
 defineProps({
   certificate: { type: Object, default: {} },
- 
 });
 </script>
 

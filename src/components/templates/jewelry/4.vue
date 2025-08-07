@@ -32,15 +32,7 @@
 
         <!-- color slider -->
         <div class="">
-          <colorbar
-            :idPrefix="`${i}`"
-            :value="stone.MainStoneColor.value"
-            :percentage="
-              percentages[stone.MainStoneColor.template][
-                stone.MainStoneColor.value
-              ]
-            "
-          />
+          <colorbar :idPrefix="`${i}`" :color="stone.MainStoneColor" />
         </div>
 
         <!-- diagram + CTW / table / depth -->
@@ -59,7 +51,6 @@
             <gauge
               :idPrefix="(i + 1) * Math.random()"
               :value="stone.MainStoneClarity.value"
-              :percentage="percentages[stone.MainStoneClarity.value]"
             />
             <div class="label">Clarity</div>
           </div>
@@ -67,7 +58,6 @@
             <gauge
               :idPrefix="(i + 1) * Math.random() + Math.random()"
               :value="stone.MainStoneSymmetry"
-              :percentage="percentages[stone.MainStoneSymmetry]"
             />
             <div class="label">Symmetry</div>
           </div>
@@ -75,7 +65,6 @@
             <gauge
               :idPrefix="(i + 1) * Math.random() * Math.random()"
               :value="stone.MainStonePolish"
-              :percentage="percentages[stone.MainStonePolish]"
             />
             <div class="label">Polish</div>
           </div>
@@ -88,49 +77,9 @@
 <script setup>
 import colorbar from "../../animations/colorbar.vue";
 import gauge from "../../animations/gauge.vue";
-import { usePercentages } from "../../../composables/getGuagePercent";
-const { percentages } = usePercentages();
 
 defineProps({
   certificate: { type: Object, default: {} },
-  ringNumber: { type: String, default: "G1ERRD500WM" },
-  type: { type: String, default: "STUDS" },
-  style: { type: String, default: "STYLE" },
-  colorPercent: { type: Number, default: 82 },
-  stones: {
-    type: Array,
-    default: () => [
-      {
-        measurements: "8.75 × 8.81 × 5.46 MM",
-        shape: "Round Brilliant",
-        cut: "Ideal",
-        colorGrade: "G",
-        colorPercent: 82,
-        ctw: "2.61",
-        table: "59.0",
-        depth: "62.2",
-        clarity: "VS1",
-        polish: "EXCL",
-      },
-      {
-        measurements: "8.79 × 8.80 × 5.44 MM",
-        shape: "Round Brilliant",
-        cut: "Ideal",
-        colorGrade: "G",
-        colorPercent: 82,
-        ctw: "2.63",
-        table: "59.5",
-        depth: "62.5",
-        clarity: "VS1",
-        polish: "EXCL",
-      },
-    ],
-  },
-  comments: {
-    type: String,
-    default:
-      "Diamond Stud Earrings with 2 round lab grown diamonds weighing approximately 5.24 ct. tw. in 14K White Gold. Inscriptions LG613370778; LG631448548. Diamond weight estimated. Graded as mounting permits.",
-  },
 });
 </script>
 

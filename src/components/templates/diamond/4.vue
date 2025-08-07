@@ -1,35 +1,27 @@
 
 <template>
   <section class="jewelry-info">
-    <div class="jewelry-info__item animated-phase-one">
-      <div class="value">{{ certificate.JewelryType }}</div>
-      <div class="label">Style</div>
-    </div>
     <div class="jewelry-info__top animated-phase-one">
       <div class="jewelry-info__item">
-        <div class="value">{{ certificate.MainStoneCut }}</div>
-        <div class="label">Cut</div>
-      </div>
-      <div class="jewelry-info__item">
-        <div class="value">{{ certificate.MainStoneShape }}</div>
-        <div class="label">Center Stone Shape</div>
+        <div class="value">{{ certificate.Shape }}</div>
+        <div class="label">Shape</div>
       </div>
     </div>
 
     <!-- Color slider -->
-    <div class="animated-phase-two">
-      <colorbar :idPrefix="'1'" :color="certificate.MainStoneColor" />
+    <div class="jewelry-info__color animated-phase-one">
+      <colorbar :idPrefix="'1'" :color="certificate.Color" />
     </div>
 
     <!-- Weight / Measurements / Diagram -->
     <div class="jewelry-info__stats animated-phase-one">
       <div class="stat">
-        <div class="value">{{ certificate.MainStoneWeight }} ct.</div>
-        <div class="label">Center Stone Weight</div>
+        <div class="value">{{ certificate.Weight }} ct.</div>
+        <div class="label">Carat</div>
       </div>
       <div class="stat">
-        <div class="value">{{ certificate.MainStoneMeasurements }}</div>
-        <div class="label">Center Stone Measurements</div>
+        <div class="value">{{ certificate.Measurements }}</div>
+        <div class="label">Measurements</div>
       </div>
     </div>
     <div class="stat diagram">
@@ -38,27 +30,29 @@
     <!-- Clarity / Symmetry / Polish gauges -->
     <div class="jewelry-info__quality">
       <div class="gauge animated-phase-two">
-        <gauge :idPrefix="'1'" :value="certificate.MainStoneClarity.value" />
+        <gauge
+          :idPrefix="'1'"
+          :value="certificate.Clarity.value"
+          :guageWidth="'100px'"
+        />
         <div class="label">Clarity</div>
       </div>
       <div class="gauge animated-phase-three">
-        <gauge :idPrefix="'2'" :value="certificate.MainStoneSymmetry" />
+        <gauge
+          :idPrefix="'2'"
+          :value="certificate.Symmetry"
+          :guageWidth="'100px'"
+        />
         <div class="label">Symmetry</div>
       </div>
       <div class="gauge animated-phase-four">
-        <gauge :idPrefix="'3'" :value="certificate.MainStonePolish" />
+        <gauge
+          :idPrefix="'3'"
+          :value="certificate.Polish"
+          :guageWidth="'100px'"
+        />
         <div class="label">Polish</div>
       </div>
-    </div>
-
-    <!-- Side‐stones summary -->
-    <div class="jewelry-info__sides animated-phase-one">
-      <div class="value">
-        {{
-          `${certificate.SideStoneWeight} | ${certificate.SideStoneColor.value} | ${certificate.SideStoneClarity.value}`
-        }}
-      </div>
-      <div class="label">Sidestones / Color / Clarity</div>
     </div>
   </section>
 </template>
@@ -78,7 +72,6 @@ defineProps({
   width: 100%;
   margin: 0 auto;
   color: #e1e8ed;
-  padding: 2rem;
   border-radius: 0.75rem;
   font-family: "Helvetica Neue", Arial, sans-serif;
 }
@@ -92,7 +85,9 @@ defineProps({
 
 .jewelry-info__top {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .jewelry-info__item .label {
@@ -165,7 +160,7 @@ defineProps({
   flex-flow: column;
   align-items: center;
   gap: 10px;
-  width: 14rem;
+  width: 100%;
 }
 
 .stat {
@@ -178,7 +173,7 @@ defineProps({
 }
 
 .stat .value {
-  font-size: 1rem;
+  font-size: 20px;
   font-weight: 500;
 }
 
@@ -197,11 +192,6 @@ defineProps({
 .gauge {
   flex: 1;
   text-align: center;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  overflow: hidden;
 }
 
 .gauge .value {

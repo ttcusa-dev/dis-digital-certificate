@@ -28,7 +28,7 @@
             y1="25"
             x2="10"
             y2="25"
-            stroke="#00BFFF"
+            :stroke="barColor[color.template]"
             stroke-width="5"
             stroke-linecap="butt"
           />
@@ -47,7 +47,7 @@
               y="0"
               text-anchor="middle"
             >
-              {{ value }}
+              {{ color.value }}
             </text>
           </g>
         </svg>
@@ -58,12 +58,13 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
+import { getColorAttribute } from "../../composables/getColorAttributes";
+const { percentages, barColor } = getColorAttribute();
 
 const props = defineProps({
-  value: { type: String, default: "" },
   idPrefix: { type: String, default: "" },
-  percentage: { type: Number, default: 0 },
+  color: { type: Object, default: {} },
 });
 
 // scale for the triangle (1 = original size, 0.5 = half size, etc.)
@@ -128,7 +129,7 @@ onMounted(() => {
       `_pointer-${props.idPrefix}`,
       `pointerText-${props.idPrefix}`,
       `arrow-${props.idPrefix}`,
-      props.percentage
+      percentages[props.color.template][props.color.value]
     );
   }, 300);
 });

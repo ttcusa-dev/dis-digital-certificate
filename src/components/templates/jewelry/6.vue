@@ -13,15 +13,7 @@
 
     <!-- Color slider -->
     <div class="jewelry-info__color animated-phase-two">
-      <colorbar
-        :idPrefix="'1'"
-        :value="certificate.MainStoneColor.value"
-        :percentage="
-          percentages[certificate.MainStoneColor.template][
-            certificate.MainStoneColor.value
-          ]
-        "
-      />
+      <colorbar :idPrefix="'1'" :color="certificate.MainStoneColor" />
     </div>
 
     <!-- Weight / Measurements / Diagram -->
@@ -41,27 +33,15 @@
     <!-- Clarity / Symmetry / Polish gauges -->
     <div class="jewelry-info__quality">
       <div class="gauge animated-phase-two">
-        <gauge
-          :idPrefix="'1'"
-          :value="certificate.MainStoneClarity.value"
-          :percentage="percentages[certificate.MainStoneClarity.value]"
-        />
+        <gauge :idPrefix="'1'" :value="certificate.MainStoneClarity.value" />
         <div class="label">Clarity</div>
       </div>
       <div class="gauge animated-phase-three">
-        <gauge
-          :idPrefix="'2'"
-          :value="certificate.MainStoneSymmetry"
-          :percentage="percentages[certificate.MainStoneSymmetry]"
-        />
+        <gauge :idPrefix="'2'" :value="certificate.MainStoneSymmetry" />
         <div class="label">Symmetry</div>
       </div>
       <div class="gauge animated-phase-four">
-        <gauge
-          :idPrefix="'3'"
-          :value="certificate.MainStonePolish"
-          :percentage="percentages[certificate.MainStonePolish]"
-        />
+        <gauge :idPrefix="'3'" :value="certificate.MainStonePolish" />
         <div class="label">Polish</div>
       </div>
     </div>
@@ -81,8 +61,6 @@
 <script setup>
 import colorbar from "../../animations/colorbar.vue";
 import gauge from "../../animations/gauge.vue";
-import { usePercentages } from "../../../composables/getGuagePercent";
-const { percentages } = usePercentages();
 
 defineProps({
   certificate: { type: Object, default: {} },

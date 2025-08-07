@@ -27,15 +27,7 @@
         <div class="label">CENTER STONE SHAPE</div>
 
         <!-- color slider -->
-        <colorbar
-          :idPrefix="`${i}`"
-          :value="stone.MainStoneColor.value"
-          :percentage="
-            percentages[stone.MainStoneColor.template][
-              stone.MainStoneColor.value
-            ]
-          "
-        />
+        <colorbar :idPrefix="`${i}`" :color="stone.MainStoneColor" />
 
         <!-- diagram + CTW / table / depth -->
         <div class="diagram">
@@ -53,7 +45,6 @@
             <gauge
               :idPrefix="(i + 1) * Math.random()"
               :value="stone.MainStoneClarity.value"
-              :percentage="percentages[stone.MainStoneClarity.value]"
             />
             <div class="label">Clarity</div>
           </div>
@@ -61,7 +52,6 @@
             <gauge
               :idPrefix="(i + 1) * Math.random() + Math.random()"
               :value="stone.MainStoneSymmetry"
-              :percentage="percentages[stone.MainStoneSymmetry]"
             />
             <div class="label">Symmetry</div>
           </div>
@@ -69,7 +59,6 @@
             <gauge
               :idPrefix="(i + 1) * Math.random() * Math.random()"
               :value="stone.MainStonePolish"
-              :percentage="percentages[stone.MainStonePolish]"
             />
             <div class="label">Polish</div>
           </div>
@@ -82,12 +71,9 @@
 <script setup>
 import colorbar from "../../animations/colorbar.vue";
 import gauge from "../../animations/gauge.vue";
-import { usePercentages } from "../../../composables/getGuagePercent";
-const { percentages } = usePercentages();
 
 defineProps({
   certificate: { type: Object, default: {} },
-  
 });
 </script>
 

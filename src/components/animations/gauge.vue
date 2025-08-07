@@ -1,5 +1,5 @@
 <template>
-  <div class="gauge-wrapper">
+  <div class="gauge-wrapper" :style="{ width: guageWidth }">
     <div class="gauge-container">
       <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">
         <!-- Outer circle -->
@@ -44,7 +44,7 @@
               align-items: center;
               justify-content: center;
               flex-direction: column;
-              font-size: 40px;
+              font-size: 30px;
               font-weight: bold;
             "
           >
@@ -57,12 +57,14 @@
 </template>
 
 <script setup>
-import { defineAsyncComponent, onMounted, ref, computed } from "vue";
+import { onMounted } from "vue";
+import { usePercentages } from "../../composables/getGuagePercent";
+const { percentages } = usePercentages();
 
 const props = defineProps({
   value: { type: String, default: "" },
   idPrefix: { type: String, default: "" },
-  percentage: { type: Number, default: 0 },
+  guageWidth: { type: String, default: "50px" },
 });
 
 function shortenToAcronym(value) {
@@ -158,7 +160,7 @@ onMounted(async () => {
     `bgArc-${props.idPrefix}`,
     `progress-${props.idPrefix}`,
     `pointer-${props.idPrefix}`,
-    props.percentage
+    percentages[props.value]
   );
 });
 </script>
@@ -167,13 +169,13 @@ onMounted(async () => {
 /* reset & base */
 
 .gauge-wrapper {
-  width: 50px; /* or whatever parent‑container size you want */
   aspect-ratio: 1 / 1;
 }
 .gauge-container {
   width: 100%;
   height: 100%;
   animation: scaleIn 1s ease-out forwards;
+  overflow: hidden;
 }
 svg {
   width: 100%;

@@ -513,6 +513,7 @@ body {
 .website {
   color: #7c9cc8;
   font-weight: 400;
+  text-decoration: none;
 }
 
 /* Animations */

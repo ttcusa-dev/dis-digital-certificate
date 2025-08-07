@@ -12,7 +12,7 @@
     </div>
   </div>
 
-  <div class="primary-gem">
+  <div class="primary-gem animated-phase-one">
     <div class="spec-label label">PRIMARY:GEM STONE</div>
     <div class="gem-content-layout">
       <div class="specs-container">
@@ -48,7 +48,7 @@
     </div>
   </div>
 
-  <div class="primary-gem secondary">
+  <div class="primary-gem animated-phase-one">
     <div class="spec-label label">SECONDARY DIAMOND(S)</div>
 
     <div class="diamond-section">

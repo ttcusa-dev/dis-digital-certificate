@@ -53,7 +53,7 @@
     </div>
   </div>
 
-  <div class="primary-gem secondary">
+  <div class="primary-gem animated-phase-one">
     <div class="spec-label">SECONDARY:: GEM STONE</div>
     <div class="gem-content-layout">
       <div class="specs-container">

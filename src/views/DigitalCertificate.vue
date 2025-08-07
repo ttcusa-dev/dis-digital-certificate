@@ -65,7 +65,10 @@
       </div>
       <div class="footer">
         <img src="../assets/images/DIS_Logo.png" class="ds-logo" />
-        <div class="website">DIAMONDSERVICESUSA.COM</div>
+
+        <a class="website" href="http://DIAMONDSERVICESUSA.COM"
+          >DIAMONDSERVICESUSA.COM</a
+        >
       </div>
     </div>
   </div>
@@ -188,39 +191,10 @@ onMounted(async () => {
         }, 100);
       }, 500);
     }, 4500);
+  } else {
+    
   }
 });
-// document.addEventListener("DOMContentLoaded", () => {
-//   const loaderContainer = document.querySelector(".loader-container");
-//   const introContainer = document.querySelector(".intro-container");
-//   const mainContent = document.querySelector(".main-content");
-//   const specsSection = document.querySelector(".specifications-section");
-//   const video = document.getElementById("video");
-
-//   // After 5 seconds, hide loader and show intro video
-//   setTimeout(() => {
-//     loaderContainer.style.animation = "fadeOut 0.5s ease-in-out forwards";
-//     setTimeout(() => {
-//       loaderContainer.style.display = "none";
-//       introContainer.classList.remove("hidden");
-//       video.currentTime = 0; // Set the video to start from the beginning
-//       video.play();
-//     }, 500);
-//   }, 1000);
-
-//   // After 8 seconds total (5s loader + 3s intro), show main content
-//   setTimeout(() => {
-//     introContainer.style.animation = "fadeOut 1s ease-in-out forwards";
-//     setTimeout(() => {
-//       introContainer.style.display = "none";
-//       mainContent.classList.remove("hidden");
-//       setTimeout(() => {
-//         mainContent.classList.add("visible");
-//         specsSection.style.visibility = "visible";
-//       }, 100);
-//     }, 500);
-//   }, 4500);
-// });
 </script>
 
-<style></style>
+

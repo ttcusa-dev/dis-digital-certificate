@@ -37,7 +37,7 @@
           <g :id="`_pointer-${idPrefix}`">
             <!-- arrow subgroup (scaled in JS) -->
             <g :id="`arrow-${idPrefix}`">
-              <polygon points="0,0 -7,-10 7,-10" fill="#00BFFF" />
+              <polygon points="0,0 -7,-10 7,-10" fill="#287bc9" />
             </g>
             <!-- text travels with the arrow -->
             <text
@@ -53,7 +53,7 @@
         </svg>
       </div>
     </div>
-    <div class="label">Color</div>
+    <div class="label">Color - {{ color.template }}</div>
   </div>
 </template>
 

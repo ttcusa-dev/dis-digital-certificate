@@ -6,6 +6,11 @@
         <div class="value">{{ certificate.Shape }}</div>
         <div class="label">Shape</div>
       </div>
+
+      <div v-if="certificate.Cut" class="jewelry-info__item">
+        <div class="value">{{ certificate.Cut }}</div>
+        <div class="label">Cut</div>
+      </div>
     </div>
 
     <!-- Color slider -->
@@ -91,24 +96,16 @@ defineProps({
 }
 
 .jewelry-info__item .label {
-  font-size: 0.75rem;
+  font-size: 13px;
   text-transform: uppercase;
   opacity: 0.6;
   text-align: center;
 }
 
 .jewelry-info__item .value {
-  font-size: 1rem;
+  font-size: 20px;
   font-weight: 500;
   margin-top: 0.25rem;
-  text-align: center;
-}
-
-.jewelry-info__color .label {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  opacity: 0.6;
-  margin-top: 10px;
   text-align: center;
 }
 
@@ -178,7 +175,8 @@ defineProps({
 }
 
 .stat .label {
-  font-size: 0.75rem;
+  font-size: 13px;
+  text-transform: uppercase;
   opacity: 0.6;
   margin-top: 0.25rem;
 }
@@ -200,7 +198,8 @@ defineProps({
 }
 
 .gauge .label {
-  font-size: 0.75rem;
+  font-size: 13px;
+  text-transform: uppercase;
   opacity: 0.6;
   margin-top: 0.25rem;
 }

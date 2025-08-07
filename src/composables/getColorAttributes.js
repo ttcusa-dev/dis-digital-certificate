@@ -98,7 +98,7 @@ export function getColorAttribute() {
   });
 
   const barColor = {
-    Standard: "#00BFFF",
+    Standard: "#287bc9",
     Black: "#3f3f40",
     Blue: "#2f2fb7",
     Brown: "#845e5e",

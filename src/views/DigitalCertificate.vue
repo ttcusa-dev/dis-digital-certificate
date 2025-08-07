@@ -24,14 +24,7 @@
     <!-- Top section with jewelry showcase -->
     <div class="jewelry-showcase">
       <div class="showcase-header">
-        <img
-          class="client-logo"
-          src="../assets/images/Helzberg_logo.png"
-          alt=""
-          srcset=""
-        />
-        <!-- <div class="showcase-logo">HELZBERG</div>
-        <div class="showcase-year">1915</div> -->
+        <img class="client-logo" :src="client.images.url" alt="" srcset="" />
       </div>
       <!-- Replace the div with video element -->
       <video
@@ -84,6 +77,7 @@ import { db, getDoc, doc } from "../config/firebaseInit";
 import { useRoute } from "vue-router";
 
 const certificate = ref(null);
+const client = ref(null);
 
 const route = useRoute();
 
@@ -92,6 +86,11 @@ async function fetchCertificate() {
     doc(db, route.params.certType, route.params.certId)
   );
   certificate.value = certificateDoc.data();
+}
+
+async function fetchCertClient(clientId) {
+  let clientDoc = await getDoc(doc(db, "companies", clientId));
+  client.value = clientDoc.data();
 }
 
 const templateComponent = computed(() =>
@@ -108,6 +107,7 @@ onMounted(async () => {
   await fetchCertificate();
   // After 5 seconds, hide loader and show intro
   if (certificate.value) {
+    await fetchCertClient(certificate.value.Company.id);
     const introContainer = document.querySelector(".intro-container");
     const loaderContainer = document.querySelector(".loader-container");
     const video = document.getElementById("video");

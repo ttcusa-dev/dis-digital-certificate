@@ -137,12 +137,21 @@ body {
 }
 
 .showcase-header {
-  text-align: center;
+  /* text-align: center;
   overflow-y: hidden;
   margin-top: 10px;
-  width: 100%;
+   max-width: 300px;
+  display: flex;
+  justify-content: center; */
+  text-align: center;
+  overflow-y: hidden;
+  margin-top: 5px;
+  min-width: 100px;
+  max-width: 600px;
+  width: 150px;
   display: flex;
   justify-content: center;
+  position: absolute;
 }
 
 .showcase-logo {
@@ -201,9 +210,7 @@ body {
 }
 
 .client-logo {
-  width: 150px;
-  z-index: 99;
-  position: absolute;
+  width: 100%;
 }
 
 .product-info {

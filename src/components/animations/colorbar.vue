@@ -176,6 +176,6 @@ svg {
   font-size: 8px; /* scales with container */
   font-weight: 700;
   fill: #ffffff;
+  font-style: italic;
 }
 </style>
-Launch V

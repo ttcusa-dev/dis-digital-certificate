@@ -12,14 +12,20 @@
     <hr class="divider" />
 
     <div class="info-section">
-      <div class="wireframe">
-        <img src="../../../assets/wireframe.png" alt="" srcset="" />
+      <div class="animated-phase-two">
+        <Wireframe
+          :weight="certificate.MainStoneWeight"
+          :jewelryShape="certificate.MainStoneShape"
+          :jewelryType="certificate.JewelryType"
+        />
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
+import Wireframe from "../../animations/Wireframe.vue";
+
 defineProps({
   certificate: { type: Object, default: {} },
 });

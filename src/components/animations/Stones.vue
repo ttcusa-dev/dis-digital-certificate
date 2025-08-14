@@ -41,7 +41,7 @@ const stoneImage = computed(() => {
     }
 
     return new URL(
-      `../../assets/images/stone animation gifs/${stoneFileName}.gif`,
+      `../../assets/stone animation gifs/${stoneFileName}.gif`,
       import.meta.url
     ).href;
   } catch (e) {

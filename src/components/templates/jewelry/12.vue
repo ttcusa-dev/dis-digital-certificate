@@ -33,8 +33,12 @@
           <div class="label">CLARITY</div>
         </div>
       </div>
-      <div class="wireframe">
-        <img src="../../../assets/wireframe.png" alt="" srcset="" />
+      <div class="animated-phase-two">
+        <Wireframe
+          :weight="certificate.MainStoneWeight"
+          :jewelryShape="certificate.MainStoneShape"
+          :jewelryType="certificate.JewelryType"
+        />
       </div>
     </div>
   </section>
@@ -43,6 +47,7 @@
 <script setup>
 import colorbar from "../../animations/colorbar.vue";
 import gauge from "../../animations/gauge.vue";
+import Wireframe from "../../animations/Wireframe.vue";
 
 defineProps({
   certificate: { type: Object, default: {} },

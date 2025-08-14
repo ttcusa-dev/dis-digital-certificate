@@ -26,17 +26,21 @@
     <!-- Clarity gauge -->
     <div class="info-section">
       <div class="gauges">
-        <div class="guage animated-phase-two">
+        <div class="gauge animated-phase-two">
           <gauge
             :idPrefix="'1'"
             :value="certificate.MainStoneClarity.value"
-            guageWidth="120px"
+            guageWidth="100px"
           />
           <div class="label">CLARITY</div>
         </div>
       </div>
-      <div class="wireframe">
-        <img src="../../../assets/wireframe.png" alt="" srcset="" />
+      <div class="animated-phase-two">
+        <Wireframe
+          :weight="certificate.MainStoneWeight"
+          :jewelryShape="certificate.MainStoneShape"
+          :jewelryType="certificate.JewelryType"
+        />
       </div>
     </div>
   </section>
@@ -45,11 +49,12 @@
 <script setup>
 import colorbar from "../../animations/colorbar.vue";
 import gauge from "../../animations/gauge.vue";
+import Wireframe from "../../animations/Wireframe.vue";
 
-
-defineProps({
+ defineProps({
   certificate: { type: Object, default: {} },
 });
+
 </script>
 
 <style scoped>
@@ -82,8 +87,9 @@ defineProps({
   text-transform: uppercase;
 }
 .top .block .value {
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 500;
+  text-transform: uppercase;
 }
 .divider {
   border: none;
@@ -121,18 +127,6 @@ defineProps({
   overflow: hidden;
 }
 
-.wireframe {
-  width: 75%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 200px;
-}
-
-.wireframe img {
-  width: 100%;
-  height: 88%;
-}
 .fill {
   position: absolute;
   top: 0;

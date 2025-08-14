@@ -358,7 +358,7 @@ onMounted(async () => {
   // After 5 seconds, hide loader and show intro
   if (certificate.value) {
     await fetchCertClient(certificate.value.Company.id);
-    await fetchClientCampaign(certificate.value.Company.id);
+    // await fetchClientCampaign(certificate.value.Company.id);
     initCertificateViewingSequence();
 
     // setTimeout(async () => {

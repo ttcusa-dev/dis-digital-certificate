@@ -13,20 +13,14 @@
 
     <!-- Color slider -->
     <div class="color-slider">
-      <colorbar
-        :idPrefix="'1'"
-       :color="certificate.MainStoneColor" 
-      />
-      <colorbar
-        :idPrefix="'2'"
-       :color="certificate.MainStoneColor2" 
-      />
+      <colorbar :idPrefix="'1'" :color="certificate.MainStoneColor" />
+      <colorbar :idPrefix="'2'" :color="certificate.MainStoneColor2" />
     </div>
 
     <!-- Measurements & Weight -->
 
     <!-- Clarity gauge -->
-    <div class="info-section">
+    <div class="info-section" style="margin-top: 20px;">
       <div class="gauges">
         <div class="guage animated-phase-two">
           <gauge
@@ -37,8 +31,12 @@
           <div class="label">CLARITY</div>
         </div>
       </div>
-      <div class="wireframe">
-        <img src="../../../assets/wireframe.png" alt="" srcset="" />
+      <div class="animated-phase-two">
+        <Wireframe
+          :weight="certificate.MainStoneWeight"
+          :jewelryShape="certificate.MainStoneShape"
+          :jewelryType="certificate.JewelryType"
+        />
       </div>
     </div>
   </section>
@@ -47,6 +45,7 @@
 <script setup>
 import colorbar from "../../animations/colorbar.vue";
 import gauge from "../../animations/gauge.vue";
+import Wireframe from "../../animations/Wireframe.vue";
 
 defineProps({
   certificate: { type: Object, default: {} },

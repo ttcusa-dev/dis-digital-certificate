@@ -32,9 +32,15 @@
       </div>
     </div>
 
+    <hr class="divider" />
+
     <!-- Clarity gauge -->
-    <div class="guage animated-phase-two">
-      <gauge :idPrefix="'1'" :value="certificate.MainStoneClarity.value" />
+    <div class="gauge animated-phase-two">
+      <gauge
+        :idPrefix="'1'"
+        :value="certificate.MainStoneClarity.value"
+        :guageWidth="'80px'"
+      />
       <div class="label">CLARITY</div>
     </div>
 
@@ -67,7 +73,7 @@ defineProps({
   width: 100%;
   margin: auto;
   color: #e1e8ed;
-  padding: 2rem 1.5rem;
+  /* padding: 2rem 1.5rem; */
   text-align: center;
   font-family: "Helvetica Neue", Arial, sans-serif;
 }
@@ -94,7 +100,8 @@ defineProps({
 .divider {
   border: none;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  margin: 1rem 0;
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
 .color-slider {
   margin-bottom: 1.5rem;

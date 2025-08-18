@@ -1,6 +1,6 @@
 <template>
   <!-- Loader container (shows first for 5 seconds) -->
-  <div class="loader-container">
+  <div v-show="loading" class="loader-container">
     <div class="loader-content">
       <img
         src="../assets/images/loader.gif"
@@ -9,63 +9,86 @@
       />
     </div>
   </div>
+  <div class="nocontent" v-if="!loading && certificateDoesNotExist">
+    <p>
+      We were unable to locate this certificate. It may not exist or has not
+      been generated yet. Please try again later. If the issue persists or you
+      are experiencing difficulties with the video, please contact Diamond
+      Services for assistance.
+    </p>
 
-  <!-- Intro container (shows after loader) -->
-  <div class="intro-container">
-    <div class="logo-container">
-      <video id="video" class="logo-video" muted playsinline>
-        <source src="../assets/images/helzberg-logo.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-    </div>
+    <p>Redirecting you back to the home page in ...{{ redirectTimer }}</p>
   </div>
 
-  <div v-if="certificate" v-show="!showFullPageAd" class="main-content">
-    <!-- Top section with jewelry showcase -->
-    <div class="jewelry-showcase">
-      <div class="showcase-header">
-        <img class="client-logo" :src="client.images.url" alt="" srcset="" />
+  <div v-else class="digitalcert-wrapper">
+    <!-- Intro container (shows after loader) -->
+    <div class="intro-container">
+      <div class="logo-container">
+        <video id="video" class="logo-video" muted playsinline>
+          <source src="../assets/images/helzberg-logo.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
       </div>
-      <!-- Replace the div with video element -->
-      <video
-        id="jewelry-video"
-        class="jewelry-image"
-        autoplay
-        muted
-        playsinline
-        ref="productVideo"
-        @timeupdate="handleTime"
-        @ended="handleVideoPlayback"
-      >
-        <source src="../assets/images/Emerlad.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
     </div>
 
-    <!-- <div class="custom-divider"></div> -->
-    <!-- Bottom section with specifications -->
-    <!-- Template Section -->
-    <div class="specifications-section">
-      <div class="product-id">
-        <p class="product-id-main">
-          DIS CERTIFICATE#: {{ certificate.CertNum }}
-        </p>
-        <p class="product-id-overlap">{{ certificate.ClientSKU }}</p>
-      </div>
-      <div class="template-container">
-        <component :is="templateComponent" :certificate="certificate" />
-      </div>
-      <div style="visibility: hidden" class="product-description">
-        <div class="description-label">
-          <p class="comment-label">COMMENTS</p>
+    <div
+      v-if="certificate && !certificateDoesNotExist"
+      v-show="!showFullPageAd"
+      class="main-content"
+    >
+      <!-- Top section with jewelry showcase -->
+      <div class="jewelry-showcase">
+        <div class="showcase-header">
+          <img
+            v-if="clientLogo"
+            class="client-logo"
+            :src="clientLogo"
+            alt=""
+            srcset=""
+          />
         </div>
-        <div class="description-card">
-          <div class="description-text">
-            {{ certificate.CertificateComments }}
+        <!-- Replace the div with video element -->
+        <video
+          v-if="productShowCaseVideo"
+          id="jewelry-video"
+          class="jewelry-image"
+          autoplay
+          muted
+          playsinline
+          ref="productVideo"
+          @timeupdate="handleTime"
+          @ended="handleVideoPlayback"
+        >
+          <source :src="productShowCaseVideo" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
+      <!-- <div class="custom-divider"></div> -->
+      <!-- Bottom section with specifications -->
+      <!-- Template Section -->
+      <div class="specifications-section">
+        <div class="product-id">
+          <p class="product-id-main">
+            DIS CERTIFICATE#: {{ certificate.CertNum }}
+          </p>
+          <p class="product-id-overlap">{{ certificate.ClientSKU }}</p>
+        </div>
+        <div class="template-container">
+          <component :is="templateComponent" :certificate="certificate" />
+        </div>
+        <div style="visibility: hidden" class="product-description">
+          <div class="description-label">
+            <p class="comment-label">COMMENTS</p>
+          </div>
+          <div class="description-card">
+            <div class="description-text">
+              {{ certificate.CertificateComments }}
+            </div>
           </div>
         </div>
+        <Footer />
       </div>
-      <Footer />
     </div>
   </div>
 
@@ -79,17 +102,6 @@
       @handle-analytics="handleAnalytics('click', true)"
     />
   </div>
-
-  <!-- <div class="nocontent" v-if="noCertificate && !DISLoading">
-    <p>
-      We were unable to locate this certificate. It may not exist or has not
-      been generated yet. Please try again later. If the issue persists or you
-      are experiencing difficulties with the video, please contact Diamond
-      Services for assistance.
-    </p>
-
-    <p>Redirecting you back to the home page in ...{{ redirectTimer }}</p>
-  </div> -->
 </template>
 
 <script setup>
@@ -111,6 +123,10 @@ import {
   endAt,
   query,
   collection,
+  getMetadata,
+  getDownloadURL,
+  ref as storageRef,
+  storage,
 } from "../config/firebaseInit";
 import { useRoute } from "vue-router";
 import Footer from "../components/Footer.vue";
@@ -119,7 +135,7 @@ import { DateTime } from "luxon";
 import axios from "axios";
 
 const certificate = ref(null);
-const client = ref(null);
+const clientLogo = ref(null);
 const campaings = ref([]);
 const currentCampaign = ref({});
 const showFooterAd = ref(false);
@@ -127,19 +143,36 @@ const showFullPageAd = ref(false);
 const activateAds = ref(false);
 const has_footer_ad = ref(false);
 const noAdsInit = ref(false);
-
+const certificateDoesNotExist = ref(false);
+const redirectTimer = ref(5);
+const productShowCaseVideo = ref(null);
+const loading = ref(false);
 const route = useRoute();
+const productVideoRef = useTemplateRef("productVideo");
 
 async function fetchCertificate() {
   let certificateDoc = await getDoc(
     doc(db, route.params.certType, route.params.certId)
   );
-  certificate.value = certificateDoc.data();
+  if (!certificateDoc.exists) return false;
+  else return certificateDoc.data();
 }
 
-async function fetchCertClient(clientId) {
+async function fetchShowCasingVideo(videoFileName) {
+  const videoRef = storageRef(storage, `product-display/${videoFileName}`);
+  try {
+    const [url] = await Promise.all([getDownloadURL(videoRef)]);
+    productShowCaseVideo.value = url;
+  } catch (error) {
+    console.error({ error });
+    certificateDoesNotExist.value = true;
+  }
+}
+
+async function fetchClientLogo(clientId) {
   let clientDoc = await getDoc(doc(db, "companies", clientId));
-  client.value = clientDoc.data();
+  clientLogo.value = clientDoc.data().images.url;
+  console.log({ clientLogo });
 }
 
 //For Advertisement
@@ -225,8 +258,7 @@ function handleVideoPlayback() {
     showFullPageAd.value = true;
     showFooterAd.value = false;
   } else {
-    const el = useTemplateRef("productVideo");
-    el.play();
+    productVideoRef.value.play();
   }
 }
 
@@ -339,7 +371,7 @@ function restartCertificateViewingSequence() {
   const video = document.getElementById("jewelry-video");
   video.currentTime = 0; // Set the video to start from the beginning
   video.play();
-  handleVideoPlayback()
+  handleVideoPlayback();
   initCertificateViewingSequence();
 }
 
@@ -354,12 +386,18 @@ const templateComponent = computed(() =>
 );
 
 onMounted(async () => {
-  await fetchCertificate();
+  loading.value = true;
+  certificate.value = await fetchCertificate();
   // After 5 seconds, hide loader and show intro
   if (certificate.value) {
-    await fetchCertClient(certificate.value.Company.id);
-    // await fetchClientCampaign(certificate.value.Company.id);
-    initCertificateViewingSequence();
+    loading.value = false;
+
+    setTimeout(async () => {
+      await fetchShowCasingVideo(certificate.value.Video.name);
+      await fetchClientLogo(certificate.value.Company.id);
+      await fetchClientCampaign(certificate.value.Company.id);
+      initCertificateViewingSequence();
+    }, 500);
 
     // setTimeout(async () => {
     //   await this.fetchClientCampaign(certificate.value.Company.id);
@@ -368,12 +406,26 @@ onMounted(async () => {
     //   );
     // }, 1000);
   } else {
+    loading.value = false;
+    certificateDoesNotExist.value = true;
+    redirectTimer.value -= 1;
   }
 });
 
 watch(showFullPageAd, (toggled) => {
   if (!toggled) {
     restartCertificateViewingSequence();
+  }
+});
+
+watch(redirectTimer, (timer) => {
+  console.log({ timer });
+  if (!timer) {
+    // window.location = "https://diamondservicesusa.com";
+  } else {
+    setTimeout(() => {
+      redirectTimer.value -= 1;
+    }, 1000);
   }
 });
 </script>

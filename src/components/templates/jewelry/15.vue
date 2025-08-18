@@ -16,11 +16,18 @@
     <div class="spec-label label">PRIMARY:GEM STONE</div>
     <div class="gem-content-layout">
       <div class="specs-container">
-        <div class="size-info">
+        <div v-if="props.certificate.MainStoneMeasurements" class="size-info">
           <div class="specs-value value">
             {{ props.certificate.MainStoneMeasurements }}
           </div>
           <div class="specs-label label">GEM SIZE</div>
+        </div>
+
+        <div v-else-if="props.certificate.MainStoneWeight" class="size-info">
+          <div class="specs-value value">
+            {{ props.certificate.MainStoneWeight }}
+          </div>
+          <div class="specs-label label">GEM WEIGHT</div>
         </div>
 
         <div
@@ -68,6 +75,7 @@
             :stoneShape="certificate.SideStoneShape"
             :stoneType="certificate.SideStoneType"
             :colorHex="certificate.SideStoneColorCode"
+            :maxWidth="'100px'"
           />
         </div>
 

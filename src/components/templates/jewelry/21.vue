@@ -12,23 +12,42 @@
     </div>
   </div>
   <hr class="divider" />
-  <div class="specs-container">
-    <div
-      class="gem-center"
-      style="display: flex; flex-direction: column; align-items: center"
-    >
-      <stones
-        :stoneShape="certificate.MainStoneShape"
-        :stoneType="certificate.MainStoneType"
-        :colorHex="certificate.MainStoneColorCode"
-        :maxWidth="'150px'"
-      />
-      <div class="gem-type">
-        <div style="margin-top: 20px">
-          <div class="specs-value value">
-            {{ certificate.MainStoneMeasurements }}
+
+  <div class="primary-gem animated-phase-one">
+    <div class="diamond-section">
+      <div class="specs-container">
+        <div class="clarity-info">
+          <div class="specs-value">
+            {{ certificate.MainStoneClarity.value }}
           </div>
-          <div class="specs-label">GEM SIZE</div>
+          <div class="specs-label">CLARITY</div>
+        </div>
+
+        <div
+          class="diamond-visual"
+          style="display: flex; flex-direction: column; align-items: center"
+        >
+          <stones
+            :stoneShape="certificate.MainStoneShape"
+            :stoneType="certificate.MainStoneType"
+            :colorHex="certificate.MainStoneColorCode"
+            :maxWidth="'200px'"
+          />
+        </div>
+
+        <div class="specs-info">
+          <div class="specs-divs">
+            <div class="specs-value">
+              {{ certificate.MainStoneColor.value }}
+            </div>
+            <div class="specs-label">COLOR</div>
+          </div>
+          <div v-if="certificate.MainStoneWeight" class="specs-divs">
+            <div class="specs-value">
+              {{ certificate.MainStoneWeight }}
+            </div>
+            <div class="specs-label">WEIGHT</div>
+          </div>
         </div>
       </div>
     </div>

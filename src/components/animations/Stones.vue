@@ -1,7 +1,7 @@
 <template>
   <div class="container" :style="{ maxWidth: containerWidth }">
     <!-- GIF that sizes the container -->
-    <img v-if="stoneImage" :src="stoneImage" :alt="`${stoneShape} GIF`" />
+    <img v-if="stoneImage" :src="stoneImage" :alt="`${stoneShape}`" />
     <div
       class="tint"
       :style="{
@@ -34,16 +34,20 @@ const props = defineProps({
 const stoneImage = computed(() => {
   try {
     let stoneFileName = props.stoneShape.toLowerCase();
+    let filePath = `../../assets/stone animation gifs/${stoneFileName}.gif`;
     if (props.stoneType == "Pearl") {
       stoneFileName = props.stoneType.toLowerCase();
     } else if (props.stoneType == "Opal") {
       stoneFileName = `${props.stoneType.toLowerCase()} ${props.stoneShape.toLowerCase()}`;
+    } else if (props.stoneType == "Mixed Diamonds") {
+      stoneFileName = props.stoneShape;
+      filePath = `../../assets/multi-stone/Multi-${stoneFileName}.webp`;
+    } else if (props.stoneShape.includes("Multi")) {
+      stoneFileName = props.stoneShape.split(" ").join("-");
+      filePath = `../../assets/multi-stone/${stoneFileName}.webp`;
     }
 
-    return new URL(
-      `../../assets/stone animation gifs/${stoneFileName}.gif`,
-      import.meta.url
-    ).href;
+    return new URL(filePath, import.meta.url).href;
   } catch (e) {
     console.warn("Image not found:", e);
     return null;
@@ -57,7 +61,6 @@ const containerWidth = computed(() => {
 
   return maxWidth;
 });
-
 </script>
 
 <style scoped>
@@ -79,7 +82,6 @@ const containerWidth = computed(() => {
 }
 
 /* Overlay SVG covers the same area */
-
 
 .tint {
   position: absolute;

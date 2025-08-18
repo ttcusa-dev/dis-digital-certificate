@@ -52,6 +52,24 @@ body {
   animation: scaleUp 0.8s ease-out;
 }
 
+.nocontent {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 90%;
+  height: 500px;
+  font-size: 22px;
+  color: white;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  text-align: left;
+  justify-content: center;
+}
+
 .loader-gif {
   width: 100%;
   /* Adjust size as needed */
@@ -130,10 +148,10 @@ body {
 .jewelry-image {
   width: 100%;
   display: block;
-  mix-blend-mode: lighten;
+  mix-blend-mode: plus-lighter;
   object-fit: cover;
   object-position: center;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .showcase-header {
@@ -211,6 +229,7 @@ body {
 
 .client-logo {
   width: 100%;
+  filter: brightness(0) invert(1);
 }
 
 .product-info {

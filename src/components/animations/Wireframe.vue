@@ -5,7 +5,7 @@
         <div class="value">{{ handleCaratWeight(weight) }}</div>
         <div class="label">TOTAL CARAT WEIGHT</div>
       </div>
-      <img v-if="wireframe" :src="wireframe" :alt="`${stoneShape} GIF`" />
+      <img v-if="wireframe" :src="wireframe" :alt="`${stoneShape}`" />
       <div
         class="tint"
         :style="{
@@ -45,7 +45,7 @@ const wireframe = computed(() => {
     const shape = props.jewelryShape.split(" ")[0];
     wireframeFileName = `${props.jewelryType}-${shape}`;
   }
-  console.log({ wireframeFileName });
+
   try {
     return new URL(
       `../../assets/wireframes/${wireframeFileName}.webp`,

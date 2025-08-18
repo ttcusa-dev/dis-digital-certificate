@@ -1,6 +1,6 @@
 <template>
   <!-- Loader container (shows first for 5 seconds) -->
-  <div v-show="loading" class="loader-container">
+  <div  class="loader-container">
     <div class="loader-content">
       <img
         src="../assets/images/loader.gif"

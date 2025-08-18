@@ -37,6 +37,10 @@ if (props.jewelryType == "Pendant") {
   className.value = "ring";
 } else if (props.jewelryType == "Necklace") {
   className.value = "necklace";
+} else if (props.jewelryType == "Earring" || props.jewelryType == "Earrings") {
+  className.value = "earring";
+} else if (props.jewelryType == "Studs") {
+  className.value = "studs";
 }
 
 const wireframe = computed(() => {
@@ -112,6 +116,18 @@ const handleCaratWeight = (value) => {
 
 .necklace {
   margin-top: 50px;
+}
+
+.studs {
+  margin-top: -120px;
+}
+
+.earring {
+  position: absolute;
+  z-index: 99;
+  font-size: 17px;
+  margin-right: 74px;
+  width: 115px;
 }
 
 .wireframe-info .label {

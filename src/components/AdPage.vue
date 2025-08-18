@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      v-show="showFullPageAd"
+      v-show="showFullPageAdToggle"
       v-if="currentCampaign.full_screen_ad.url"
       class="adpage-container full fill"
     >
@@ -17,7 +17,7 @@
       v-show="showFooterAdToggle"
       class="ads-container bottom fill"
       :class="{ hideFooter: Boolean(currentCampaign.footer_ad.url) }"
-      :ref="(el) => el.scrollIntoView({ behavior: 'smooth' })"
+      
     >
       <img
         @click="handleAdsLink"

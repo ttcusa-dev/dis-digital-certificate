@@ -70,6 +70,10 @@ body {
   justify-content: center;
 }
 
+.digital-cert-vid {
+  height: 95vh;
+}
+
 .loader-gif {
   width: 100%;
   /* Adjust size as needed */
@@ -148,7 +152,7 @@ body {
 .jewelry-image {
   width: 100%;
   display: block;
-  mix-blend-mode: plus-lighter;
+  mix-blend-mode: lighten;
   object-fit: cover;
   object-position: center;
   margin-top: 20px;
@@ -269,6 +273,7 @@ body {
   z-index: 1;
   pointer-events: none;
   font-family: "inter", sans-serif;
+  text-transform: uppercase;
 }
 
 .specs-grid {
@@ -527,6 +532,7 @@ body {
   position: absolute;
   bottom: 0;
   width: 100%;
+  padding: 10px 15px;
 }
 
 .website {
@@ -635,7 +641,7 @@ body {
   }
 
   .jewelry-image {
-    height: 256px;
+    height: 305px;
   }
 
   .showcase-header {
@@ -657,7 +663,7 @@ body {
   }
 
   .product-id {
-    margin: 10px 0 10px;
+    margin-top: 60px;
     height: 40px;
   }
 
@@ -833,7 +839,7 @@ body {
   }
 
   .jewelry-image {
-    height: 256px;
+    height: 305px;
   }
 
   .showcase-logo {
@@ -845,8 +851,8 @@ body {
   }
 
   .product-id {
-    margin-top: 2px;
     height: 40px;
+    margin-top: 10px;
   }
 
   .product-id-main {
@@ -939,18 +945,22 @@ body {
     line-height: 10px;
   }
 
+  .ring-info-v2 {
+    padding: 1rem 1rem !important;
+  }
+
   .product-description {
-    margin: 10px 0 0 0;
+    height: 13rem;
   }
 
   .description-label {
     font-size: 11px;
-    /* width: 340.53px; */
+    width: 340.53px;
   }
 
   .description-card {
-    /* padding: 5px 2px 25px 2px; */
-    width: 280px;
+    padding: 5px 2px 25px 2px;
+    width: 340px;
     max-width: 100%;
   }
 
@@ -958,11 +968,6 @@ body {
     font-size: 10px;
     padding-left: 4px;
     padding-right: 4px;
-  }
-
-  .footer {
-    padding: 0 30px;
-    /* margin-top: 20px; */
   }
 
   .ds-logo {

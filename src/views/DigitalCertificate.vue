@@ -1,6 +1,6 @@
 <template>
   <!-- Loader container (shows first for 5 seconds) -->
-  <div  class="loader-container">
+  <div class="loader-container">
     <div class="loader-content">
       <img
         src="../assets/images/loader.gif"
@@ -22,72 +22,110 @@
 
   <div v-else class="digitalcert-wrapper">
     <!-- Intro container (shows after loader) -->
-    <div class="intro-container">
-      <div class="logo-container">
-        <video id="video" class="logo-video" muted playsinline>
-          <source src="../assets/images/helzberg-logo.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+    <div v-if="!olderCertificate">
+      <div class="intro-container">
+        <div class="logo-container">
+          <video id="video" class="logo-video" muted playsinline>
+            <source src="../assets/images/helzberg-logo.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+
+      <div
+        v-if="certificate && !certificateDoesNotExist"
+        v-show="!showFullPageAd"
+        class="main-content"
+      >
+        <!-- Top section with jewelry showcase -->
+        <div class="jewelry-showcase">
+          <div class="showcase-header">
+            <img
+              v-if="clientLogo"
+              class="client-logo"
+              :src="clientLogo"
+              alt=""
+              srcset=""
+            />
+          </div>
+          <!-- Replace the div with video element -->
+          <video
+            v-if="productShowCaseVideo"
+            id="jewelry-video"
+            class="jewelry-image"
+            autoplay
+            muted
+            playsinline
+            ref="productVideo"
+            @timeupdate="handleTime"
+            @ended="handleVideoPlayback"
+          >
+            <source src="../assets/images/Emerlad.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <!-- <div class="custom-divider"></div> -->
+        <!-- Bottom section with specifications -->
+        <!-- Template Section -->
+        <div class="specifications-section">
+          <div class="product-id">
+            <p class="product-id-main">
+              DIS CERTIFICATE#: {{ certificate.CertNum }}
+            </p>
+            <p class="product-id-overlap">{{ certificate.ClientSKU }}</p>
+          </div>
+          <div class="template-container">
+            <component :is="templateComponent" :certificate="certificate" />
+          </div>
+          <div style="visibility: hidden" class="product-description">
+            <div class="description-label">
+              <p class="comment-label">COMMENTS</p>
+            </div>
+            <div class="description-card">
+              <div class="description-text">
+                {{ certificate.CertificateComments }}
+              </div>
+            </div>
+          </div>
+          <Footer />
+        </div>
       </div>
     </div>
 
-    <div
-      v-if="certificate && !certificateDoesNotExist"
-      v-show="!showFullPageAd"
-      class="main-content"
-    >
-      <!-- Top section with jewelry showcase -->
-      <div class="jewelry-showcase">
-        <div class="showcase-header">
-          <img
-            v-if="clientLogo"
-            class="client-logo"
-            :src="clientLogo"
-            alt=""
-            srcset=""
-          />
-        </div>
-        <!-- Replace the div with video element -->
+    <div v-else>
+      <div v-if="!showFullPageAd" class="right">
         <video
-          v-if="productShowCaseVideo"
-          id="jewelry-video"
-          class="jewelry-image"
+          ref="videoRef"
+          class="digital-cert-vid"
+          :src="digitalCertificateVideoURL"
           autoplay
           muted
           playsinline
-          ref="productVideo"
           @timeupdate="handleTime"
           @ended="handleVideoPlayback"
+        ></video>
+        <!-- <div
+        v-if="showDISCert"
+        class="certificate-number-wrapper"
+        :class="{
+          meeting_settings: isHZMeeting,
+          hz_settings: isHZ && !isHZMeeting,
+          isTemplate4: isTemplate4,
+          has_footer_ad: has_footer_ad,
+          has_imperfections: has_imperfections,
+        }"
+      >
+        <strong>
+          DIS CERTIFICATE#:
+          {{
+            digitalCertificate &&
+            digitalCertificate.ManufacturedAs === "Lab Grown"
+              ? `LG${digitalCertificate.CertNum}`
+              : $route.params.certificate_num
+          }}</strong
         >
-          <source :src="productShowCaseVideo" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-      </div>
-
-      <!-- <div class="custom-divider"></div> -->
-      <!-- Bottom section with specifications -->
-      <!-- Template Section -->
-      <div class="specifications-section">
-        <div class="product-id">
-          <p class="product-id-main">
-            DIS CERTIFICATE#: {{ certificate.CertNum }}
-          </p>
-          <p class="product-id-overlap">{{ certificate.ClientSKU }}</p>
-        </div>
-        <div class="template-container">
-          <component :is="templateComponent" :certificate="certificate" />
-        </div>
-        <div style="visibility: hidden" class="product-description">
-          <div class="description-label">
-            <p class="comment-label">COMMENTS</p>
-          </div>
-          <div class="description-card">
-            <div class="description-text">
-              {{ certificate.CertificateComments }}
-            </div>
-          </div>
-        </div>
-        <Footer />
+      </div> -->
       </div>
     </div>
   </div>
@@ -132,7 +170,7 @@ import { useRoute } from "vue-router";
 import Footer from "../components/Footer.vue";
 import AdPage from "../components/AdPage.vue";
 import { DateTime } from "luxon";
-import axios from "axios";
+
 
 const certificate = ref(null);
 const clientLogo = ref(null);
@@ -143,10 +181,14 @@ const showFullPageAd = ref(false);
 const activateAds = ref(false);
 const has_footer_ad = ref(false);
 const noAdsInit = ref(false);
+const olderCertificate = ref(false);
 const certificateDoesNotExist = ref(false);
 const redirectTimer = ref(5);
-const productShowCaseVideo = ref(null);
+const productShowCaseVideo = ref("@/assets/images/Emerlad.mp4");
+const digitalCertificateVideoURL = ref(null);
 const loading = ref(false);
+const timerTickerBeforeAd = ref(20);
+
 const route = useRoute();
 const productVideoRef = useTemplateRef("productVideo");
 
@@ -158,6 +200,54 @@ async function fetchCertificate() {
   else return certificateDoc.data();
 }
 
+async function fetchDigitalCertificate(certificate) {
+  const { ClientSKU, CertNum, LineNum } = certificate;
+  let certificateVideo;
+  try {
+    const digitalCertRef = collection(db, "digital_certificate_videos");
+    const digitalCertQuery = query(
+      digitalCertRef,
+      where("name", "in", [ClientSKU, CertNum, LineNum])
+    );
+    certificateVideo = await getDocs(digitalCertQuery);
+    if (certificateVideo.empty) {
+      // DISLoading = false;
+      // noCertificate = true;
+      return false;
+    }
+    olderCertificate.value = true;
+    certificateVideo = certificateVideo.docs[0];
+
+    certificateVideo = Object.assign(
+      { id: certificateVideo.id },
+      certificateVideo.data()
+    );
+    digitalCertificateVideoURL.value = certificateVideo.meta.url;
+
+    // if (certificateVideo.hasOwnProperty("globalSku")) {
+    //   showCertNumber = true;
+    // }
+
+    // digitalCertificateVideo = certificateVideo;
+    // digitalCertificateVideoURL.value = certificateVideo.meta.url;
+    // skuCertificate = showCertNumber;
+
+    // if (onlySKU) {
+    //   skuCertificate = false;
+    // }
+    // isHZ = client ? client.name.includes("Helzberg") : false;
+  } catch (error) {
+    console.error("Error: ", error);
+    if (certificate.CertificateVideo) {
+      // digitalCertificateVideo = digitalCertificate.CertificateVideo;
+      digitalCertificateVideoURL = digitalCertificate.CertificateVideo.url;
+    } else {
+      // noCertificate = true;
+      // DISLoading = false;
+    }
+  }
+}
+
 async function fetchShowCasingVideo(videoFileName) {
   const videoRef = storageRef(storage, `product-display/${videoFileName}`);
   try {
@@ -165,14 +255,19 @@ async function fetchShowCasingVideo(videoFileName) {
     productShowCaseVideo.value = url;
   } catch (error) {
     console.error({ error });
-    certificateDoesNotExist.value = true;
+    // certificateDoesNotExist.value = true;
   }
 }
 
 async function fetchClientLogo(clientId) {
   let clientDoc = await getDoc(doc(db, "companies", clientId));
   clientLogo.value = clientDoc.data().images.url;
-  console.log({ clientLogo });
+}
+
+async function getAdRunTime() {
+  let tickerDoc = await getDoc(doc(db, "attributes", "timerTickerBeforeAd"));
+  if (!tickerDoc.exists) return null;
+  else return tickerDoc.data();
 }
 
 //For Advertisement
@@ -247,7 +342,7 @@ async function fetchClientCampaign(clientId) {
 
 function handleTime(e) {
   if (!noAdsInit) {
-    if (e.target.currentTime > timerTickerBeforeAd.values) {
+    if (e.target.currentTime > timerTickerBeforeAd.value.values) {
       handleVideoPlayback();
     }
   }
@@ -357,20 +452,16 @@ function restartCertificateViewingSequence() {
   const mainContent = document.querySelector(".main-content");
   const introContainer = document.querySelector(".intro-container");
   // const templateContainer = document.querySelector(".template-container");
-
   // templateContainer.classList.add("hidden");
-
   introContainer.classList.remove("visible");
   mainContent.classList.remove("visible");
-
   introContainer.classList.add("hidden");
   mainContent.classList.add("hidden");
-
   introContainer.style.display = "none";
   mainContent.style.display = "none";
   const video = document.getElementById("jewelry-video");
-  video.currentTime = 0; // Set the video to start from the beginning
-  video.play();
+  productVideoRef.value.currentTime = 0; // Set the productVideoRef to start from the beginning
+  productVideoRef.value.play();
   handleVideoPlayback();
   initCertificateViewingSequence();
 }
@@ -393,8 +484,13 @@ onMounted(async () => {
     loading.value = false;
 
     setTimeout(async () => {
-      await fetchShowCasingVideo(certificate.value.Video.name);
-      await fetchClientLogo(certificate.value.Company.id);
+      if (certificate.value.created > 1756675200000) {
+        await fetchDigitalCertificate(certificate.value);
+      } else {
+        await fetchShowCasingVideo(certificate.value.Video.name);
+        await fetchClientLogo(certificate.value.Company.id);
+      }
+
       await fetchClientCampaign(certificate.value.Company.id);
       initCertificateViewingSequence();
     }, 500);
@@ -413,8 +509,16 @@ onMounted(async () => {
 });
 
 watch(showFullPageAd, (toggled) => {
+  console.log({ toggled });
+
   if (!toggled) {
     restartCertificateViewingSequence();
+  }
+});
+
+watch(activateAds, async (toggled) => {
+  if (toggled) {
+    timerTickerBeforeAd.value = await getAdRunTime();
   }
 });
 

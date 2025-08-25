@@ -22,7 +22,13 @@
           <div class="value">{{ certificate.Measurements }}</div>
           <div class="label">Center Stone Measurements</div>
         </div>
+        <div v-if="hasImperfection" class="stat">
+          <button class="text-btn" @click="emits('view-imperfections')">
+            View Imperfections
+          </button>
+        </div>
       </div>
+
       <div class="diagram">
         <img src="../../../assets/diagram.png" alt="" srcset="" />
       </div>
@@ -34,7 +40,7 @@
       <div class="gauge animated-phase-two">
         <gauge
           :idPrefix="'1'"
-          :guageWidth="'70px'"
+          :guageWidth="'80px'"
           :value="certificate.Clarity.value"
         />
         <div class="label">CLARITY</div>
@@ -42,7 +48,7 @@
       <div class="gauge animated-phase-three">
         <gauge
           :idPrefix="'2'"
-          :guageWidth="'70px'"
+          :guageWidth="'80px'"
           :value="certificate.Symmetry"
         />
         <div class="label">SYMMETRY</div>
@@ -50,7 +56,7 @@
       <div class="gauge animated-phase-four">
         <gauge
           :idPrefix="'3'"
-          :guageWidth="'70px'"
+          :guageWidth="'80px'"
           :value="certificate.Polish"
         />
         <div class="label">POLISH</div>
@@ -58,7 +64,7 @@
       <div class="gauge animated-phase-four">
         <gauge
           :idPrefix="'4'"
-          :guageWidth="'70px'"
+          :guageWidth="'80px'"
           :value="certificate.Polish"
         />
         <div class="label">FLUORESCENCE</div>
@@ -69,10 +75,11 @@
 
 <script setup>
 import colorbar from "../../animations/colorbar.vue";
-import gauge from "../../animations/gauge.vue";
-
+import gauge from "../../animations/Gauge.vue";
+const emits = defineEmits("view-imperfections");
 defineProps({
   certificate: { type: Object, default: {} },
+  hasImperfection: { type: Boolean, default: false },
 });
 </script>
 
@@ -113,7 +120,7 @@ defineProps({
 }
 
 .jewelry-info__color .label {
-  font-size: 0.75rem;
+  font-size: 13px;
   text-transform: uppercase;
   opacity: 0.6;
 
@@ -200,7 +207,7 @@ defineProps({
 }
 
 .stat .label {
-  font-size: 0.75rem;
+  font-size: 13px;
   opacity: 0.6;
   margin-top: 0.25rem;
 }

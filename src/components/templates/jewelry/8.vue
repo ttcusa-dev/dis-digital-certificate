@@ -61,7 +61,7 @@
 
 <script setup>
 import colorbar from "../../animations/colorbar.vue";
-import gauge from "../../animations/gauge.vue";
+import gauge from "../../animations/Gauge.vue";
 
 defineProps({
   certificate: { type: Object, default: {} },

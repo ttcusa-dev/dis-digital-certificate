@@ -153,8 +153,6 @@ function initGauge(bgId, progId, ptrId, percent) {
   }, 300);
 }
 
-console.log(props.idPrefix);
-
 onMounted(async () => {
   initGauge(
     `bgArc-${props.idPrefix}`,

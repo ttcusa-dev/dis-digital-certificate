@@ -9,33 +9,31 @@
       alt="Imperfection Template"
       ref="characteristics_url"
     />
-    <div class="imperfections_key_holder">
+    <div
+      v-if="
+        imperfection.imperfectionAddedList &&
+        imperfection.imperfectionAddedList.length
+      "
+      class="imperfections_key_holder"
+    >
       <p class="imperfection_chosen_text section_two_section_head">
         Key to Symbols
       </p>
 
-      <div
-        v-if="
-          imperfection.imperfectionAddedList &&
-          imperfection.imperfectionAddedList.length
-        "
-        class="key_info_holder"
-      >
-        <template>
-          <div
-            class="imperfections_key"
-            v-for="(imperfection, index) in imperfection.imperfectionAddedList"
-            :key="index"
-          >
-            <img
-              ref="imperfection_url"
-              class="imperfection_img_icon"
-              :src="require('@/assets/imperfections/' + imperfection.image)"
-              alt="imperfection"
-            />
-            <p class="imperfections_key_text">{{ imperfection.name }}</p>
-          </div>
-        </template>
+      <div class="key_info_holder">
+        <div
+          class="imperfections_key"
+          v-for="(list, index) in imperfection.imperfectionAddedList"
+          :key="index"
+        >
+          <img
+            ref="imperfection_url"
+            class="imperfection_img_icon"
+            :src="fetchImperfection(list.image)"
+            alt="imperfection"
+          />
+          <p class="imperfections_key_text">{{ list.name }}</p>
+        </div>
         <div
           v-if="!imperfection.display_imperfection_icons"
           class="imperfections_key_noicon"
@@ -51,13 +49,23 @@
 </template>
 
 <script setup>
-defineProps({
+const props = defineProps({
   imperfection: { type: Object, default: {} },
   hasPerfections: { type: Boolean, default: false },
 });
+
+function fetchImperfection(imagePath) {
+  let filePath = `../assets/imperfections/${imagePath}`;
+  return new URL(filePath, import.meta.url).href;
+}
 </script>
 
 <style lang="scss" scoped>
+.imperfections_key_text {
+  text-transform: capitalize;
+  display: flex;
+  flex-direction: column;
+}
 .imperfection_img {
   // position: absolute;
   width: 100%;
@@ -69,7 +77,6 @@ defineProps({
     z-index: 2;
     position: relative;
     // left: 2px;
-    filter: invert(1);
   }
 
   .img_background {
@@ -84,8 +91,7 @@ defineProps({
   .imperfections_key_holder {
     margin-left: 0;
     padding-left: 15px;
-    color: white;
-    background: black;
+    color: black;
     padding-left: 5%;
     padding-bottom: 2%;
   }

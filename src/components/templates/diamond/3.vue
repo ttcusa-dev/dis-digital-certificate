@@ -22,6 +22,11 @@
           <div class="value">{{ certificate.Measurements }}</div>
           <div class="label">Measurements</div>
         </div>
+        <div v-if="hasImperfection" class="stat">
+          <button class="text-btn" @click="emits('view-imperfections')">
+            View Imperfections
+          </button>
+        </div>
       </div>
     </div>
     <hr class="divider" />
@@ -66,10 +71,11 @@
 
 <script setup>
 import colorbar from "../../animations/colorbar.vue";
-import gauge from "../../animations/gauge.vue";
-
+import gauge from "../../animations/Gauge.vue";
+const emits = defineEmits("view-imperfections");
 defineProps({
   certificate: { type: Object, default: {} },
+  hasImperfection: { type: Boolean, default: false },
 });
 </script>
 

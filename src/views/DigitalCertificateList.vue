@@ -271,6 +271,17 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../assets/images/LC-background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .video-title {
   color: white;
   font-size: 25px;
@@ -362,16 +373,7 @@ export default {
   background-color: #2980b9;
 }
 
-.container {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-image: url("../assets/images/LC-background.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+
 
 .modal-overlay {
   position: fixed;

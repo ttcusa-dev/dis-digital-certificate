@@ -49,15 +49,21 @@
         <div class="label">POLISH</div>
       </div>
     </div>
+    <div v-if="hasImperfection" class="stat txt-btn">
+      <button class="text-btn" @click="emits('view-imperfections')">
+        View Imperfections
+      </button>
+    </div>
   </section>
 </template>
 
 <script setup>
 import colorbar from "../../animations/colorbar.vue";
-import gauge from "../../animations/gauge.vue";
-
+import gauge from "../../animations/Gauge.vue";
+const emits = defineEmits("view-imperfections");
 defineProps({
   certificate: { type: Object, default: {} },
+  hasImperfection: { type: Boolean, default: false },
 });
 </script>
 
@@ -114,6 +120,9 @@ defineProps({
   border-radius: 2px 0 0 2px;
 }
 
+.txt-btn {
+  margin: 20px 0 25px 0;
+}
 /* DOWNWARD‑POINTING arrow sitting on top of the slider */
 .thumb {
   position: absolute;
@@ -186,7 +195,6 @@ defineProps({
 .jewelry-info__quality {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 3.5rem;
   padding-top: 20px;
 }
 

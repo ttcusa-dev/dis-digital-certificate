@@ -32,6 +32,11 @@
           <div class="value">{{ certificate.Measurements }}</div>
           <div class="label">Center Stone Measurements</div>
         </div>
+        <div v-if="hasImperfection" class="stat">
+          <button class="text-btn" @click="emits('view-imperfections')">
+            View Imperfections
+          </button>
+        </div>
       </div>
       <div class="diagram">
         <img src="../../../assets/diagram.png" alt="" srcset="" />
@@ -44,7 +49,7 @@
       <div class="gauge animated-phase-two">
         <gauge
           :idPrefix="'1'"
-          :guageWidth="'70px'"
+          :guageWidth="'80px'"
           :value="certificate.Clarity.value"
         />
         <div class="label">CLARITY</div>
@@ -52,7 +57,7 @@
       <div class="gauge animated-phase-three">
         <gauge
           :idPrefix="'2'"
-          :guageWidth="'70px'"
+          :guageWidth="'80px'"
           :value="certificate.Symmetry"
         />
         <div class="label">SYMMETRY</div>
@@ -60,7 +65,7 @@
       <div class="gauge animated-phase-four">
         <gauge
           :idPrefix="'3'"
-          :guageWidth="'70px'"
+          :guageWidth="'80px'"
           :value="certificate.Polish"
         />
         <div class="label">POLISH</div>
@@ -68,7 +73,7 @@
       <div class="gauge animated-phase-four">
         <gauge
           :idPrefix="'4'"
-          :guageWidth="'70px'"
+          :guageWidth="'80px'"
           :value="certificate.Polish"
         />
         <div class="label">FLUORESCENCE</div>
@@ -79,10 +84,12 @@
 
 <script setup>
 import colorbar from "../../animations/colorbar.vue";
-import gauge from "../../animations/gauge.vue";
+import gauge from "../../animations/Gauge.vue";
 
+const emits = defineEmits("view-imperfections");
 defineProps({
   certificate: { type: Object, default: {} },
+  hasImperfection: { type: Boolean, default: false },
 });
 </script>
 
@@ -92,7 +99,8 @@ defineProps({
   width: 100%;
   margin: 0 auto;
   color: #e1e8ed;
-  padding: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   border-radius: 0.75rem;
   font-family: "Helvetica Neue", Arial, sans-serif;
 }
@@ -106,11 +114,11 @@ defineProps({
 
 .jewelry-info__top {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .jewelry-info__item .label {
-  font-size: 0.75rem;
+  font-size: 13px;
   text-transform: uppercase;
   opacity: 0.6;
   text-align: center;
@@ -123,10 +131,9 @@ defineProps({
 }
 
 .jewelry-info__color .label {
-  font-size: 0.75rem;
+  font-size: 13px;
   text-transform: uppercase;
   opacity: 0.6;
-
   text-align: center;
 }
 
@@ -182,12 +189,13 @@ defineProps({
 .divider {
   border: none;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  margin: 0.5rem 0;
+  margin-bottom: 6px;
+  margin-top: 6px;
 }
 
 .diagram {
   width: 150px;
-  height: 140px;
+  height: 120px;
 }
 
 .diagram img {
@@ -210,15 +218,16 @@ defineProps({
 }
 
 .stat .label {
-  font-size: 0.75rem;
+  font-size: 13px;
   opacity: 0.6;
-  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  text-transform: uppercase;
 }
 
 .jewelry-info__quality {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 5.5rem;
+  margin-bottom: 6.5rem;
 }
 
 .gauge {

@@ -82,7 +82,12 @@
             <p class="product-id-overlap">{{ certificate.ClientSKU }}</p>
           </div>
           <div class="template-container">
-            <component :is="templateComponent" :certificate="certificate" />
+            <component
+              @view-imperfections="initImperfectionModal"
+              :is="templateComponent"
+              :certificate="certificate"
+              :hasImperfection="has_imperfections"
+            />
           </div>
           <div style="visibility: hidden" class="product-description">
             <div class="description-label">
@@ -134,6 +139,14 @@
       </div> -->
       </div>
     </div>
+
+    <modal @close-modal="closeModal" :isVisible="showModal" :logo="clientLogo">
+      <imperfections
+        v-if="showImperfectionModal"
+        :hasPerfections="has_imperfections"
+        :imperfection="imperfections"
+      ></imperfections>
+    </modal>
   </div>
 
   <div class="advertisements">
@@ -176,6 +189,9 @@ import {
 import { useRoute } from "vue-router";
 import Footer from "../components/Footer.vue";
 import AdPage from "../components/AdPage.vue";
+import Imperfections from "../components/Imperfections.vue";
+import Modal from "../components/Modal.vue";
+
 import { DateTime } from "luxon";
 
 const route = useRoute();
@@ -191,11 +207,15 @@ const digitalCertificateVideoURL = ref(null);
 const redirectTimer = ref(5);
 const timerTickerBeforeAd = ref(20);
 const enterTimestamp = ref(Date.now());
+
+const showModal = ref(false);
+const showImperfectionModal = ref(false);
 const showFooterAd = ref(false);
 const showFullPageAd = ref(false);
 const activateAds = ref(false);
 const has_imperfections = ref(false);
 const has_footer_ad = ref(false);
+const stolenItem = ref(false);
 const noAdsInit = ref(false);
 const olderCertificate = ref(false);
 const certificateDoesNotExist = ref(false);
@@ -488,6 +508,11 @@ function fetchUserDevice() {
   }
 }
 
+function initImperfectionModal() {
+  showModal.value = true;
+  showImperfectionModal.value = true;
+}
+
 async function handleAnalytics(userAction, saveViewingTime) {
   if (initAnalytics) {
     const viewingTime = handleViewingTime();
@@ -524,13 +549,8 @@ async function handleAnalytics(userAction, saveViewingTime) {
 }
 async function fetchImperfections(id) {
   let imperfection_doc = await getDoc(doc(db, "diamond_imperfections", id));
-  if (imperfection_doc.exists) {
-    imperfections.value = Object.assign(
-      { id: imperfection_doc.id },
-      imperfection_doc.data()
-    );
-    has_imperfections.value = true;
-  }
+  if (!imperfection_doc.exists) return false;
+  return Object.assign({ id: imperfection_doc.id }, imperfection_doc.data());
 }
 function handleCertificateNumber() {
   if (skuCertificate) {
@@ -539,6 +559,11 @@ function handleCertificateNumber() {
       showDISCert = true;
     }, seconds);
   }
+}
+
+function closeModal() {
+  showModal.value = false;
+  showImperfectionModal.value = false;
 }
 
 function handleViewingTime() {
@@ -592,7 +617,10 @@ onMounted(async () => {
     setTimeout(async () => {
       if (route.params.certType == "diamond") {
         if (certificate.value.imperfection)
-          await fetchImperfections(certificate.value.imperfection.id);
+          imperfections.value = await fetchImperfections(
+            certificate.value.imperfection.id
+          );
+        has_imperfections.value = Boolean(imperfections.value);
       }
       if (certificate.value.created > 1756675200000) {
         await fetchDigitalCertificate(certificate.value);

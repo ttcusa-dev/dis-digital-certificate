@@ -16,9 +16,6 @@
       <colorbar :idPrefix="'1'" :color="certificate.Color" />
     </div>
 
-    <!-- Measurements & Weight -->
-
-    <!-- Clarity gauge -->
     <div class="info-section">
       <div class="gauges">
         <div class="guage animated-phase-two">
@@ -34,15 +31,22 @@
         <img src="../../../assets/diagram.png" alt="" srcset="" />
       </div>
     </div>
+
+    <div v-if="hasImperfection" class="stat">
+      <button class="text-btn" @click="emits('view-imperfections')">
+        View Imperfections
+      </button>
+    </div>
   </section>
 </template>
 
 <script setup>
 import colorbar from "../../animations/colorbar.vue";
-import gauge from "../../animations/gauge.vue";
-
+import gauge from "../../animations/Gauge.vue";
+const emits = defineEmits("view-imperfections");
 defineProps({
   certificate: { type: Object, default: {} },
+  hasImperfection: { type: Boolean, default: false },
 });
 </script>
 
@@ -71,12 +75,12 @@ defineProps({
   justify-content: space-around;
 }
 .top .block .label {
-  font-size: 0.75rem;
+  font-size: 13px;
   opacity: 0.6;
   text-transform: uppercase;
 }
 .top .block .value {
-  font-size: 1rem;
+  font-size: 18px;
   font-weight: 500;
 }
 .divider {
@@ -92,7 +96,7 @@ defineProps({
   width: 100%;
   position: relative;
   display: flex;
-  margin-top: 50px;
+  margin-top: 2rem;
   justify-content: space-between;
   align-content: center;
   align-items: first baseline;

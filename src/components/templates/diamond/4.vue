@@ -19,6 +19,7 @@
     </div>
 
     <!-- Weight / Measurements / Diagram -->
+    <hr class="divider" />
     <div class="jewelry-info__stats animated-phase-one">
       <div class="stat">
         <div class="value">{{ certificate.Weight }} ct.</div>
@@ -28,7 +29,13 @@
         <div class="value">{{ certificate.Measurements }}</div>
         <div class="label">Measurements</div>
       </div>
+      <div v-if="hasImperfection" class="stat">
+        <button class="text-btn" @click="emits('view-imperfections')">
+          View Imperfections
+        </button>
+      </div>
     </div>
+    <hr class="divider" />
     <div class="stat diagram">
       <!-- drop in your SVG icon here -->
     </div>
@@ -38,7 +45,7 @@
         <gauge
           :idPrefix="'1'"
           :value="certificate.Clarity.value"
-          :guageWidth="'100px'"
+          :guageWidth="'80px'"
         />
         <div class="label">Clarity</div>
       </div>
@@ -46,7 +53,7 @@
         <gauge
           :idPrefix="'2'"
           :value="certificate.Symmetry"
-          :guageWidth="'100px'"
+          :guageWidth="'80px'"
         />
         <div class="label">Symmetry</div>
       </div>
@@ -54,7 +61,7 @@
         <gauge
           :idPrefix="'3'"
           :value="certificate.Polish"
-          :guageWidth="'100px'"
+          :guageWidth="'80px'"
         />
         <div class="label">Polish</div>
       </div>
@@ -64,10 +71,11 @@
 
 <script setup>
 import colorbar from "../../animations/colorbar.vue";
-import gauge from "../../animations/gauge.vue";
-
+import gauge from "../../animations/Gauge.vue";
+const emits = defineEmits("view-imperfections");
 defineProps({
   certificate: { type: Object, default: {} },
+  hasImperfection: { type: Boolean, default: false },
 });
 </script>
 
@@ -76,6 +84,7 @@ defineProps({
   overflow: hidden;
   width: 100%;
   margin: 0 auto;
+  padding: 1rem;
   color: #e1e8ed;
   border-radius: 0.75rem;
   font-family: "Helvetica Neue", Arial, sans-serif;
@@ -103,52 +112,13 @@ defineProps({
 }
 
 .jewelry-info__item .value {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 500;
   margin-top: 0.25rem;
   text-align: center;
 }
 
-.slider {
-  position: relative;
-  height: 4px;
-  background: #ffffff;
-  border-radius: 2px;
-  margin-top: 0.5rem;
-}
 
-.fill {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  background: #287bc9;
-  border-radius: 2px 0 0 2px;
-}
-
-/* DOWNWARD‑POINTING arrow sitting on top of the slider */
-.thumb {
-  position: absolute;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 6px solid #fff0;
-  border-right: 6px solid #fff0;
-  border-top: 8px solid #fff;
-  margin-top: -16px;
-}
-
-/* label text above the arrow */
-.thumb::after {
-  content: attr(data-label);
-  position: absolute;
-  bottom: calc(20% + 8px + 4px); /* 8px arrow-height + 4px gap */
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 0.75rem;
-  color: #fff;
-  white-space: nowrap;
-}
 
 .jewelry-info__stats {
   display: flex;
@@ -170,7 +140,7 @@ defineProps({
 }
 
 .stat .value {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 500;
 }
 
@@ -178,13 +148,12 @@ defineProps({
   font-size: 13px;
   text-transform: uppercase;
   opacity: 0.6;
-  margin-top: 0.25rem;
 }
 
 .jewelry-info__quality {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
+  margin-bottom: 6rem;
 }
 
 .gauge {
@@ -226,6 +195,13 @@ defineProps({
   border-radius: 0.5rem;
   font-size: 0.75rem;
   line-height: 1.4;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 </style>
 

@@ -66,7 +66,7 @@
 
 <script>
 import { functions } from "../config/firebaseInit";
-const { DateTime } = require("luxon");
+import { DateTime } from "luxon";
 
 export default {
   name: "LandingSendLink",

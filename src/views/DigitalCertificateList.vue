@@ -4,8 +4,9 @@
       <div class="swiper-wrapper">
         <div
           v-for="(cert, index) in certificates"
-          :key="index"
+          :key="cert"
           class="swiper-slide"
+          :id="cert.id"
         >
           <div class="video-wrapper">
             <div class="video-title">
@@ -17,7 +18,6 @@
               <img class="client-logo" :src="client.logo" alt="" srcset="" />
             </div>
             <video
-            
               :ref="cert.name"
               @ended="stopVideo(cert)"
               :src="cert.url"
@@ -31,13 +31,14 @@
               class="overlay-play-btn"
               v-if="displayPlayBtn !== cert.name"
             >
-              <i style="font-size: 200px" class="material-symbols-outlined">
+              <i style="font-size: 200px" class="material-icons">
                 play_circle
               </i>
             </div>
           </div>
           <button
-            v-if="swiper && swiper.activeIndex == index"
+            v-if="currentSlideIndex === index"
+            :ref="cert.id"
             @click="openModal('email', cert)"
             class="action-btn"
           >
@@ -112,16 +113,24 @@
 </template>
 
 <script>
-import { Swiper, SwiperSlide } from "swiper";
+import {
+  httpsCallable,
+  functions,
+  db,
+  getDoc,
+  doc,
+} from "../config/firebaseInit";
+import Swiper from "swiper";
 import { Navigation, EffectCoverflow } from "swiper/modules";
-import "swiper/swiper-bundle.min.css";
-import { db, functions } from "../config/firebaseInit";
-import Swal from "sweetalert2";
+import "swiper/css/bundle";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
+// import Swal from "sweetalert2";
 
 export default {
   components: {
     Swiper,
-    SwiperSlide,
   },
   data() {
     return {
@@ -132,7 +141,8 @@ export default {
       sendType: "email",
       displayPlayBtn: "",
       swiper: {},
-      sendEmail: functions.httpsCallable("sendEmail"),
+      currentSlideIndex: 0,
+      sendEmail: httpsCallable(functions, "sendEmail"),
       form: {
         email: null,
         name: null,
@@ -144,7 +154,7 @@ export default {
 
   async created() {
     await this.getCertificateList();
-    await this.initSwiper();
+    this.initSwiper();
   },
   methods: {
     initSwiper() {
@@ -157,14 +167,8 @@ export default {
         coverflowEffect: {
           rotate: 40,
           slideShadows: false,
-
           depth: 1000,
         },
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-        },
-
         // Navigation arrows
         navigation: {
           nextEl: ".swiper-button-next",
@@ -182,14 +186,9 @@ export default {
       });
     },
     loadCurrentVideo() {
-      // if (this.swiper.slides) {
-      //   const currentSlide = this.swiper.slides[this.swiper.activeIndex];
-      //   console.log({ currentSlide });
-      //   const video = currentSlide.querySelector("video");
-      //   if (video && !video.src) {
-      //     video.src = video.dataset.src;
-      //   }
-      // }
+      if (this.swiper.slides) {
+        this.currentSlideIndex = this.swiper.activeIndex;
+      }
     },
     stopVideo(cert) {
       this.$refs[cert.name][0].currentTime = 0;
@@ -225,10 +224,12 @@ export default {
 
     async getCertificateList() {
       const list_id = this.$route.params.list_id;
-      let certificateList = await db
-        .doc(`digital_certificate_lists/${list_id}`)
-        .get();
+      let certificateList = await getDoc(
+        doc(db, "digital_certificate_lists", list_id)
+      );
       this.certificates = certificateList.data().certificates;
+
+      console.log(this.certificates);
       this.client = certificateList.data().client;
     },
     validateEmailData() {
@@ -309,7 +310,8 @@ export default {
 .video-element {
   display: block;
   position: relative;
-  width: 100%;
+  width: 88%;
+  height: 100%;
   border: 2px solid #3d3d3d;
   border-radius: 14px !important;
 }
@@ -339,6 +341,7 @@ export default {
   color: rgba(255, 255, 255, 0.8);
   cursor: pointer;
   z-index: 999;
+  overflow: hidden;
 }
 
 .overlay-play-btn i {
@@ -361,14 +364,13 @@ export default {
 
 .container {
   width: 100vw;
-  /* background-color: #273357; */
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("../assets/img/LC-background.png");
+  background-image: url("../assets/images/LC-background.png");
   background-repeat: no-repeat;
-  background-size: cover
+  background-size: cover;
 }
 
 .modal-overlay {

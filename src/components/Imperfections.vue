@@ -57,7 +57,72 @@ defineProps({
 });
 </script>
 
-<style>
+<style lang="scss" scoped>
+.imperfection_img {
+  // position: absolute;
+  width: 100%;
+  top: 50em;
 
+  .img {
+    // background: #2b2b2b;
+    width: 100%;
+    z-index: 2;
+    position: relative;
+    // left: 2px;
+    filter: invert(1);
+  }
 
+  .img_background {
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+    filter: none;
+  }
+
+  .imperfections_key_holder {
+    margin-left: 0;
+    padding-left: 15px;
+    color: white;
+    background: black;
+    padding-left: 5%;
+    padding-bottom: 2%;
+  }
+
+  .imperfection_chosen_text {
+    margin-left: 0;
+    font-size: 18px;
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+
+  .key_info_holder {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+
+    .imperfections_key {
+      margin: 0;
+      width: auto;
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      margin-right: 10px;
+      margin-bottom: 5px;
+
+      p {
+        font-size: 18px;
+        margin: 0;
+      }
+
+      img {
+        height: 20px;
+        margin-left: 3px;
+        filter: invert(1);
+      }
+    }
+  }
+}
 </style>

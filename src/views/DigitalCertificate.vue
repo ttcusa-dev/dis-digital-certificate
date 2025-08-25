@@ -158,6 +158,8 @@ import {
   watch,
 } from "vue";
 import {
+  httpsCallable,
+  functions,
   db,
   getDoc,
   doc,
@@ -176,11 +178,19 @@ import Footer from "../components/Footer.vue";
 import AdPage from "../components/AdPage.vue";
 import { DateTime } from "luxon";
 
+const route = useRoute();
+
+const productVideoRef = useTemplateRef("productVideo");
 const certificate = ref(null);
 const clientLogo = ref(null);
 const campaings = ref([]);
 const currentCampaign = ref({});
 const imperfections = ref(null);
+const productShowCaseVideo = ref("@/assets/images/Emerlad.mp4");
+const digitalCertificateVideoURL = ref(null);
+const redirectTimer = ref(5);
+const timerTickerBeforeAd = ref(20);
+const enterTimestamp = ref(Date.now());
 const showFooterAd = ref(false);
 const showFullPageAd = ref(false);
 const activateAds = ref(false);
@@ -189,14 +199,7 @@ const has_footer_ad = ref(false);
 const noAdsInit = ref(false);
 const olderCertificate = ref(false);
 const certificateDoesNotExist = ref(false);
-const redirectTimer = ref(5);
-const productShowCaseVideo = ref("@/assets/images/Emerlad.mp4");
-const digitalCertificateVideoURL = ref(null);
 const loading = ref(false);
-const timerTickerBeforeAd = ref(20);
-
-const route = useRoute();
-const productVideoRef = useTemplateRef("productVideo");
 
 async function fetchCertificate() {
   let certificateDoc = await getDoc(
@@ -486,18 +489,16 @@ function fetchUserDevice() {
 }
 
 async function handleAnalytics(userAction, saveViewingTime) {
-  if (this.initAnalytics) {
-    const viewingTime = this.handleViewingTime();
-    const clientId = this.client.id;
-    const userDevice = this.fetchUserDevice();
-    const productID =
-      this.digitalCertificate.ClientSKU ||
-      this.digitalCertificateVideo.id ||
-      this.digitalCertificate.CertNum;
-    const country = this.location ? this.location.country : "United States";
-    const locality = this.location ? this.location.locality : null;
-    const certificateData = this.digitalCertificate;
-    const handleAnalyticsPerCertificate = functions.httpsCallable(
+  if (initAnalytics) {
+    const viewingTime = handleViewingTime();
+    const userDevice = fetchUserDevice();
+    const productID = certificate.value.ClientSKU || certificate.value.CertNum;
+    const clientId = certificate.value.Company.id;
+    const country = "United States";
+    const locality = null;
+    const certificateData = certificate.value;
+    const handleAnalyticsPerCertificate = httpsCallable(
+      functions,
       "analytics-handleAnalyticsPerClient"
     );
 
@@ -514,10 +515,10 @@ async function handleAnalytics(userAction, saveViewingTime) {
         certificateData,
       });
 
-      return true;
+      return data;
     } catch (error) {
       console.log(error);
-      return true;
+      return false;
     }
   }
 }
@@ -540,6 +541,31 @@ function handleCertificateNumber() {
   }
 }
 
+function handleViewingTime() {
+  const leaveTimestamp = Date.now();
+  const timeSpentOnSite = leaveTimestamp - enterTimestamp; // Time in milliseconds
+  // You can convert the time to seconds, minutes, or hours as needed
+  const secondsSpent = Math.floor(timeSpentOnSite / 1000); // Convert milliseconds to seconds
+  const minutesSpent = Math.floor(secondsSpent / 60); // Convert seconds to minutes
+  return { seconds: secondsSpent, minutes: minutesSpent };
+}
+async function fetchIPAddress() {
+  try {
+    const IPAdd = await axios.get("https://api.ipify.org?format=json");
+    return IPAdd.data.ip === process.env.VUE_APP_DIS_IP;
+  } catch (error) {
+    return false;
+  }
+}
+
+async function handleAnalyticsInitilization(data) {
+  const timestampDate = DateTime.fromMillis(data.created).startOf("day");
+  const now = DateTime.local().startOf("day");
+  const isSystemIP = await this.fetchIPAddress();
+  if (isSystemIP) return false;
+  return !timestampDate.equals(now);
+}
+
 const templateComponent = computed(() =>
   defineAsyncComponent(
     () =>
@@ -558,6 +584,7 @@ onMounted(async () => {
     if (certificate.value.isStolen) {
       stolenItem.value = true;
       certificateDoesNotExist.value = true;
+      loading.value = false;
       return null;
     }
 
@@ -575,7 +602,14 @@ onMounted(async () => {
       }
 
       await fetchClientCampaign(certificate.value.Company.id);
+      // initAnalytics.value = await handleAnalyticsInitilization(
+      //   certificate.value
+      // );
+
       initCertificateViewingSequence();
+      // setTimeout(() => {
+      //   handleAnalytics("view", false);
+      // }, 2000);
     }, 500);
 
     // setTimeout(async () => {

@@ -9,6 +9,12 @@
       />
     </div>
   </div>
+
+  <div v-if="stolenItem" class="stolen-message">
+    THIS ITEM HAS BEEN REPORTED STOLEN BELONGS TO TTC USA. PLEASE CONTACT OWNER
+    TAL WHARSHAVSKY 213-400-6610
+  </div>
+
   <div class="nocontent" v-if="!loading && certificateDoesNotExist">
     <p>
       We were unable to locate this certificate. It may not exist or has not
@@ -161,7 +167,6 @@ import {
   endAt,
   query,
   collection,
-  getMetadata,
   getDownloadURL,
   ref as storageRef,
   storage,
@@ -175,9 +180,11 @@ const certificate = ref(null);
 const clientLogo = ref(null);
 const campaings = ref([]);
 const currentCampaign = ref({});
+const imperfections = ref(null);
 const showFooterAd = ref(false);
 const showFullPageAd = ref(false);
 const activateAds = ref(false);
+const has_imperfections = ref(false);
 const has_footer_ad = ref(false);
 const noAdsInit = ref(false);
 const olderCertificate = ref(false);
@@ -458,11 +465,79 @@ function restartCertificateViewingSequence() {
   mainContent.classList.add("hidden");
   introContainer.style.display = "none";
   mainContent.style.display = "none";
-  const video = document.getElementById("jewelry-video");
   productVideoRef.value.currentTime = 0; // Set the productVideoRef to start from the beginning
   productVideoRef.value.play();
-  
+
   initCertificateViewingSequence();
+}
+
+function fetchUserDevice() {
+  const userAgent = navigator.userAgent;
+  if (/Android/i.test(userAgent)) {
+    console.log("This is an Android device");
+    return "Android";
+  } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
+    console.log("This is an iOS device");
+    return "iOS";
+  } else {
+    console.log("This is a desktop computer");
+    return "Desktop";
+  }
+}
+
+async function handleAnalytics(userAction, saveViewingTime) {
+  if (this.initAnalytics) {
+    const viewingTime = this.handleViewingTime();
+    const clientId = this.client.id;
+    const userDevice = this.fetchUserDevice();
+    const productID =
+      this.digitalCertificate.ClientSKU ||
+      this.digitalCertificateVideo.id ||
+      this.digitalCertificate.CertNum;
+    const country = this.location ? this.location.country : "United States";
+    const locality = this.location ? this.location.locality : null;
+    const certificateData = this.digitalCertificate;
+    const handleAnalyticsPerCertificate = functions.httpsCallable(
+      "analytics-handleAnalyticsPerClient"
+    );
+
+    try {
+      let data = await handleAnalyticsPerCertificate({
+        clientId,
+        userDevice,
+        productID,
+        country,
+        locality,
+        viewingTime,
+        saveViewingTime,
+        userAction,
+        certificateData,
+      });
+
+      return true;
+    } catch (error) {
+      console.log(error);
+      return true;
+    }
+  }
+}
+async function fetchImperfections(id) {
+  let imperfection_doc = await getDoc(doc(db, "diamond_imperfections", id));
+  if (imperfection_doc.exists) {
+    imperfections.value = Object.assign(
+      { id: imperfection_doc.id },
+      imperfection_doc.data()
+    );
+    has_imperfections.value = true;
+  }
+}
+function handleCertificateNumber() {
+  if (skuCertificate) {
+    const seconds = isHZ ? 4000 : 3200;
+    setTimeout(() => {
+      showDISCert = true;
+    }, seconds);
+  }
 }
 
 const templateComponent = computed(() =>
@@ -480,9 +555,18 @@ onMounted(async () => {
   certificate.value = await fetchCertificate();
   // After 5 seconds, hide loader and show intro
   if (certificate.value) {
-    loading.value = false;
+    if (certificate.value.isStolen) {
+      stolenItem.value = true;
+      certificateDoesNotExist.value = true;
+      return null;
+    }
 
+    loading.value = false;
     setTimeout(async () => {
+      if (route.params.certType == "diamond") {
+        if (certificate.value.imperfection)
+          await fetchImperfections(certificate.value.imperfection.id);
+      }
       if (certificate.value.created > 1756675200000) {
         await fetchDigitalCertificate(certificate.value);
       } else {

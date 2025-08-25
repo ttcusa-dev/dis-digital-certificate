@@ -541,6 +541,16 @@ body {
   text-decoration: none;
 }
 
+.stolen-message {
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  font-size: 45px;
+  padding-top: 125px;
+  overflow: hidden;
+  text-transform: uppercase;
+}
+
 /* Animations */
 @keyframes fadeOut {
   from {

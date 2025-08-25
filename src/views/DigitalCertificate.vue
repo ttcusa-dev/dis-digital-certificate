@@ -171,7 +171,6 @@ import Footer from "../components/Footer.vue";
 import AdPage from "../components/AdPage.vue";
 import { DateTime } from "luxon";
 
-
 const certificate = ref(null);
 const clientLogo = ref(null);
 const campaings = ref([]);
@@ -462,7 +461,7 @@ function restartCertificateViewingSequence() {
   const video = document.getElementById("jewelry-video");
   productVideoRef.value.currentTime = 0; // Set the productVideoRef to start from the beginning
   productVideoRef.value.play();
-  handleVideoPlayback();
+  
   initCertificateViewingSequence();
 }
 
@@ -509,8 +508,6 @@ onMounted(async () => {
 });
 
 watch(showFullPageAd, (toggled) => {
-  console.log({ toggled });
-
   if (!toggled) {
     restartCertificateViewingSequence();
   }

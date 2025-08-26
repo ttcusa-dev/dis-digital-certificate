@@ -66,7 +66,8 @@
             @timeupdate="handleTime"
             @ended="handleVideoPlayback"
           >
-            <source src="../assets/images/Emerlad.mp4" type="video/mp4" />
+            <source :src="productShowCaseVideo" type="video/mp4" />
+
             Your browser does not support the video tag.
           </video>
         </div>
@@ -202,7 +203,7 @@ const clientLogo = ref(null);
 const campaings = ref([]);
 const currentCampaign = ref({});
 const imperfections = ref(null);
-const productShowCaseVideo = ref("@/assets/images/Emerlad.mp4");
+const productShowCaseVideo = ref(null);
 const digitalCertificateVideoURL = ref(null);
 const redirectTimer = ref(5);
 const timerTickerBeforeAd = ref(20);
@@ -278,7 +279,8 @@ async function fetchDigitalCertificate(certificate) {
 }
 
 async function fetchShowCasingVideo(videoFileName) {
-  const videoRef = storageRef(storage, `product-display/${videoFileName}`);
+  const fileName = videoFileName.replace(/_001.*$/, "");
+  const videoRef = storageRef(storage, `product-display/${fileName}`);
   try {
     const [url] = await Promise.all([getDownloadURL(videoRef)]);
     productShowCaseVideo.value = url;

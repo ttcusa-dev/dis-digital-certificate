@@ -3,7 +3,7 @@
     <div class="wireframe">
       <div class="wireframe-info" :class="className">
         <div class="value">{{ handleCaratWeight(weight) }}</div>
-        <div class="label">TOTAL CARAT WEIGHT</div>
+        <div v-if="showLabel" class="label">TOTAL CARAT WEIGHT</div>
       </div>
       <img v-if="wireframe" :src="wireframe" :alt="`${jewelryShape}`" />
       <div
@@ -30,7 +30,7 @@ const props = defineProps({
 });
 
 const className = ref("");
-
+const showLabel = ref(true);
 if (props.jewelryType == "Pendant") {
   className.value = "pendant";
 } else if (props.jewelryType == "Ring") {
@@ -70,9 +70,13 @@ const containerWidth = computed(() => {
 });
 
 const handleCaratWeight = (value) => {
-  if (typeof value !== "number") value = parseInt(value).toFixed(2);
-  if (!isNaN(value) && (value < 0 || !value)) return "Diamond Accent";
-  else return value;
+  if (typeof value == "number") value = parseInt(value).toFixed(2);
+  if (value < 0 || !value) {
+    showLabel.value = false;
+    return "Diamond Accent";
+  } else {
+    return value;
+  }
 };
 </script>
 

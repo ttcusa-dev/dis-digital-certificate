@@ -1,11 +1,15 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-const DigitalCertificate = import("../views/DigitalCertificate.vue");
-const DigitalCertificateList = import("../views/DigitalCertificateList.vue");
-const ClientAnalyticalLandingPage = import(
-  "../views/ClientAnalyticalLandingPage.vue"
-);
+// const DigitalCertificate = import("../views/DigitalCertificate.vue");
+// const DigitalCertificateList = import("../views/DigitalCertificateList.vue");
+// const ClientAnalyticalLandingPage = import(
+//   "../views/ClientAnalyticalLandingPage.vue"
+// );
 // import Redirect from "../views/Redirect.vue";
+
+import DigitalCertificate from "../views/DigitalCertificate.vue";
+import ClientAnalyticalLandingPage from "../views/ClientAnalyticalLandingPage.vue";
+import DigitalCertificateList from "../views/DigitalCertificateList.vue";
 
 const routes = [
   {

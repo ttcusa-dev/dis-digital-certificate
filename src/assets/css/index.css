@@ -1,4 +1,11 @@
 /* Base styles - apply to all screen sizes */
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("../fonts/Montserrat-SemiBold.ttf");
+  font-weight: bolder;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -260,7 +267,7 @@ body {
   letter-spacing: 1px;
   position: relative;
   z-index: 2;
-  font-family: "inter", sans-serif;
+  font-family: "Montserrat";
 }
 
 .product-id-overlap {
@@ -274,7 +281,7 @@ body {
   transform: translateX(-50%);
   z-index: 1;
   pointer-events: none;
-  font-family: "inter", sans-serif;
+  font-family: "Montserrat";
   text-transform: uppercase;
 }
 
@@ -293,19 +300,19 @@ body {
 .spec-label {
   color: #c7ceda;
   font-weight: 400;
-  font-family: "inter", sans-serif;
+  font-family: "Montserrat";
 }
 
 .spec-value {
   color: #7c9cc8;
   font-size: 8px;
   font-weight: 400;
-  font-family: "inter", sans-serif;
+  font-family: "Montserrat";
 }
 
 .primary-gem {
   overflow: hidden;
-  height: 27%;
+  /* height: 27%; */
 }
 
 .primary-gem .spec-label {
@@ -313,7 +320,7 @@ body {
   text-transform: uppercase;
   border-bottom: 1px solid #4c5a71;
   font-weight: 400;
-  font-family: "inter", sans-serif;
+  font-family: "Montserrat";
 }
 
 .gem-content-layout {
@@ -333,14 +340,14 @@ body {
 .size-value {
   color: #4c5a71;
   font-weight: 400;
-  font-family: "inter", sans-serif;
+  font-family: "Montserrat";
 }
 
 .size-label {
   color: #c0c0c0;
   font-weight: 400;
   text-align: center;
-  font-family: "inter", sans-serif;
+  font-family: "Montserrat";
 }
 
 .gem-center {
@@ -355,7 +362,7 @@ body {
   width: 100px;
   color: #4c5a71;
   font-weight: 400;
-  font-family: "inter", sans-serif;
+  font-family: "Montserrat";
 }
 
 .secondary-diamonds {
@@ -367,7 +374,7 @@ body {
   text-transform: uppercase;
   border-bottom: 1px solid #4c5a71;
   font-weight: 400;
-  font-family: "inter", sans-serif;
+  font-family: "Montserrat";
 }
 
 .diamond-section {
@@ -404,7 +411,7 @@ body {
   color: #7c9cc8;
   font-weight: 400;
   text-align: center;
-  font-family: "inter", sans-serif;
+  font-family: "Montserrat";
 }
 
 .gauge {
@@ -446,7 +453,7 @@ body {
   color: #c7ceda;
   text-align: center;
   font-weight: 400;
-  font-family: "inter", sans-serif;
+  font-family: "Montserrat";
 }
 
 .diamond-visual {
@@ -462,13 +469,13 @@ body {
   font-size: 13.4px;
   line-height: 13.85px;
   font-weight: 400;
-  font-family: "inter", sans-serif;
+  font-family: "Montserrat";
 }
 
 .round {
   color: #4c5a71;
   font-weight: 400;
-  font-family: "inter", sans-serif;
+  font-family: "Montserrat";
 }
 
 .product-description {
@@ -483,7 +490,7 @@ body {
   color: #7c9cc8;
   text-transform: uppercase;
   text-align: center;
-  font-family: "inter", sans-serif;
+  font-family: "Montserrat";
   font-weight: 400;
   margin-bottom: 4px;
   display: flex;
@@ -517,7 +524,7 @@ body {
   color: #c0c0c0;
   text-align: center;
   font-weight: 400;
-  font-family: "inter", sans-serif;
+  font-family: "Montserrat";
   height: 60px !important;
 }
 
@@ -553,6 +560,35 @@ body {
   text-transform: uppercase;
 }
 
+.certificate-number-wrapper {
+  position: absolute;
+  width: 100%;
+  color: white;
+  text-align: center;
+  top: 40%;
+  font-family: "Montserrat";
+  animation: blink 0.2s 1;
+  font-weight: bolder;
+  font-size: 15px;
+  right: 2px;
+}
+
+.hz_theme {
+  color: #7e1d47 !important;
+  top: 38%;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 /* Animations */
 @keyframes fadeOut {
   from {
@@ -654,7 +690,7 @@ body {
 
   .jewelry-image {
     /* height: 305px; */
-    
+
     height: 100%;
   }
 
@@ -962,7 +998,9 @@ body {
   }
 
   .ring-info-v2 {
-    padding: 1rem 1rem !important;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
   }
 
   .product-description {

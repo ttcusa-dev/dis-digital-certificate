@@ -67,7 +67,7 @@
             @ended="handleVideoPlayback"
           >
             <source :src="productShowCaseVideo" type="video/mp4" />
-
+            <!-- <source src="../assets/images/Emerlad.mp4" type="video/mp4" /> -->
             Your browser does not support the video tag.
           </video>
         </div>
@@ -78,7 +78,14 @@
         <div class="specifications-section">
           <div class="product-id">
             <p class="product-id-main">
-              DIS CERTIFICATE#: {{ certificate.CertNum }}
+              <strong>
+                DIS CERTIFICATE#:
+                {{
+                  certificate && certificate.ManufacturedAs === "Lab Grown"
+                    ? `LG${certificate.CertNum}`
+                    : certificate.CertNum
+                }}</strong
+              >
             </p>
             <p class="product-id-overlap">{{ certificate.ClientSKU }}</p>
           </div>
@@ -108,7 +115,7 @@
     <div v-else>
       <div v-if="!showFullPageAd" class="right">
         <video
-          ref="videoRef"
+          ref="productVideo"
           class="digital-cert-vid"
           :src="digitalCertificateVideoURL"
           autoplay
@@ -117,27 +124,22 @@
           @timeupdate="handleTime"
           @ended="handleVideoPlayback"
         ></video>
-        <!-- <div
-        v-if="showDISCert"
-        class="certificate-number-wrapper"
-        :class="{
-          meeting_settings: isHZMeeting,
-          hz_settings: isHZ && !isHZMeeting,
-          isTemplate4: isTemplate4,
-          has_footer_ad: has_footer_ad,
-          has_imperfections: has_imperfections,
-        }"
-      >
-        <strong>
-          DIS CERTIFICATE#:
-          {{
-            digitalCertificate &&
-            digitalCertificate.ManufacturedAs === "Lab Grown"
-              ? `LG${digitalCertificate.CertNum}`
-              : $route.params.certificate_num
-          }}</strong
+        <div
+          v-if="showCertNumberForOldCerts"
+          class="certificate-number-wrapper"
+          :class="{
+            hz_theme: certificate.Company.name.includes('Helzberg'),
+          }"
         >
-      </div> -->
+          <strong>
+            DIS CERTIFICATE#:
+            {{
+              certificate && certificate.ManufacturedAs === "Lab Grown"
+                ? `LG${certificate.CertNum}`
+                : certificate.CertNum
+            }}</strong
+          >
+        </div>
       </div>
     </div>
 
@@ -171,6 +173,7 @@ import {
   useTemplateRef,
   watch,
 } from "vue";
+
 import {
   httpsCallable,
   functions,
@@ -187,6 +190,7 @@ import {
   ref as storageRef,
   storage,
 } from "../config/firebaseInit";
+
 import { useRoute } from "vue-router";
 import Footer from "../components/Footer.vue";
 import AdPage from "../components/AdPage.vue";
@@ -196,8 +200,8 @@ import Modal from "../components/Modal.vue";
 import { DateTime } from "luxon";
 
 const route = useRoute();
-
 const productVideoRef = useTemplateRef("productVideo");
+
 const certificate = ref(null);
 const clientLogo = ref(null);
 const campaings = ref([]);
@@ -205,7 +209,7 @@ const currentCampaign = ref({});
 const imperfections = ref(null);
 const productShowCaseVideo = ref(null);
 const digitalCertificateVideoURL = ref(null);
-const redirectTimer = ref(5);
+const redirectTimer = ref(6);
 const timerTickerBeforeAd = ref(20);
 const enterTimestamp = ref(Date.now());
 
@@ -217,6 +221,7 @@ const activateAds = ref(false);
 const has_imperfections = ref(false);
 const has_footer_ad = ref(false);
 const stolenItem = ref(false);
+const showCertNumberForOldCerts = ref(false);
 const noAdsInit = ref(false);
 const olderCertificate = ref(false);
 const certificateDoesNotExist = ref(false);
@@ -231,19 +236,17 @@ async function fetchCertificate() {
 }
 
 async function fetchDigitalCertificate(certificate) {
-  const { ClientSKU, CertNum, LineNum } = certificate;
+  const { ClientSKU, CertNum, LineNum, OrderNum } = certificate;
   let certificateVideo;
   try {
     const digitalCertRef = collection(db, "digital_certificate_videos");
     const digitalCertQuery = query(
       digitalCertRef,
-      where("name", "in", [ClientSKU, CertNum, LineNum])
+      where("name", "in", [ClientSKU, CertNum, `${OrderNum}-${LineNum}`])
     );
     certificateVideo = await getDocs(digitalCertQuery);
     if (certificateVideo.empty) {
-      // DISLoading = false;
-      // noCertificate = true;
-      return false;
+      throw "No Digital Certificate Has Been Found";
     }
     olderCertificate.value = true;
     certificateVideo = certificateVideo.docs[0];
@@ -254,26 +257,13 @@ async function fetchDigitalCertificate(certificate) {
     );
     digitalCertificateVideoURL.value = certificateVideo.meta.url;
 
-    // if (certificateVideo.hasOwnProperty("globalSku")) {
-    //   showCertNumber = true;
-    // }
-
-    // digitalCertificateVideo = certificateVideo;
-    // digitalCertificateVideoURL.value = certificateVideo.meta.url;
-    // skuCertificate = showCertNumber;
-
-    // if (onlySKU) {
-    //   skuCertificate = false;
-    // }
-    // isHZ = client ? client.name.includes("Helzberg") : false;
+    handleCertificateNumber(certificate.Company.name.includes("Helzberg"));
   } catch (error) {
     console.error("Error: ", error);
     if (certificate.CertificateVideo) {
-      // digitalCertificateVideo = digitalCertificate.CertificateVideo;
-      digitalCertificateVideoURL = digitalCertificate.CertificateVideo.url;
+      digitalCertificateVideoURL = certificateVideo.CertificateVideo.url;
     } else {
-      // noCertificate = true;
-      // DISLoading = false;
+      certificateDoesNotExist.value = true;
     }
   }
 }
@@ -286,6 +276,10 @@ async function fetchShowCasingVideo(videoFileName) {
     productShowCaseVideo.value = url;
   } catch (error) {
     console.error({ error });
+    productShowCaseVideo.value = new URL(
+      "../assets/images/Emerlad.mp4",
+      import.meta.url
+    ).href;
     // certificateDoesNotExist.value = true;
   }
 }
@@ -299,6 +293,47 @@ async function getAdRunTime() {
   let tickerDoc = await getDoc(doc(db, "attributes", "timerTickerBeforeAd"));
   if (!tickerDoc.exists) return null;
   else return tickerDoc.data();
+}
+
+async function handleAnalytics(userAction, saveViewingTime) {
+  if (initAnalytics) {
+    const viewingTime = handleViewingTime();
+    const userDevice = fetchUserDevice();
+    const productID = certificate.value.ClientSKU || certificate.value.CertNum;
+    const clientId = certificate.value.Company.id;
+    const country = "United States";
+    const locality = null;
+    const certificateData = certificate.value;
+    const handleAnalyticsPerCertificate = httpsCallable(
+      functions,
+      "analytics-handleAnalyticsPerClient"
+    );
+
+    try {
+      let data = await handleAnalyticsPerCertificate({
+        clientId,
+        userDevice,
+        productID,
+        country,
+        locality,
+        viewingTime,
+        saveViewingTime,
+        userAction,
+        certificateData,
+      });
+
+      return data;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
+}
+
+async function fetchImperfections(id) {
+  let imperfection_doc = await getDoc(doc(db, "diamond_imperfections", id));
+  if (!imperfection_doc.exists) return false;
+  return Object.assign({ id: imperfection_doc.id }, imperfection_doc.data());
 }
 
 //For Advertisement
@@ -385,6 +420,12 @@ function handleVideoPlayback() {
     showFooterAd.value = false;
   } else {
     productVideoRef.value.play();
+    if (olderCertificate.value) {
+      showCertNumberForOldCerts.value = false;
+      handleCertificateNumber(
+        certificate.value.Company.name.includes("Helzberg")
+      );
+    }
   }
 }
 
@@ -400,19 +441,14 @@ function handleAdToggle(data) {
 }
 
 function initCertificateViewingSequence() {
-  const loaderContainer = document.querySelector(".loader-container");
   const introContainer = document.querySelector(".intro-container");
   const video = document.getElementById("video");
 
   setTimeout(() => {
-    loaderContainer.style.animation = "fadeOut 0.5s ease-in-out forwards";
-    setTimeout(() => {
-      loaderContainer.style.display = "none";
-      introContainer.classList.remove("hidden");
-      video.currentTime = 0; // Set the video to start from the beginning
-      video.play();
-    }, 500);
-  }, 1000);
+    introContainer.classList.remove("hidden");
+    video.currentTime = 0; // Set the video to start from the beginning
+    video.play();
+  }, 500);
 
   // After 8 seconds total (5s loader + 3s intro), show main content
   setTimeout(() => {
@@ -463,14 +499,19 @@ function initCertificateViewingSequence() {
               animatedPhaseFourElements.forEach((el) => {
                 el.style.animation = "scaleUp 0.7s ease-in forwards";
               });
-              setTimeout(() => {
-                productDesc.style.visibility = "visible";
-                productDesc.style.animation = "scaleUp 0.7s ease-in forwards";
+              productDesc.style.visibility = "visible";
+              productDesc.style.animation = "scaleUp 0.7s ease-in forwards";
+              descriptionLabel.classList.remove("hidden");
+              descriptionLabel.style.animation =
+                "scaleUp 0.7s ease-in forwards";
+              // setTimeout(() => {
+              //   productDesc.style.visibility = "visible";
+              //   productDesc.style.animation = "scaleUp 0.7s ease-in forwards";
 
-                descriptionLabel.classList.remove("hidden");
-                descriptionLabel.style.animation =
-                  "scaleUp 0.7s ease-in forwards";
-              }, 300);
+              //   descriptionLabel.classList.remove("hidden");
+              //   descriptionLabel.style.animation =
+              //     "scaleUp 0.7s ease-in forwards";
+              // }, 300);
             }, 300);
           }, 300);
         }, 200);
@@ -515,52 +556,11 @@ function initImperfectionModal() {
   showImperfectionModal.value = true;
 }
 
-async function handleAnalytics(userAction, saveViewingTime) {
-  if (initAnalytics) {
-    const viewingTime = handleViewingTime();
-    const userDevice = fetchUserDevice();
-    const productID = certificate.value.ClientSKU || certificate.value.CertNum;
-    const clientId = certificate.value.Company.id;
-    const country = "United States";
-    const locality = null;
-    const certificateData = certificate.value;
-    const handleAnalyticsPerCertificate = httpsCallable(
-      functions,
-      "analytics-handleAnalyticsPerClient"
-    );
-
-    try {
-      let data = await handleAnalyticsPerCertificate({
-        clientId,
-        userDevice,
-        productID,
-        country,
-        locality,
-        viewingTime,
-        saveViewingTime,
-        userAction,
-        certificateData,
-      });
-
-      return data;
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
-  }
-}
-async function fetchImperfections(id) {
-  let imperfection_doc = await getDoc(doc(db, "diamond_imperfections", id));
-  if (!imperfection_doc.exists) return false;
-  return Object.assign({ id: imperfection_doc.id }, imperfection_doc.data());
-}
-function handleCertificateNumber() {
-  if (skuCertificate) {
-    const seconds = isHZ ? 4000 : 3200;
-    setTimeout(() => {
-      showDISCert = true;
-    }, seconds);
-  }
+function handleCertificateNumber(isHZ) {
+  const seconds = isHZ ? 4000 : 3200;
+  setTimeout(() => {
+    showCertNumberForOldCerts.value = true;
+  }, seconds);
 }
 
 function closeModal() {
@@ -576,6 +576,7 @@ function handleViewingTime() {
   const minutesSpent = Math.floor(secondsSpent / 60); // Convert seconds to minutes
   return { seconds: secondsSpent, minutes: minutesSpent };
 }
+
 async function fetchIPAddress() {
   try {
     const IPAdd = await axios.get("https://api.ipify.org?format=json");
@@ -613,7 +614,6 @@ onMounted(async () => {
       return null;
     }
 
-    loading.value = false;
     setTimeout(async () => {
       if (route.params.certType == "diamond") {
         if (certificate.value.imperfection)
@@ -622,22 +622,26 @@ onMounted(async () => {
           );
         has_imperfections.value = Boolean(imperfections.value);
       }
-      if (certificate.value.created > 1756675200000) {
+      if (certificate.value.created < 1756675200000) {
         await fetchDigitalCertificate(certificate.value);
       } else {
         await fetchShowCasingVideo(certificate.value.Video.name);
         await fetchClientLogo(certificate.value.Company.id);
+        initCertificateViewingSequence();
       }
 
-      await fetchClientCampaign(certificate.value.Company.id);
+      if (!certificateDoesNotExist.value) {
+        await fetchClientCampaign(certificate.value.Company.id);
+      }
+
       // initAnalytics.value = await handleAnalyticsInitilization(
       //   certificate.value
       // );
 
-      initCertificateViewingSequence();
       // setTimeout(() => {
       //   handleAnalytics("view", false);
       // }, 2000);
+      loading.value = false;
     }, 500);
 
     // setTimeout(async () => {
@@ -649,13 +653,18 @@ onMounted(async () => {
   } else {
     loading.value = false;
     certificateDoesNotExist.value = true;
-    redirectTimer.value -= 1;
   }
 });
 
 watch(showFullPageAd, (toggled) => {
   if (!toggled) {
-    restartCertificateViewingSequence();
+    if (!olderCertificate.value) restartCertificateViewingSequence();
+    else
+      handleCertificateNumber(
+        certificate.value.Company.name.includes("Helzberg")
+      );
+  } else {
+    if (olderCertificate.value) showCertNumberForOldCerts.value = false;
   }
 });
 
@@ -665,10 +674,23 @@ watch(activateAds, async (toggled) => {
   }
 });
 
+watch(loading, async (isLoading) => {
+  if (!isLoading) {
+    const loaderContainer = document.querySelector(".loader-container");
+    loaderContainer.style.animation = "fadeOut 0.5s ease-in-out forwards";
+    loaderContainer.style.display = "none";
+  }
+});
+
+watch(certificateDoesNotExist, (certDoesNotExists) => {
+  if (certDoesNotExists) {
+    redirectTimer.value -= 1;
+  }
+});
+
 watch(redirectTimer, (timer) => {
-  console.log({ timer });
   if (!timer) {
-    // window.location = "https://diamondservicesusa.com";
+    window.location = "https://diamondservicesusa.com";
   } else {
     setTimeout(() => {
       redirectTimer.value -= 1;

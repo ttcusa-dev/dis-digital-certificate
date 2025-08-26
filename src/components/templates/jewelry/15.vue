@@ -103,5 +103,6 @@ import Stones from "../../animations/Stones.vue";
 const props = defineProps(["certificate"]);
 </script>
 
-<style>
+<style scoped>
+
 </style>

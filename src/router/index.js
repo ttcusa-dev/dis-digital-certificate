@@ -6,7 +6,7 @@ const ClientAnalyticalLandingPage = import(
   "../views/ClientAnalyticalLandingPage.vue"
 
 );
-import Redirect from "../views/Redirect.vue";
+// import Redirect from "../views/Redirect.vue";
 
 const routes = [
   {
@@ -26,11 +26,11 @@ const routes = [
     component: ClientAnalyticalLandingPage,
   },
 
-  {
-    path: "/redirect",
-    name: "Redirect",
-    component: Redirect,
-  },
+  // {
+  //   path: "/redirect",
+  //   name: "Redirect",
+  //   component: Redirect,
+  // },
 ];
 
 const router = createRouter({

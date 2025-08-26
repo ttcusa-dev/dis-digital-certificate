@@ -592,12 +592,10 @@ async function handleAnalyticsInitilization(data) {
 }
 
 const templateComponent = computed(() =>
-  defineAsyncComponent(
-    () =>
-      import(
-        `../components/templates/${route.params.certType}/${certificate.value.Template.id}.vue`
-      )
-    // import(`../components/templates/9.vue`)
+  defineAsyncComponent(() =>
+    import(
+      `../components/templates/${route.params.certType}/${certificate.value.Template.id}.vue`
+    )
   )
 );
 

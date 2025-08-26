@@ -162,19 +162,14 @@ body {
   mix-blend-mode: lighten;
   object-fit: cover;
   object-position: center;
-  margin-top: 20px;
+  bottom: 0px;
+  position: absolute;
 }
 
 .showcase-header {
-  /* text-align: center;
-  overflow-y: hidden;
-  margin-top: 10px;
-   max-width: 300px;
-  display: flex;
-  justify-content: center; */
   text-align: center;
   overflow-y: hidden;
-  margin-top: 5px;
+  margin-top: 27px;
   min-width: 100px;
   max-width: 600px;
   width: 150px;
@@ -1037,7 +1032,7 @@ body {
   }
 
   .jewelry-showcase {
-    flex: 0 0 38%;
+    flex: 0 0 36%;
     height: 38%;
     padding: 0;
   }

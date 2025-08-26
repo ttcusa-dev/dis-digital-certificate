@@ -5,7 +5,7 @@
         <div class="value">{{ handleCaratWeight(weight) }}</div>
         <div class="label">TOTAL CARAT WEIGHT</div>
       </div>
-      <img v-if="wireframe" :src="wireframe" :alt="`${stoneShape}`" />
+      <img v-if="wireframe" :src="wireframe" :alt="`${jewelryShape}`" />
       <div
         class="tint"
         :style="{
@@ -64,14 +64,15 @@ const wireframe = computed(() => {
 const containerWidth = computed(() => {
   let maxWidth = props.maxWidth;
 
-  if (props.stoneShape == "Baguette") maxWidth = "35px";
+  if (props.jewelryShape == "Baguette") maxWidth = "35px";
 
   return maxWidth;
 });
 
 const handleCaratWeight = (value) => {
-  if (value > 0 || !value) return "Diamond Accent";
-  else return value + " ct.tw";
+  if (typeof value !== "number") value = parseInt(value).toFixed(2);
+  if (!isNaN(value) && (value < 0 || !value)) return "Diamond Accent";
+  else return value;
 };
 </script>
 

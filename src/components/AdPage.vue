@@ -98,7 +98,6 @@ function scrollToElement() {
   width: 100%;
   position: relative;
   height: 4em;
-  bottom: -5px;
 }
 
 .ads {

@@ -27,37 +27,48 @@
         <div class="label">CENTER STONE SHAPE</div>
 
         <!-- color slider -->
-        <colorbar :idPrefix="`${i}`" :color="stone.MainStoneColor" />
+        <div class="color-wrapper">
+          <colorbar
+            fontSize="13px"
+            maxWidth="170px"
+            :idPrefix="`${i + 1}`"
+            :color="stone.MainStoneColor"
+          />
+        </div>
 
         <!-- diagram + CTW / table / depth -->
-        <div class="diagram">
-          <!-- <slot name="diagram" :stone="stone" /> -->
-          <div class="ctw">{{ stone.MainStoneWeight }} CTW</div>
-        </div>
-        <div class="table-depth">
+
+        <!-- <div class="table-depth">
           <div>{{ stone.MainStoneTable }} <span class="small">TABLE</span></div>
           <div>{{ stone.MainStoneDepth }} <span class="small">DEPTH</span></div>
-        </div>
+        </div> -->
 
         <!-- clarity & polish gauges (same as left side) -->
         <div class="gauges">
           <div class="gauge animated-phase-two">
             <gauge
-              :idPrefix="(i + 1) * Math.random()"
+              guageWidth="70px"
+              :idPrefix="generateRandomID()"
               :value="stone.MainStoneClarity.value"
             />
             <div class="label">Clarity</div>
           </div>
+          <div class="diagram">
+            <div class="ctw">{{ stone.MainStoneWeight }} CTW</div>
+            <img src="../../../assets/diagram.png" alt="" srcset="" />
+          </div>
           <div class="gauge animated-phase-three">
             <gauge
-              :idPrefix="(i + 1) * Math.random() + Math.random()"
+              guageWidth="70px"
+              :idPrefix="generateRandomID()"
               :value="stone.MainStoneSymmetry"
             />
             <div class="label">Symmetry</div>
           </div>
           <div class="gauge animated-phase-four">
             <gauge
-              :idPrefix="(i + 1) * Math.random() * Math.random()"
+              guageWidth="70px"
+              :idPrefix="generateRandomID()"
               :value="stone.MainStonePolish"
             />
             <div class="label">Polish</div>
@@ -75,12 +86,23 @@ import gauge from "../../animations/Gauge.vue";
 defineProps({
   certificate: { type: Object, default: {} },
 });
+
+function generateRandomID() {
+  const chars =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let result = "";
+  for (let i = 0; i < length; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return result;
+}
 </script>
 
 <style scoped>
 .ring‑studs {
   color: #e1e8ed;
-  padding: 2rem 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   border-radius: 0.75rem;
   text-align: center;
   overflow: hidden;
@@ -90,18 +112,11 @@ defineProps({
   margin-bottom: 0.5rem;
 }
 
-.label {
-  font-size: 1rem;
-  font-weight: 500;
-  margin-bottom: 1rem;
-}
-
 /* 1) STYLE heading with lines */
 .style-row {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 1rem 0;
 }
 .style-row .line {
   flex: 1;
@@ -143,65 +158,28 @@ defineProps({
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
   line-height: 24px;
-  margin: 0 auto 0.75rem;
+  margin: 0 auto 0.25rem;
   opacity: 0.6;
 }
 .value {
-  font-size: 0.9rem;
+  font-size: 13px;
   font-weight: 500;
 }
 .label {
-  font-size: 0.65rem;
-  opacity: 0.6;
-  text-transform: uppercase;
-  margin-bottom: 0.75rem;
+  font-size: 9px;
 }
-.slider {
-  position: relative;
-  height: 4px;
-  background: #2c3742;
-  border-radius: 2px;
-  margin: 0.5rem 0 0.25rem;
-}
-.fill {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  background: #fff;
-  border-radius: 2px 0 0 2px;
-}
-.thumb {
-  position: absolute;
-  bottom: 100%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-top: 8px solid #fff;
-  z-index: 2;
-}
-.thumb::after {
-  content: attr(data-label);
-  position: absolute;
-  bottom: calc(100% + 8px + 4px);
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 0.65rem;
-  white-space: nowrap;
-}
-.diagram {
-  position: relative;
-  margin: 1rem 0 0.5rem;
-}
+
 .ctw {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 0.75rem;
-  font-weight: 500;
+  transform: translate(-39%, 17%);
+  font-size: 10px;
+  font-weight: 900;
+  background-color: #414c62d6;
+  padding: 3px;
+  width: 34px;
+  height: 29px;
+  text-align: center;
+  border-radius: 8px;
 }
 .table-depth {
   display: flex;
@@ -216,18 +194,29 @@ defineProps({
   text-transform: uppercase;
 }
 
-.gauges {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
+.color-wrapper {
+  margin-bottom: 10px;
 }
 
-.comments {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 1rem;
-  border-radius: 0.5rem;
-  font-size: 0.65rem;
-  line-height: 1.4;
-  text-align: left;
+.gauges {
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  gap: 12px;
+}
+
+.diagram {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.diagram img {
+  width: 100%;
+  height: 100%;
+}
+
+.label:nth-child(5),
+.label:nth-child(3) {
+  margin-top: 0.1rem !important;
 }
 </style>

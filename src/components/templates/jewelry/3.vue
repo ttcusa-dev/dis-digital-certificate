@@ -89,12 +89,12 @@ defineProps({
   gap: 0.5rem;
 }
 .top .block .label {
-  font-size: 0.75rem;
+  font-size: 13px;
   opacity: 0.6;
   text-transform: uppercase;
 }
 .top .block .value {
-  font-size: 1rem;
+  font-size: 15px;
   font-weight: 500;
 }
 .divider {
@@ -121,37 +121,9 @@ defineProps({
   align-items: center;
   overflow: hidden;
 }
-.fill {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  background: #fff;
-  border-radius: 2px 0 0 2px;
-}
-.thumb {
-  position: absolute;
-  bottom: 100%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-top: 8px solid #fff;
-  z-index: 2;
-}
-.thumb::after {
-  content: attr(data-label);
-  position: absolute;
-  bottom: calc(100% + 8px + 4px);
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 0.75rem;
-  color: #fff;
-  white-space: nowrap;
-}
+
 .color-slider .label {
-  font-size: 0.75rem;
+  font-size: 13px;
   opacity: 0.6;
   text-transform: uppercase;
   margin-top: 0.5rem;
@@ -165,11 +137,11 @@ defineProps({
   flex: 1;
 }
 .stats .col .value {
-  font-size: 1rem;
+  font-size: 15px;
   font-weight: 500;
 }
 .stats .col .label {
-  font-size: 0.75rem;
+  font-size: 13px;
   opacity: 0.6;
   text-transform: uppercase;
   margin-top: 0.25rem;
@@ -185,7 +157,7 @@ defineProps({
   height: 80px;
 }
 /* .quality .label {
-  font-size: 0.75rem;
+  font-size: 13px;
   text-transform: uppercase;
   opacity: 0.6;
   text-align: center;
@@ -194,26 +166,18 @@ defineProps({
   margin-bottom: 1.5rem;
 }
 .sides .value {
-  font-size: 0.9rem;
+  font-size: 15px;
   font-weight: 500;
 }
 .sides .label {
-  font-size: 0.75rem;
+  font-size: 13px;
   opacity: 0.6;
   text-transform: uppercase;
   margin-top: 0.25rem;
 }
-.comments {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 1rem;
-  border-radius: 0.5rem;
-  font-size: 0.75rem;
-  line-height: 1.4;
-  text-align: left;
-}
 
 .label {
-  font-size: 0.75rem;
+  font-size: 13px;
   text-transform: uppercase;
   opacity: 0.6;
   text-align: center;

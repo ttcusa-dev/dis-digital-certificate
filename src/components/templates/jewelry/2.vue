@@ -33,7 +33,7 @@
         <div class="guage animated-phase-two">
           <gauge
             :idPrefix="'2'"
-            :value="certificate.MainStoneClarity2.value"
+            :value="certificate.MainStoneClarity2?.value"
             guageWidth="80px"
           />
           <div class="label">CLARITY 2</div>

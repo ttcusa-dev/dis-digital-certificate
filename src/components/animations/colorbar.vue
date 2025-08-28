@@ -7,7 +7,7 @@
       overflow: hidden;
     "
   >
-    <div class="bar-wrapper">
+    <div class="bar-wrapper" :style="{ maxWidth }">
       <div class="bar-container">
         <svg viewBox="0 0 200 50" preserveAspectRatio="xMidYMid meet">
           <!-- static background bar with flat ends -->
@@ -42,6 +42,7 @@
             <!-- text travels with the arrow -->
             <text
               class="colorText"
+              :style="{ fontSize }"
               :id="`pointerText-${idPrefix}`"
               x="0"
               y="0"
@@ -64,6 +65,8 @@ const { percentages, barColor } = getColorAttribute();
 
 const props = defineProps({
   idPrefix: { type: String, default: "" },
+  maxWidth: { type: String, default: "400px" },
+  fontSize: { type: String, default: "8px" },
   color: { type: Object, default: {} },
 });
 
@@ -139,7 +142,6 @@ onMounted(() => {
 <style scoped>
 .bar-wrapper {
   width: 90vmin;
-  max-width: 400px;
   aspect-ratio: 4 / 1;
   display: block;
   height: 43px;
@@ -173,7 +175,6 @@ svg {
 
 .colorText {
   font-family: "Roboto", Arial, sans-serif;
-  font-size: 8px; /* scales with container */
   font-weight: 700;
   fill: #ffffff;
   font-style: italic;

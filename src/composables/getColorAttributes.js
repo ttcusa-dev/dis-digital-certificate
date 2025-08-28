@@ -103,7 +103,7 @@ export function getColorAttribute() {
     Blue: "#2f2fb7",
     Brown: "#845e5e",
     Green: "#0fb30f",
-    Pink: "#f2b2bd",
+    Pink: "#f25771",
     Yellow: "#ffff02",
     Orange: "#ffa807",
     Purple: "#9f059f",

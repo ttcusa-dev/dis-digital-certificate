@@ -97,17 +97,19 @@
               :hasImperfection="has_imperfections"
             />
           </div>
-          <div style="visibility: hidden" class="product-description">
-            <div class="description-label">
-              <p class="comment-label">COMMENTS</p>
-            </div>
-            <div class="description-card">
-              <div class="description-text">
-                {{ certificate.CertificateComments }}
+          <div class="bottom">
+            <div style="visibility: hidden" class="product-description">
+              <div class="description-label">
+                <p class="comment-label">COMMENTS</p>
+              </div>
+              <div class="description-card">
+                <div class="description-text">
+                  {{ certificate.CertificateComments }}
+                </div>
               </div>
             </div>
+            <Footer />
           </div>
-          <Footer />
         </div>
       </div>
     </div>
@@ -622,7 +624,7 @@ onMounted(async () => {
           );
         has_imperfections.value = Boolean(imperfections.value);
       }
-      if (certificate.value.created < 1756675200000) {
+      if (certificate.value.created > 1756675200000) {
         await fetchDigitalCertificate(certificate.value);
       } else {
         await fetchShowCasingVideo(certificate.value.Video.name);
@@ -690,7 +692,7 @@ watch(certificateDoesNotExist, (certDoesNotExists) => {
 
 watch(redirectTimer, (timer) => {
   if (!timer) {
-    window.location = "https://diamondservicesusa.com";
+    //window.location = "https://diamondservicesusa.com";
   } else {
     setTimeout(() => {
       redirectTimer.value -= 1;

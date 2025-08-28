@@ -28,7 +28,7 @@ const props = defineProps({
   stoneShape: { type: String, default: "" },
   stoneType: { type: String, default: "" },
   colorHex: { type: String, default: "#ff0000" },
-  maxWidth: { type: String, default: "55px" },
+  maxWidth: { type: String, default: "80px" },
 });
 
 const stoneImage = computed(() => {

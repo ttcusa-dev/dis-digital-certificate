@@ -24,6 +24,10 @@ body {
   overflow-x: hidden;
 }
 
+.template-container {
+  text-transform: uppercase;
+}
+
 /* Common components */
 .intro-container {
   position: fixed;
@@ -430,8 +434,8 @@ body {
 }
 
 .gauge .label {
-  font-size: 0.75rem;
-  opacity: 0.6;
+  /* font-size: 0.75rem;
+  opacity: 0.6; */
   margin-top: 0.25rem;
 }
 
@@ -483,7 +487,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 12rem;
+  /* height: 12rem; */
 }
 
 .description-label {
@@ -525,7 +529,8 @@ body {
   text-align: center;
   font-weight: 400;
   font-family: "Montserrat";
-  height: 60px !important;
+  max-height: 60px !important;
+  overflow: auto;
 }
 
 .custom-divider {
@@ -538,7 +543,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: absolute;
+  position: relative;
   bottom: 0;
   width: 100%;
   padding: 10px 15px;
@@ -815,7 +820,7 @@ body {
 
   .product-description {
     margin-top: auto;
-    padding-bottom: 20px;
+    /* padding-bottom: 20px; */
   }
 
   .description-label {
@@ -1004,7 +1009,7 @@ body {
   }
 
   .product-description {
-    height: 13rem;
+    /* height: 13rem; */
   }
 
   .description-label {
@@ -1225,7 +1230,7 @@ body {
   }
 
   .footer {
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
     padding: 15px 40px;
   }
 }

@@ -71,7 +71,7 @@ const containerWidth = computed(() => {
 
 const handleCaratWeight = (value) => {
   if (typeof value == "number") value = parseInt(value).toFixed(2);
-  if (value < 0 || !value) {
+  if (value <= 0 || !value) {
     showLabel.value = false;
     return "Diamond Accent";
   } else {

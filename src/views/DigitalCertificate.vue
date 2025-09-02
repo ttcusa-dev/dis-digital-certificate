@@ -31,8 +31,8 @@
     <div v-if="!olderCertificate">
       <div class="intro-container">
         <div class="logo-container">
-          <video id="video" class="logo-video" muted playsinline>
-            <source src="../assets/images/helzberg-logo.mp4" type="video/mp4" />
+          <video v-if="introVideo" id="video" class="logo-video" muted playsinline>
+            <source :src="introVideo" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
@@ -55,8 +55,11 @@
             />
           </div>
           <!-- Replace the div with video element -->
+
+          <div v-if="noProductShowcasingVideo" class="no-video-message">
+            NO VIDEO
+          </div>
           <video
-            v-if="productShowCaseVideo"
             id="jewelry-video"
             class="jewelry-image"
             autoplay
@@ -209,12 +212,14 @@ const clientLogo = ref(null);
 const campaings = ref([]);
 const currentCampaign = ref({});
 const imperfections = ref(null);
+const introVideo = ref(null);
 const productShowCaseVideo = ref(null);
 const digitalCertificateVideoURL = ref(null);
 const redirectTimer = ref(6);
 const timerTickerBeforeAd = ref(20);
 const enterTimestamp = ref(Date.now());
 
+const noProductShowcasingVideo = ref(false);
 const showModal = ref(false);
 const showImperfectionModal = ref(false);
 const showFooterAd = ref(false);
@@ -277,11 +282,7 @@ async function fetchShowCasingVideo(videoFileName) {
     const [url] = await Promise.all([getDownloadURL(videoRef)]);
     productShowCaseVideo.value = url;
   } catch (error) {
-    console.error({ error });
-    productShowCaseVideo.value = new URL(
-      "../assets/images/Emerlad.mp4",
-      import.meta.url
-    ).href;
+    noProductShowcasingVideo.value = true;
     // certificateDoesNotExist.value = true;
   }
 }
@@ -406,6 +407,11 @@ async function fetchClientCampaign(clientId) {
   } else {
     noAdsInit.value = true;
   }
+}
+
+function fetchIntroVideo(clientName) {
+  let filePath = `../assets/intro-videos/${clientName}.mp4`;
+  return new URL(filePath, import.meta.url).href;
 }
 
 function handleTime(e) {
@@ -627,6 +633,7 @@ onMounted(async () => {
       if (certificate.value.created > 1756675200000) {
         await fetchDigitalCertificate(certificate.value);
       } else {
+        introVideo.value = fetchIntroVideo(certificate.value.Company.name);
         await fetchShowCasingVideo(certificate.value.Video.name);
         await fetchClientLogo(certificate.value.Company.id);
         initCertificateViewingSequence();

@@ -539,6 +539,16 @@ body {
   background: #5e7697;
 }
 
+.no-video-message {
+  position: absolute;
+  z-index: 999;
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  text-transform: uppercase;
+  top: 50%;
+}
+
 .footer {
   display: flex;
   justify-content: space-between;

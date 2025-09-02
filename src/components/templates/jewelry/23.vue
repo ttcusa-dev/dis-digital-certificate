@@ -105,11 +105,10 @@ import { computed } from "vue";
 import Stones from "../../animations/Stones.vue";
 
 const props = defineProps(["certificate"]);
-
 const totalCaratWeight = computed(
-  () => props.certificate.MainStoneWeight + props.certificate.SideStoneWeight
+  () =>
+    parseFloat(props.certificate.MainStoneWeight) +
+    parseFloat(props.certificate.SideStoneWeight)
 );
 </script>
 
-<style>
-</style>

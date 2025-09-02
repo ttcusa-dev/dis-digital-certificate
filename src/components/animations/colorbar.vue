@@ -54,7 +54,10 @@
         </svg>
       </div>
     </div>
-    <div class="label">Color - {{ color.template }}</div>
+    <div v-if="color.template !== 'Standard'" class="label">
+      {{ color.template }}
+    </div>
+    <div v-else class="label">Color</div>
   </div>
 </template>
 
@@ -178,5 +181,10 @@ svg {
   font-weight: 700;
   fill: #ffffff;
   font-style: italic;
+}
+
+.label {
+  max-height: 20px;
+  overflow: auto;
 }
 </style>

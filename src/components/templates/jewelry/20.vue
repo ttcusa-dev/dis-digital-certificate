@@ -30,6 +30,7 @@
             :stoneShape="certificate.MainStoneShape"
             :stoneType="certificate.MainStoneType"
             :colorHex="certificate.MainStoneColorCode"
+           
           />
         </div>
 

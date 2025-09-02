@@ -28,13 +28,13 @@ const props = defineProps({
   stoneShape: { type: String, default: "" },
   stoneType: { type: String, default: "" },
   colorHex: { type: String, default: "#ff0000" },
-  maxWidth: { type: String, default: "80px" },
+  maxWidth: { type: String, default: "90px" },
 });
 
 const stoneImage = computed(() => {
   try {
     let stoneFileName = props.stoneShape.toLowerCase();
-    let filePath = `../../assets/stone animation gifs/${stoneFileName}.gif`;
+    let filePath = `../../assets/stones/${stoneFileName}.gif`;
     if (props.stoneType == "Pearl") {
       stoneFileName = props.stoneType.toLowerCase();
     } else if (props.stoneType == "Opal") {
@@ -58,6 +58,7 @@ const containerWidth = computed(() => {
   let maxWidth = props.maxWidth;
 
   if (props.stoneShape == "Baguette") maxWidth = "35px";
+  if (props.stoneShape == "Marquise") maxWidth = "65px";
 
   return maxWidth;
 });

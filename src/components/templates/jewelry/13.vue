@@ -54,8 +54,13 @@
             <div class="label">Clarity</div>
           </div>
           <div class="diagram">
-            <div class="ctw">{{ stone.MainStoneWeight }} CTW</div>
-            <img src="../../../assets/diagram.png" alt="" srcset="" />
+            <table-depth
+              :showCTW="true"
+              maxWidth="90px"
+              :weight="stone.MainStoneWeight"
+              :depth="stone.MainStoneDepth"
+              :table="stone.MainStoneTable"
+            />
           </div>
           <div class="gauge animated-phase-three">
             <gauge
@@ -82,6 +87,7 @@
 <script setup>
 import colorbar from "../../animations/colorbar.vue";
 import gauge from "../../animations/Gauge.vue";
+import TableDepth from "../../animations/TableDepth.vue";
 
 defineProps({
   certificate: { type: Object, default: {} },
@@ -162,11 +168,11 @@ function generateRandomID() {
   opacity: 0.6;
 }
 .value {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 500;
 }
 .label {
-  font-size: 9px;
+  font-size: 10px;
 }
 
 .ctw {

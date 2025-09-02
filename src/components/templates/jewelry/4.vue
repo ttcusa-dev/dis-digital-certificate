@@ -57,9 +57,15 @@
             />
             <div class="label">Clarity</div>
           </div>
+
           <div class="diagram">
-            <div class="ctw">{{ stone.MainStoneWeight }} CTW</div>
-            <img src="../../../assets/diagram.png" alt="" srcset="" />
+            <table-depth
+              :showCTW="true"
+              maxWidth="90px"
+              :weight="stone.MainStoneWeight"
+              :depth="stone.MainStoneDepth"
+              :table="stone.MainStoneTable"
+            />
           </div>
           <div class="gauge animated-phase-three">
             <gauge
@@ -86,7 +92,7 @@
 <script setup>
 import colorbar from "../../animations/colorbar.vue";
 import gauge from "../../animations/Gauge.vue";
-
+import TableDepth from "../../animations/TableDepth.vue";
 defineProps({
   certificate: { type: Object, default: {} },
 });
@@ -96,7 +102,9 @@ function generateRandomID() {
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   let result = "";
   for (let i = 0; i < length; i++) {
-    result += chars.charAt(Math.floor(Math.random() * chars.length));
+    result +=
+      chars.charAt(Math.floor(Math.random() * chars.length)) +
+      Math.floor(Math.random() * i);
   }
   return result;
 }
@@ -154,7 +162,7 @@ function generateRandomID() {
 /* optional: add a little breathing room on each side */
 .col {
   flex: 1;
-  padding: 0 0.5rem;
+  padding: 0 0.8rem;
 }
 .index {
   width: 24px;
@@ -166,25 +174,13 @@ function generateRandomID() {
   opacity: 0.6;
 }
 .value {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 500;
 }
 .label {
-  font-size: 9px;
+  font-size: 10px;
 }
 
-.ctw {
-  position: absolute;
-  transform: translate(-39%, 17%);
-  font-size: 10px;
-  font-weight: 900;
-  background-color: #414c62d6;
-  padding: 3px;
-  width: 34px;
-  height: 29px;
-  text-align: center;
-  border-radius: 8px;
-}
 .table-depth {
   display: flex;
   justify-content: space-between;
@@ -206,17 +202,6 @@ function generateRandomID() {
   display: grid;
   grid-template-columns: 2fr 2fr;
   gap: 12px;
-}
-
-.diagram {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.diagram img {
-  width: 100%;
-  height: 100%;
 }
 
 .label:nth-child(5),

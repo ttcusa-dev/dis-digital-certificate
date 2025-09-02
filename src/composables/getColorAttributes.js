@@ -70,6 +70,28 @@ export function getColorAttribute() {
       "Fancy Deep": 1.0,
     },
 
+    "Purplish-Red": {
+      Faint: 0.125,
+      "Very Light": 0.25,
+      Light: 0.375,
+      "Fancy Light": 0.5,
+      Fancy: 0.625,
+      "Fancy Intense": 0.75,
+      "Fancy Vivid": 0.875,
+      "Fancy Deep": 1.0,
+    },
+
+    "Yellow-Orange": {
+      Faint: 0.125,
+      "Very Light": 0.25,
+      Light: 0.375,
+      "Fancy Light": 0.5,
+      Fancy: 0.625,
+      "Fancy Intense": 0.75,
+      "Fancy Vivid": 0.875,
+      "Fancy Deep": 1.0,
+    },
+
     Yellow: {
       "Fancy Light": 0.2,
       Fancy: 0.4,
@@ -108,6 +130,8 @@ export function getColorAttribute() {
     Orange: "#ffa807",
     Purple: "#9f059f",
     Red: "#ff0707",
+    "Yellow-Orange": "#FFC100",
+    "Purplish-Red": "#953553",
   };
 
   return { percentages, barColor };

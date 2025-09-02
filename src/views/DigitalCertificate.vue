@@ -31,7 +31,13 @@
     <div v-if="!olderCertificate">
       <div class="intro-container">
         <div class="logo-container">
-          <video v-if="introVideo" id="video" class="logo-video" muted playsinline>
+          <video
+            v-if="introVideo"
+            id="video"
+            class="logo-video"
+            muted
+            playsinline
+          >
             <source :src="introVideo" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
@@ -60,6 +66,7 @@
             NO VIDEO
           </div>
           <video
+            v-if="productShowCaseVideo"
             id="jewelry-video"
             class="jewelry-image"
             autoplay
@@ -490,7 +497,7 @@ function initCertificateViewingSequence() {
         templateContainer.classList.add("visible");
         mainContent.classList.add("visible");
         specsSection.style.visibility = "visible";
-        jewelryVideo.currentTime = 5;
+        if(productShowCaseVideo.value) jewelryVideo.currentTime = 5;
         // specInfo.style.animation = "scaleUp 0.7s ease-in forwards";
         animatedPhaseOneElements.forEach((el) => {
           el.style.animation = "scaleUp 0.7s ease-in forwards";

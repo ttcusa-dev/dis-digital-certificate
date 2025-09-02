@@ -38,6 +38,7 @@
             :stoneShape="certificate.MainStoneShape"
             :stoneType="certificate.MainStoneType"
             :colorHex="certificate.MainStoneColorCode"
+            :maxWidth="'115px'"
           />
         </div>
 
@@ -75,7 +76,7 @@
             :stoneShape="certificate.SideStoneShape"
             :stoneType="certificate.SideStoneType"
             :colorHex="certificate.SideStoneColorCode"
-            :maxWidth="'150px'"
+            :maxWidth="'115px'"
           />
         </div>
 

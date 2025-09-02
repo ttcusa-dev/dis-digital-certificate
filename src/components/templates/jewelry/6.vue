@@ -27,8 +27,11 @@
           <div class="label">Center Stone Measurements</div>
         </div>
       </div>
-      <div class="diagram">
-        <img src="../../../assets/diagram.png" alt="" srcset="" />
+       <div class="diagram">
+        <table-depth
+          :depth="certificate.MainStoneDepth"
+          :table="certificate.MainStoneTable"
+        />
       </div>
     </div>
 
@@ -75,6 +78,7 @@
 <script setup>
 import colorbar from "../../animations/colorbar.vue";
 import gauge from "../../animations/Gauge.vue";
+import TableDepth from "../../animations/TableDepth.vue";
 
 defineProps({
   certificate: { type: Object, default: {} },

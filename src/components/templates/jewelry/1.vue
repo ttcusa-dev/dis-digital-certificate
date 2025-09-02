@@ -34,7 +34,10 @@
         </div>
       </div>
       <div class="diagram">
-        <img src="../../../assets/diagram.png" alt="" srcset="" />
+        <table-depth
+          :depth="certificate.MainStoneDepth"
+          :table="certificate.MainStoneTable"
+        />
       </div>
     </div>
 
@@ -81,6 +84,7 @@
 <script setup>
 import colorbar from "../../animations/colorbar.vue";
 import gauge from "../../animations/Gauge.vue";
+import TableDepth from "../../animations/TableDepth.vue";
 
 defineProps({
   certificate: { type: Object, default: {} },
@@ -218,16 +222,6 @@ defineProps({
 
 .jewelry-info__sides .value {
   font-size: 15px;
-}
-
-.diagram {
-  width: 130px;
-  height: 100px;
-}
-
-.diagram img {
-  width: 100%;
-  height: 100%;
 }
 </style>
 

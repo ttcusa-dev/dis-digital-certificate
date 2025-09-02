@@ -294,9 +294,9 @@ async function fetchShowCasingVideo(videoFileName) {
   }
 }
 
-async function fetchClientLogo(clientId) {
-  let clientDoc = await getDoc(doc(db, "companies", clientId));
-  clientLogo.value = clientDoc.data().images.url;
+async function fetchClientLogo(cert) {
+  let clientDoc = await getDoc(doc(db, "companies", cert.Company.id));
+  clientLogo.value = cert.CustomerLogo || clientDoc.data().images.url;
 }
 
 async function getAdRunTime() {
@@ -497,7 +497,7 @@ function initCertificateViewingSequence() {
         templateContainer.classList.add("visible");
         mainContent.classList.add("visible");
         specsSection.style.visibility = "visible";
-        if(productShowCaseVideo.value) jewelryVideo.currentTime = 5;
+        if (productShowCaseVideo.value) jewelryVideo.currentTime = 5;
         // specInfo.style.animation = "scaleUp 0.7s ease-in forwards";
         animatedPhaseOneElements.forEach((el) => {
           el.style.animation = "scaleUp 0.7s ease-in forwards";
@@ -642,7 +642,7 @@ onMounted(async () => {
       } else {
         introVideo.value = fetchIntroVideo(certificate.value.Company.name);
         await fetchShowCasingVideo(certificate.value.Video.name);
-        await fetchClientLogo(certificate.value.Company.id);
+        await fetchClientLogo(certificate.value);
         initCertificateViewingSequence();
       }
 

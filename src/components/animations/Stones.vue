@@ -5,6 +5,7 @@
     <div
       class="tint"
       :style="{
+        mixBlendMode: colorMode,
         backgroundColor: colorHex,
         WebkitMaskImage: `url(${stoneImage})`,
         maskImage: `url(${stoneImage})`,
@@ -28,8 +29,10 @@ const props = defineProps({
   stoneShape: { type: String, default: "" },
   stoneType: { type: String, default: "" },
   colorHex: { type: String, default: "#ff0000" },
+  colorMode: { type: String, default: "color" },
   maxWidth: { type: String, default: "90px" },
 });
+
 
 const stoneImage = computed(() => {
   try {
@@ -59,6 +62,7 @@ const containerWidth = computed(() => {
 
   if (props.stoneShape == "Baguette") maxWidth = "35px";
   if (props.stoneShape == "Marquise") maxWidth = "65px";
+  if (props.stoneShape == "Multi Shape") maxWidth = "170px";
 
   return maxWidth;
 });
@@ -90,7 +94,6 @@ const containerWidth = computed(() => {
   left: 0;
   width: 100%;
   height: 100%;
-  mix-blend-mode: color;
   pointer-events: none;
   background-repeat: no-repeat;
   background-size: cover;

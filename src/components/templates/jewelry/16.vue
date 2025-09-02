@@ -1,4 +1,5 @@
 <template>
+  
   <div class="product-info animated-phase">
     <div class="specs-grid">
       <div class="spec-item">
@@ -32,6 +33,7 @@
             :stoneShape="certificate.MainStoneShape"
             :stoneType="certificate.MainStoneType"
             :colorHex="certificate.MainStoneColorCode"
+            :colorMode="certificate.MainStoneColorMode"
           />
         </div>
 
@@ -71,6 +73,7 @@
             :stoneShape="certificate.SideStoneShape"
             :stoneType="certificate.SideStoneType"
             :colorHex="certificate.SideStoneColorCode"
+            :colorMode="certificate.SideStoneColorMode"
           />
         </div>
 

@@ -637,7 +637,7 @@ onMounted(async () => {
           );
         has_imperfections.value = Boolean(imperfections.value);
       }
-      if (certificate.value.created > 1756675200000) {
+      if (certificate.value.created < 1757381164000) {
         await fetchDigitalCertificate(certificate.value);
       } else {
         introVideo.value = fetchIntroVideo(certificate.value.Company.name);

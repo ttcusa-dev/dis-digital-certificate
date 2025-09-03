@@ -30,7 +30,8 @@
           <stones
             :stoneShape="certificate.MainStoneShape"
             :stoneType="certificate.MainStoneType"
-            :colorHex="certificate.MainStoneColorCode"
+            :colorCode="certificate.MainStoneColorCode"
+            :stoneColor="certificate.MainStoneColor.value"
             :maxWidth="'200px'"
           />
         </div>

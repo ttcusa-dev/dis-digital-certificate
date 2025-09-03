@@ -496,7 +496,6 @@ body {
   text-align: center;
   font-family: "Montserrat";
   font-weight: 400;
-  margin-bottom: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -510,7 +509,7 @@ body {
 .description-label::after {
   content: "";
   display: block;
-  height: 0.5px;
+  height: 0.8px;
   background-color: #5e7697;
   flex: 1;
 }

@@ -1,4 +1,3 @@
-
 <template>
   <section class="jewelry-info">
     <div class="jewelry-info__item animated-phase-one">
@@ -99,6 +98,7 @@ defineProps({
   color: #e1e8ed;
   padding-left: 3rem;
   padding-right: 3rem;
+  padding-top: 0.5rem;
   border-radius: 0.75rem;
   font-family: "Helvetica Neue", Arial, sans-serif;
 }
@@ -113,6 +113,7 @@ defineProps({
 .jewelry-info__top {
   display: flex;
   justify-content: space-between;
+  padding-left: 4rem;
 }
 
 .jewelry-info__item .label {
@@ -224,4 +225,3 @@ defineProps({
   font-size: 15px;
 }
 </style>
-

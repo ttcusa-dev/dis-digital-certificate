@@ -21,6 +21,7 @@
         :stoneShape="certificate.MainStoneShape"
         :stoneType="certificate.MainStoneType"
         :colorHex="certificate.MainStoneColorCode"
+        :stoneColor="certificate.MainStoneColor.value"
         :maxWidth="'150px'"
       />
       <div class="gem-type">

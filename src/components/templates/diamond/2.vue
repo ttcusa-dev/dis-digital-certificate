@@ -31,8 +31,8 @@
 
       <div class="diagram">
         <table-depth
-          :depth="certificate.MainStoneDepth"
-          :table="certificate.MainStoneTable"
+          :depth="certificate.Depth"
+          :table="certificate.Table"
         />
       </div>
     </div>

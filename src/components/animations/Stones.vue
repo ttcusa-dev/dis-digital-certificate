@@ -1,70 +1,68 @@
 <template>
-  <div class="container" :style="{ maxWidth: containerWidth }">
-    <!-- GIF that sizes the container -->
-    <img v-if="stoneImage" :src="stoneImage" :alt="`${stoneShape}`" />
-    <div
-      class="tint"
-      :style="{
-        mixBlendMode: colorMode,
-        backgroundColor: colorHex,
-        WebkitMaskImage: `url(${stoneImage})`,
-        maskImage: `url(${stoneImage})`,
-      }"
-    ></div>
-  </div>
-  <div class="gem-type" style="width: fit-content">
-    <div class="value" style="width: 200px; font-size: 12px">
-      {{ stoneType }}
-    </div>
-    <div style="width: 200px; font-size: 12px" class="round label">
-      ( {{ stoneShape }} )
-    </div>
+  <div class="container">
+    <MultiColorStones
+      v-if="showMixedColorComp"
+      :stoneShape="stoneShape"
+      :stoneType="stoneType"
+      :colorHex="colorHex"
+      :colorMode="colorMode"
+      :maxWidth="maxWidth"
+      :color-hex="colorHex"
+      :color-hex2="colorHex2"
+      two-color-mode="conic"
+      :segments="4"
+      :angle-offset="178"
+      :spin-duration="30.22"
+      :spin="true"
+      spin-direction="normal"
+    />
+
+    <SingleStones
+      v-else
+      :stoneShape="stoneShape"
+      :stoneType="stoneType"
+      :colorCode="colorCode"
+      :colorMode="colorMode"
+      :maxWidth="maxWidth"
+    />
   </div>
 </template>
 
 <script setup>
-import { computed } from "vue";
+import MultiColorStones from "./MultiColorStones.vue";
+import SingleStones from "./SingleStones.vue";
+
+import { onMounted, ref } from "vue";
 
 const props = defineProps({
   stoneShape: { type: String, default: "" },
   stoneType: { type: String, default: "" },
-  colorHex: { type: String, default: "#ff0000" },
+  colorCode: { type: String, default: "#ff0000" },
   colorMode: { type: String, default: "color" },
+  stoneColor: { type: String, default: "" },
   maxWidth: { type: String, default: "90px" },
 });
 
+const colorCodes = {
+  Champagne: "#C88001",
+  Black: "#0d0d0d",
+  Blue: "#0000FF",
+  Yellow: "#FFFF00",
+  Brown: "#964B00",
+};
 
-const stoneImage = computed(() => {
-  try {
-    let stoneFileName = props.stoneShape.toLowerCase();
-    let filePath = `../../assets/stones/${stoneFileName}.gif`;
-    if (props.stoneType == "Pearl") {
-      stoneFileName = props.stoneType.toLowerCase();
-    } else if (props.stoneType == "Opal") {
-      stoneFileName = `${props.stoneType.toLowerCase()} ${props.stoneShape.toLowerCase()}`;
-    } else if (props.stoneType == "Mixed Diamonds") {
-      stoneFileName = props.stoneShape;
-      filePath = `../../assets/multi-stone/Multi-${stoneFileName}.webp`;
-    } else if (props.stoneShape.includes("Multi")) {
-      stoneFileName = props.stoneShape.split(" ").join("-");
-      filePath = `../../assets/multi-stone/${stoneFileName}.webp`;
-    }
+const showMixedColorComp = ref(false);
+const colorHex = ref("#0d0d0d");
+const colorHex2 = ref("");
 
-    return new URL(filePath, import.meta.url).href;
-  } catch (e) {
-    console.warn("Image not found:", e);
-    return null;
+onMounted(() => {
+  if (props.stoneColor.includes("/") && props.stoneType.includes("Mixed")) {
+    showMixedColorComp.value = true;
+    const color = props.stoneColor.split("/")[0].trim();
+    const color2 = props.stoneColor.split("/")[1].trim();
+    colorHex.value = colorCodes[color] || "#FFFFFF";
+    colorHex2.value = colorCodes[color2] || "#FFFFFF";
   }
-});
-
-const containerWidth = computed(() => {
-  let maxWidth = props.maxWidth;
-
-  if (props.stoneShape == "Baguette") maxWidth = "35px";
-  if (props.stoneShape == "Marquise") maxWidth = "65px";
-  if (props.stoneShape == "Multi Shape") maxWidth = "170px";
-
-  return maxWidth;
 });
 </script>
 

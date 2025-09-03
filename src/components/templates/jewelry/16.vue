@@ -1,5 +1,4 @@
 <template>
-  
   <div class="product-info animated-phase">
     <div class="specs-grid">
       <div class="spec-item">
@@ -32,8 +31,9 @@
           <stones
             :stoneShape="certificate.MainStoneShape"
             :stoneType="certificate.MainStoneType"
-            :colorHex="certificate.MainStoneColorCode"
+            :colorCode="certificate.MainStoneColorCode"
             :colorMode="certificate.MainStoneColorMode"
+            :stoneColor="certificate.MainStoneColor.value"
           />
         </div>
 
@@ -72,8 +72,9 @@
           <stones
             :stoneShape="certificate.SideStoneShape"
             :stoneType="certificate.SideStoneType"
-            :colorHex="certificate.SideStoneColorCode"
+            :colorCode="certificate.SideStoneColorCode"
             :colorMode="certificate.SideStoneColorMode"
+            :stoneColor="certificate.SideStoneColor.value"
           />
         </div>
 
@@ -97,5 +98,4 @@ import Stones from "../../animations/Stones.vue";
 defineProps({ certificate: { type: Object, default: {} } });
 </script>
 
-<style>
-</style>
+<style></style>

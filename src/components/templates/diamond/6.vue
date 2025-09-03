@@ -27,11 +27,12 @@
           <div class="label">CLARITY</div>
         </div>
       </div>
-        <div class="diagram">
-        <table-depth
-          :depth="certificate.MainStoneDepth"
-          :table="certificate.MainStoneTable"
-        />
+      <div class="diagram">
+        <div class="wireframe-info">
+          <div class="value">{{ certificate.Weight }}</div>
+          <div class="label">TOTAL CARAT WEIGHT</div>
+        </div>
+        <img src="../../../assets/wireframes/SpinningDiamond.gif" />
       </div>
     </div>
 
@@ -100,10 +101,10 @@ defineProps({
   width: 100%;
   position: relative;
   display: flex;
-  margin-top: 2rem;
   justify-content: space-between;
   align-content: center;
-  align-items: first baseline;
+  align-items: center;
+  height: 70%;
 }
 .slider {
   position: relative;
@@ -131,13 +132,13 @@ defineProps({
 
 .diagram {
   width: 150px;
-  height: 140px;
+  height: 150px;
   overflow: hidden;
 }
 
 .diagram img {
   width: 100%;
-  height: 100%;
+  height: 79%;
 }
 
 .fill {

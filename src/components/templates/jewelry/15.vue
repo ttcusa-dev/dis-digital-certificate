@@ -37,9 +37,10 @@
           <stones
             :stoneShape="certificate.MainStoneShape"
             :stoneType="certificate.MainStoneType"
-            :colorHex="certificate.MainStoneColorCode"
+            :colorCode="certificate.MainStoneColorCode"
             :colorMode="certificate.MainStoneColorMode"
-            :maxWidth="'115px'"
+            :stoneColor="certificate.MainStoneColor.value"
+            :maxWidth="'100px'"
           />
         </div>
 
@@ -73,12 +74,12 @@
           class="diamond-visual"
           style="display: flex; flex-direction: column; align-items: center"
         >
-          <stones
+          <Stones
             :stoneShape="certificate.SideStoneShape"
             :stoneType="certificate.SideStoneType"
-            :colorHex="certificate.SideStoneColorCode"
+            :colorCode="certificate.SideStoneColorCode"
             :colorMode="certificate.SideStoneColorMode"
-            :maxWidth="'115px'"
+            :stoneColor="certificate.SideStoneColor.value"
           />
         </div>
 
@@ -103,9 +104,9 @@
 
 <script setup>
 import Stones from "../../animations/Stones.vue";
+import MultiColorStones from "../../animations/MultiColorStones.vue";
+
 const props = defineProps(["certificate"]);
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

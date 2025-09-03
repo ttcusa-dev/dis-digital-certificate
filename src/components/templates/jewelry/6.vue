@@ -1,4 +1,3 @@
-
 <template>
   <section class="jewelry-info">
     <div class="jewelry-info__item animated-phase-one">
@@ -27,7 +26,7 @@
           <div class="label">Center Stone Measurements</div>
         </div>
       </div>
-       <div class="diagram">
+      <div class="diagram">
         <table-depth
           :depth="certificate.MainStoneDepth"
           :table="certificate.MainStoneTable"
@@ -93,6 +92,7 @@ defineProps({
   color: #e1e8ed;
   padding-left: 3rem;
   padding-right: 3rem;
+  padding-top: 0.5rem;
   border-radius: 0.75rem;
   font-family: "Helvetica Neue", Arial, sans-serif;
 }
@@ -228,4 +228,3 @@ defineProps({
   height: 100%;
 }
 </style>
-

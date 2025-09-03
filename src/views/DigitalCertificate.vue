@@ -270,12 +270,12 @@ async function fetchDigitalCertificate(certificate) {
       certificateVideo.data()
     );
     digitalCertificateVideoURL.value = certificateVideo.meta.url;
-
     handleCertificateNumber(certificate.Company.name.includes("Helzberg"));
   } catch (error) {
     console.error("Error: ", error);
     if (certificate.CertificateVideo) {
-      digitalCertificateVideoURL = certificateVideo.CertificateVideo.url;
+      digitalCertificateVideoURL.value = certificate.CertificateVideo.url;
+      olderCertificate.value = true;
     } else {
       certificateDoesNotExist.value = true;
     }
@@ -647,7 +647,7 @@ onMounted(async () => {
       }
 
       if (!certificateDoesNotExist.value) {
-        await fetchClientCampaign(certificate.value.Company.id);
+        // await fetchClientCampaign(certificate.value.Company.id);
       }
 
       // initAnalytics.value = await handleAnalyticsInitilization(

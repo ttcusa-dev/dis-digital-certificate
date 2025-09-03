@@ -36,7 +36,8 @@
           <stones
             :stoneShape="certificate.MainStoneShape"
             :stoneType="certificate.MainStoneType"
-            :colorHex="certificate.MainStoneColorCode"
+            :colorCode="certificate.MainStoneColorCode"
+            :stoneColor="certificate.MainStoneColor.value"
           />
         </div>
 
@@ -77,7 +78,8 @@
           <stones
             :stoneShape="certificate.SideStoneShape"
             :stoneType="certificate.SideStoneType"
-            :colorHex="certificate.SideStoneColorCode"
+            :colorCode="certificate.SideStoneColorCode"
+            :stoneColor="certificate.SideStoneColor.value"
           />
         </div>
 
@@ -111,4 +113,3 @@ const totalCaratWeight = computed(
     parseFloat(props.certificate.SideStoneWeight)
 );
 </script>
-

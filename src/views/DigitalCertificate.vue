@@ -239,6 +239,7 @@ const showCertNumberForOldCerts = ref(false);
 const noAdsInit = ref(false);
 const olderCertificate = ref(false);
 const certificateDoesNotExist = ref(false);
+const initAnalytics = ref(false);
 const loading = ref(false);
 
 async function fetchCertificate() {
@@ -320,7 +321,7 @@ async function handleAnalytics(userAction, saveViewingTime) {
     );
 
     try {
-      let data = await handleAnalyticsPerCertificate({
+      await handleAnalyticsPerCertificate({
         clientId,
         userDevice,
         productID,
@@ -332,7 +333,7 @@ async function handleAnalytics(userAction, saveViewingTime) {
         certificateData,
       });
 
-      return data;
+      return true;
     } catch (error) {
       console.log(error);
       return false;
@@ -585,7 +586,7 @@ function closeModal() {
 
 function handleViewingTime() {
   const leaveTimestamp = Date.now();
-  const timeSpentOnSite = leaveTimestamp - enterTimestamp; // Time in milliseconds
+  const timeSpentOnSite = leaveTimestamp - enterTimestamp.value; // Time in milliseconds
   // You can convert the time to seconds, minutes, or hours as needed
   const secondsSpent = Math.floor(timeSpentOnSite / 1000); // Convert milliseconds to seconds
   const minutesSpent = Math.floor(secondsSpent / 60); // Convert seconds to minutes
@@ -604,7 +605,7 @@ async function fetchIPAddress() {
 async function handleAnalyticsInitilization(data) {
   const timestampDate = DateTime.fromMillis(data.created).startOf("day");
   const now = DateTime.local().startOf("day");
-  const isSystemIP = await this.fetchIPAddress();
+  const isSystemIP = await fetchIPAddress();
   if (isSystemIP) return false;
   return !timestampDate.equals(now);
 }
@@ -647,25 +648,18 @@ onMounted(async () => {
       }
 
       if (!certificateDoesNotExist.value) {
-        // await fetchClientCampaign(certificate.value.Company.id);
+        await fetchClientCampaign(certificate.value.Company.id);
       }
 
-      // initAnalytics.value = await handleAnalyticsInitilization(
-      //   certificate.value
-      // );
+      initAnalytics.value = await handleAnalyticsInitilization(
+        certificate.value
+      );
 
-      // setTimeout(() => {
-      //   handleAnalytics("view", false);
-      // }, 2000);
+      setTimeout(() => {
+        handleAnalytics("view", false);
+      }, 2000);
       loading.value = false;
     }, 500);
-
-    // setTimeout(async () => {
-    //   await this.fetchClientCampaign(certificate.value.Company.id);
-    //   this.initAnalytics = await this.handleAnalyticsInitilization(
-    //     this.digitalCertificate
-    //   );
-    // }, 1000);
   } else {
     loading.value = false;
     certificateDoesNotExist.value = true;
@@ -714,5 +708,3 @@ watch(redirectTimer, (timer) => {
   }
 });
 </script>
-
-

@@ -2,7 +2,9 @@
   <div class="product-info">
     <div class="specs-grid">
       <div class="spec-item">
-        <div class="spec-value value">{{ props.certificate.JewelryType }}</div>
+        <div class="spec-value value">
+          {{ props.certificate.JewelryType }}
+        </div>
         <div class="spec-label label">STYLE</div>
       </div>
       <div class="spec-item">
@@ -91,4 +93,4 @@ import Stones from "../../animations/Stones.vue";
 const props = defineProps(["certificate"]);
 </script>
 
-<style></style>
+

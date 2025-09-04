@@ -163,7 +163,7 @@ defineProps({
   text-align: center;
 } */
 .sides {
-  margin-bottom: 1.5rem;
+  /* margin-bottom: 1.5rem; */
 }
 .sides .value {
   font-size: 15px;

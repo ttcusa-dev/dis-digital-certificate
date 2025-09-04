@@ -93,8 +93,8 @@ const wireframe = computed(() => {
 
 .depth-info {
   position: absolute;
-  right: -1rem;
-  margin-top: 38px;
+  right: -0.7rem;
+  margin-top: 33px;
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -115,6 +115,7 @@ function generateRandomID() {
   color: #e1e8ed;
   padding-left: 1rem;
   padding-right: 1rem;
+  padding-top: 0.5rem;
   border-radius: 0.75rem;
   text-align: center;
   overflow: hidden;
@@ -147,7 +148,7 @@ function generateRandomID() {
   position: relative;
   display: flex;
   gap: 1rem;
-  margin-bottom: 1.5rem;
+  /* margin-bottom: 1.5rem; */
 }
 .columns::before {
   content: "";
@@ -162,7 +163,7 @@ function generateRandomID() {
 /* optional: add a little breathing room on each side */
 .col {
   flex: 1;
-  padding: 0 0.8rem;
+  /* padding: 0 0.8rem; */
 }
 .index {
   width: 24px;
@@ -207,5 +208,19 @@ function generateRandomID() {
 .label:nth-child(5),
 .label:nth-child(3) {
   margin-top: 0.1rem !important;
+}
+
+@media (max-width: 375px) and (max-height: 600px) {
+  .color-wrapper {
+    width: 140px !important;
+  }
+
+  .gauges {
+    gap: 0 !important;
+  }
+
+  .gauge {
+    width: 50px !important;
+  }
 }
 </style>

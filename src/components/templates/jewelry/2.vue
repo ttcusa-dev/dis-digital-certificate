@@ -71,7 +71,7 @@ defineProps({
   padding-top: 0.8rem;
   text-align: center;
   font-family: "Helvetica Neue", Arial, sans-serif;
-  height: 50vh;
+  height: 45vh;
 }
 .number {
   font-size: 1.2rem;

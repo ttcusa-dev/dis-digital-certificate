@@ -96,11 +96,9 @@ defineProps({
   width: 100%;
   margin: 0 auto;
   color: #e1e8ed;
-  padding-left: 3rem;
-  padding-right: 3rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
   padding-top: 0.5rem;
-  border-radius: 0.75rem;
-  font-family: "Helvetica Neue", Arial, sans-serif;
 }
 
 .jewelry-info__number {
@@ -114,6 +112,7 @@ defineProps({
   display: flex;
   justify-content: space-between;
   padding-left: 4rem;
+  padding-right: 1rem;
 }
 
 .jewelry-info__item .label {

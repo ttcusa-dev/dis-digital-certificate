@@ -109,6 +109,7 @@ function generateRandomID() {
   color: #e1e8ed;
   padding-left: 1rem;
   padding-right: 1rem;
+  padding-top: 0.5rem;
   border-radius: 0.75rem;
   text-align: center;
   overflow: hidden;
@@ -141,7 +142,7 @@ function generateRandomID() {
   position: relative;
   display: flex;
   gap: 1rem;
-  margin-bottom: 1.5rem;
+  /* margin-bottom: 1.5rem; */
 }
 .columns::before {
   content: "";

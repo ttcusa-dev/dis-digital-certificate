@@ -51,7 +51,7 @@
       >
         <!-- Top section with jewelry showcase -->
         <div class="jewelry-showcase">
-          <div class="showcase-header">
+          <div class="showcase-header" :class="{ has_footer: has_footer_ad }">
             <img
               v-if="clientLogo"
               class="client-logo"
@@ -80,6 +80,10 @@
             <!-- <source src="../assets/images/Emerlad.mp4" type="video/mp4" /> -->
             Your browser does not support the video tag.
           </video>
+
+          <div v-if="certificate.Inscription" class="inscription">
+            {{ certificate.Inscription }}
+          </div>
         </div>
 
         <!-- <div class="custom-divider"></div> -->
@@ -638,7 +642,7 @@ onMounted(async () => {
           );
         has_imperfections.value = Boolean(imperfections.value);
       }
-      if (certificate.value.created < 1757381164000) {
+      if (certificate.value.created > 1757381164000) {
         await fetchDigitalCertificate(certificate.value);
       } else {
         introVideo.value = fetchIntroVideo(certificate.value.Company.name);
@@ -651,13 +655,13 @@ onMounted(async () => {
         await fetchClientCampaign(certificate.value.Company.id);
       }
 
-      initAnalytics.value = await handleAnalyticsInitilization(
-        certificate.value
-      );
+      // initAnalytics.value = await handleAnalyticsInitilization(
+      //   certificate.value
+      // );
 
-      setTimeout(() => {
-        handleAnalytics("view", false);
-      }, 2000);
+      // setTimeout(() => {
+      //   handleAnalytics("view", false);
+      // }, 2000);
       loading.value = false;
     }, 500);
   } else {

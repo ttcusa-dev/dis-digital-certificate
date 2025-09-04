@@ -253,7 +253,7 @@ defineProps({
 
 .jewelry-info__sides {
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .jewelry-info__sides .label {

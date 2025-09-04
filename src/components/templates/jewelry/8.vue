@@ -19,30 +19,48 @@
 
     <!-- Weight / Measurements / Diagram -->
     <div class="jewelry-info__stats animated-phase-one">
-      <div class="stat">
-        <div class="value">{{ certificate.MainStoneWeight }} ct.</div>
-        <div class="label">Center Stone Weight</div>
+      <div class="stats">
+        <div class="stat">
+          <div class="value">{{ certificate.MainStoneWeight }} ct.</div>
+          <div class="label">Center Stone Weight</div>
+        </div>
+        <div class="stat">
+          <div class="value">{{ certificate.MainStoneMeasurements }}</div>
+          <div class="label">Center Stone Measurements</div>
+        </div>
       </div>
-      <div class="stat">
-        <div class="value">{{ certificate.MainStoneMeasurements }}</div>
-        <div class="label">Center Stone Measurements</div>
+      <div class="diagram">
+        <table-depth
+          :depth="certificate.MainStoneDepth"
+          :table="certificate.MainStoneTable"
+        />
       </div>
     </div>
-    <div class="stat diagram">
-      <!-- drop in your SVG icon here -->
-    </div>
+
     <!-- Clarity / Symmetry / Polish gauges -->
     <div class="jewelry-info__quality">
       <div class="gauge animated-phase-two">
-        <gauge :idPrefix="'1'" :value="certificate.MainStoneClarity.value" />
+        <gauge
+          guageWidth="100px"
+          :idPrefix="'1'"
+          :value="certificate.MainStoneClarity.value"
+        />
         <div class="label">Clarity</div>
       </div>
       <div class="gauge animated-phase-three">
-        <gauge :idPrefix="'2'" :value="certificate.MainStoneSymmetry" />
+        <gauge
+          guageWidth="100px"
+          :idPrefix="'2'"
+          :value="certificate.MainStoneSymmetry"
+        />
         <div class="label">Symmetry</div>
       </div>
       <div class="gauge animated-phase-four">
-        <gauge :idPrefix="'3'" :value="certificate.MainStonePolish" />
+        <gauge
+          guageWidth="100px"
+          :idPrefix="'3'"
+          :value="certificate.MainStonePolish"
+        />
         <div class="label">Polish</div>
       </div>
     </div>
@@ -62,6 +80,7 @@
 <script setup>
 import colorbar from "../../animations/colorbar.vue";
 import gauge from "../../animations/Gauge.vue";
+import TableDepth from "../../animations/TableDepth.vue";
 
 defineProps({
   certificate: { type: Object, default: {} },
@@ -74,9 +93,11 @@ defineProps({
   width: 100%;
   margin: 0 auto;
   color: #e1e8ed;
-  padding: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 0.5rem;
   border-radius: 0.75rem;
-  font-family: "Helvetica Neue", Arial, sans-serif;
+  /* font-family: "Helvetica Neue", Arial, sans-serif; */
 }
 
 .jewelry-info__number {
@@ -88,82 +109,44 @@ defineProps({
 
 .jewelry-info__top {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 0.5rem;
+  justify-content: space-between;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 1rem;
 }
 
 .jewelry-info__item .label {
-  font-size: 0.75rem;
+  font-size: 13px;
   text-transform: uppercase;
   opacity: 0.6;
   text-align: center;
 }
 
 .jewelry-info__item .value {
-  font-size: 1rem;
+  font-size: 15px;
   font-weight: 500;
   margin-top: 0.25rem;
   text-align: center;
 }
 
 .jewelry-info__color .label {
-  font-size: 0.75rem;
+  font-size: 13px;
   text-transform: uppercase;
   opacity: 0.6;
   margin-top: 10px;
   text-align: center;
 }
 
-.slider {
-  position: relative;
-  height: 4px;
-  background: #ffffff;
-  border-radius: 2px;
-  margin-top: 0.5rem;
-}
-
-.fill {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  background: #287bc9;
-  border-radius: 2px 0 0 2px;
-}
-
-/* DOWNWARD‑POINTING arrow sitting on top of the slider */
-.thumb {
-  position: absolute;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 6px solid #fff0;
-  border-right: 6px solid #fff0;
-  border-top: 8px solid #fff;
-  margin-top: -16px;
-}
-
-/* label text above the arrow */
-.thumb::after {
-  content: attr(data-label);
-  position: absolute;
-  bottom: calc(20% + 8px + 4px); /* 8px arrow-height + 4px gap */
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 0.75rem;
-  color: #fff;
-  white-space: nowrap;
-}
-
 .jewelry-info__stats {
   display: flex;
-  justify-content: space-between;
-  margin: 1.5rem 0;
-  flex-flow: column;
+  justify-content: space-around;
+  flex-flow: row;
   align-items: center;
-  gap: 10px;
-  width: 14rem;
+  width: 100%;
+  margin-bottom: 0.2rem;
+  border: none;
+  padding-bottom: 0.2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .stat {
@@ -176,36 +159,53 @@ defineProps({
 }
 
 .stat .value {
-  font-size: 1rem;
+  font-size: 15px;
   font-weight: 500;
 }
 
 .stat .label {
-  font-size: 0.75rem;
+  font-size: 12px;
   opacity: 0.6;
+  text-transform: uppercase;
   margin-top: 0.25rem;
+}
+
+.stat:nth-child(1) {
+  border: none;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .jewelry-info__quality {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
+  border: none;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .gauge {
   flex: 1;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
 }
 
 .gauge .value {
-  font-size: 1rem;
+  font-size: 13px;
   font-weight: 500;
 }
 
 .gauge .label {
-  font-size: 0.75rem;
+  font-size: 15px;
   opacity: 0.6;
   margin-top: 0.25rem;
+  text-transform: uppercase;
 }
 
 .jewelry-info__sides {
@@ -214,22 +214,14 @@ defineProps({
 }
 
 .jewelry-info__sides .label {
-  font-size: 0.75rem;
+  font-size: 13px;
   text-transform: uppercase;
   opacity: 0.6;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
 }
 
 .jewelry-info__sides .value {
-  font-size: 0.9rem;
-}
-
-.jewelry-info__comments {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 1rem;
-  border-radius: 0.5rem;
-  font-size: 0.75rem;
-  line-height: 1.4;
+  font-size: 15px;
 }
 </style>
 

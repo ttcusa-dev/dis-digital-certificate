@@ -128,9 +128,7 @@ defineProps({
   text-transform: uppercase;
   margin-top: 0.5rem;
 }
-.sides {
-  margin-bottom: 2rem;
-}
+
 .sides .value {
   font-size: 16px;
   font-weight: 500;
@@ -139,6 +137,5 @@ defineProps({
   font-size: 13px;
   text-transform: uppercase;
   margin-top: 0.25rem;
-  margin-bottom: 6rem;
 }
 </style>

@@ -18,18 +18,23 @@
     </div>
 
     <!-- Clarity / Symmetry / Polish gauges -->
-    <div class="jewelry-info__quality">
-      <div class="gauge animated-phase-two">
-        <gauge :idPrefix="'1'" :value="certificate.MainStoneClarity.value" />
-        <div class="label">Clarity</div>
-      </div>
-
-      <div class="stat diagram">
-        <div v-if="certificate.MainStoneWeight != 0" class="value">
-          {{ certificate.MainStoneWeight }}
+    <div class="info-section">
+      <div class="gauges">
+        <div class="gauge animated-phase-two">
+          <gauge
+            :idPrefix="'1'"
+            :value="certificate.MainStoneClarity.value"
+            guageWidth="100px"
+          />
+          <div class="label">CLARITY</div>
         </div>
-        <div class="label">{{ certificate.MainStoneType }}</div>
-        <!-- drop in your SVG icon here -->
+      </div>
+      <div class="animated-phase-two">
+        <Wireframe
+          :weight="certificate.MainStoneWeight"
+          :jewelryShape="certificate.MainStoneShape"
+          :jewelryType="certificate.JewelryType"
+        />
       </div>
     </div>
   </section>
@@ -38,6 +43,7 @@
 <script setup>
 import colorbar from "../../animations/colorbar.vue";
 import gauge from "../../animations/Gauge.vue";
+import Wireframe from "../../animations/Wireframe.vue";
 
 defineProps({
   certificate: { type: Object, default: {} },
@@ -52,7 +58,13 @@ defineProps({
   color: #e1e8ed;
   padding: 2rem;
   border-radius: 0.75rem;
-  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+.info-section {
+  width: 100%;
+  position: relative;
+  display: flex;
+  margin-top: 30px;
 }
 
 .jewelry-info__number {
@@ -66,8 +78,8 @@ defineProps({
   display: flex;
   justify-content: space-between;
   margin-bottom: 1.5rem;
-  padding-left: 5rem;
-  padding-right: 5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
   width: 100%;
 }
 

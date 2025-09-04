@@ -39,7 +39,7 @@
           <div class="label">CLARITY 2</div>
         </div>
       </div>
-     <div class="animated-phase-two" style="margin-top: 20px;">
+      <div class="animated-phase-two" style="margin-top: 20px">
         <Wireframe
           :weight="certificate.MainStoneWeight"
           :jewelryShape="certificate.MainStoneShape"
@@ -54,7 +54,6 @@
 import colorbar from "../../animations/colorbar.vue";
 import gauge from "../../animations/Gauge.vue";
 import Wireframe from "../../animations/Wireframe.vue";
-
 
 defineProps({
   certificate: { type: Object, default: {} },
@@ -141,35 +140,6 @@ defineProps({
   width: 100%;
   height: 88%;
 }
-.fill {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  background: #fff;
-  border-radius: 2px 0 0 2px;
-}
-.thumb {
-  position: absolute;
-  bottom: 100%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-top: 8px solid #fff;
-  z-index: 2;
-}
-.thumb::after {
-  content: attr(data-label);
-  position: absolute;
-  bottom: calc(100% + 8px + 4px);
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 0.75rem;
-  color: #fff;
-  white-space: nowrap;
-}
 
 .stats {
   display: flex;
@@ -218,19 +188,17 @@ defineProps({
   text-transform: uppercase;
   margin-top: 0.25rem;
 }
-.comments {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 1rem;
-  border-radius: 0.5rem;
-  font-size: 0.75rem;
-  line-height: 1.4;
-  text-align: left;
-}
 
 .label {
   font-size: 0.75rem;
   text-transform: uppercase;
   opacity: 0.6;
   text-align: center;
+}
+
+@media (min-width: 769px) {
+  .divider {
+    margin: 0.5rem auto;
+  }
 }
 </style>

@@ -52,7 +52,7 @@
           <div class="gauge animated-phase-two">
             <gauge
               guageWidth="70px"
-              :idPrefix="generateRandomID()"
+              :idPrefix="generateRandomID(i)"
               :value="stone.MainStoneClarity.value"
             />
             <div class="label">Clarity</div>
@@ -70,7 +70,7 @@
           <div class="gauge animated-phase-three">
             <gauge
               guageWidth="70px"
-              :idPrefix="generateRandomID()"
+              :idPrefix="generateRandomID(i)"
               :value="stone.MainStoneSymmetry"
             />
             <div class="label">Symmetry</div>
@@ -78,7 +78,7 @@
           <div class="gauge animated-phase-four">
             <gauge
               guageWidth="70px"
-              :idPrefix="generateRandomID()"
+              :idPrefix="generateRandomID(i)"
               :value="stone.MainStonePolish"
             />
             <div class="label">Polish</div>
@@ -97,14 +97,14 @@ defineProps({
   certificate: { type: Object, default: {} },
 });
 
-function generateRandomID() {
+function generateRandomID(index) {
   const chars =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   let result = "";
   for (let i = 0; i < length; i++) {
     result +=
       chars.charAt(Math.floor(Math.random() * chars.length)) +
-      Math.floor(Math.random() * i);
+      Math.floor(Math.random() * i * index);
   }
   return result;
 }

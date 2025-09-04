@@ -75,6 +75,7 @@ defineProps({
   display: flex;
   justify-content: center;
   margin-top: 50px;
+  height: 30vh;
 }
 .slider {
   position: relative;

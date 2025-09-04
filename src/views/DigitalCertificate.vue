@@ -642,7 +642,7 @@ onMounted(async () => {
           );
         has_imperfections.value = Boolean(imperfections.value);
       }
-      if (certificate.value.created > 1757381164000) {
+      if (certificate.value.created < 1757381164000) {
         await fetchDigitalCertificate(certificate.value);
       } else {
         introVideo.value = fetchIntroVideo(certificate.value.Company.name);
@@ -655,13 +655,13 @@ onMounted(async () => {
         await fetchClientCampaign(certificate.value.Company.id);
       }
 
-      // initAnalytics.value = await handleAnalyticsInitilization(
-      //   certificate.value
-      // );
+      initAnalytics.value = await handleAnalyticsInitilization(
+        certificate.value
+      );
 
-      // setTimeout(() => {
-      //   handleAnalytics("view", false);
-      // }, 2000);
+      setTimeout(() => {
+        handleAnalytics("view", false);
+      }, 2000);
       loading.value = false;
     }, 500);
   } else {

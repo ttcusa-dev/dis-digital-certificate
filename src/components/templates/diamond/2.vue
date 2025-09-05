@@ -78,7 +78,7 @@
 
 <script setup>
 import colorbar from "../../animations/colorbar.vue";
-import gauge from "../../animations/Gauge.vue";
+import gauge from "../../animations/gauge.vue";
 import TableDepth from "../../animations/TableDepth.vue";
 
 const emits = defineEmits("view-imperfections");

@@ -32,7 +32,7 @@
           <div class="value">{{ certificate.Weight }}</div>
           <div class="label">TOTAL CARAT WEIGHT</div>
         </div>
-        <img src="../../../assets/wireframes/SpinningDiamond.gif" />
+        <img src="/wireframes/SpinningDiamond.gif" />
       </div>
     </div>
 

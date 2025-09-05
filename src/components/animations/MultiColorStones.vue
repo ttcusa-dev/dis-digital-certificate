@@ -56,17 +56,17 @@ const showOverlay = ref(true);
 const stoneImage = computed(() => {
   try {
     let stoneFileName = props.stoneShape.toLowerCase();
-    let filePath = `../../assets/stones/${stoneFileName}.gif`;
+    let filePath = `/stones/${stoneFileName}.gif`;
 
     if (props.stoneType === "Mixed Diamonds") {
       stoneFileName = props.stoneShape;
-      filePath = `../../assets/multi-stone/Multi-${stoneFileName}.webp`;
+      filePath = `/multi-stone/Multi-${stoneFileName}.webp`;
     } else if (props.stoneShape.includes("Multi")) {
       stoneFileName = props.stoneShape.split(" ").join("-");
-      filePath = `../../assets/multi-stone/${stoneFileName}.webp`;
+      filePath = `/multi-stone/${stoneFileName}.webp`;
     } else if (props.stoneType === "Mixed Colors") {
       stoneFileName = props.stoneShape.split(" ").join("-");
-      filePath = `../../assets/multi-stone/Multi-Gems.webp`;
+      filePath = `/multi-stone/Multi-Gems.webp`;
       showOverlay.value = false;
     }
 

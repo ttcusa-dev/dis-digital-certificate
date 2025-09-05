@@ -55,7 +55,7 @@ const props = defineProps({
 });
 
 function fetchImperfection(imagePath) {
-  let filePath = `../assets/imperfections/${imagePath}`;
+  let filePath = `/imperfections/${imagePath}`;
   return new URL(filePath, import.meta.url).href;
 }
 </script>

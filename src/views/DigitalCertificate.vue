@@ -422,7 +422,7 @@ async function fetchClientCampaign(clientId) {
 }
 
 function fetchIntroVideo(clientName) {
-  let filePath = `../assets/intro-videos/${clientName}.mp4`;
+  let filePath = `/intro-videos/${clientName}.mp4`;
   return new URL(filePath, import.meta.url).href;
 }
 
@@ -642,7 +642,7 @@ onMounted(async () => {
           );
         has_imperfections.value = Boolean(imperfections.value);
       }
-      if (certificate.value.created < 1757381164000) {
+      if (certificate.value.created > 1757381164000) {
         await fetchDigitalCertificate(certificate.value);
       } else {
         introVideo.value = fetchIntroVideo(certificate.value.Company.name);

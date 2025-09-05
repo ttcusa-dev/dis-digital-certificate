@@ -30,7 +30,7 @@ const props = defineProps({
 const wireframe = computed(() => {
   try {
     return new URL(
-      `../../assets/wireframes/TableDepthDiamond.gif`,
+      `/wireframes/TableDepthDiamond.gif`,
       import.meta.url
     ).href;
   } catch (e) {

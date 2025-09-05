@@ -1,4 +1,3 @@
-
 <template>
   <section class="jewelry-info">
     <div class="jewelry-info__item animated-phase-one">
@@ -39,7 +38,7 @@
         </div>
       </div>
       <div class="diagram">
-        <img src="../../../assets/diagram.png" alt="" srcset="" />
+        <table-depth :depth="certificate.Depth" :table="certificate.Table" />
       </div>
     </div>
     <hr class="divider" />
@@ -84,7 +83,8 @@
 
 <script setup>
 import colorbar from "../../animations/colorbar.vue";
-import gauge from "../../animations/Gauge.vue";
+import gauge from "../../animations/gauge.vue";
+import TableDepth from "../../animations/TableDepth.vue";
 
 const emits = defineEmits("view-imperfections");
 defineProps({
@@ -275,4 +275,3 @@ defineProps({
   line-height: 1.4;
 }
 </style>
-

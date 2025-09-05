@@ -52,7 +52,7 @@ const wireframe = computed(() => {
 
   try {
     return new URL(
-      `../../assets/wireframes/${wireframeFileName}.webp`,
+      `/wireframes/${wireframeFileName}.webp`,
       import.meta.url
     ).href;
   } catch (e) {

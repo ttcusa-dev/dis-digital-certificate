@@ -24,11 +24,11 @@
             <div class="specs-label label">GEM SIZE</div>
           </div>
 
-          <div v-else-if="props.certificate.MainStoneWeight" class="size-info">
+          <div  class="size-info">
             <div class="specs-value value">
               {{ props.certificate.MainStoneWeight }}
             </div>
-            <div class="specs-label label">GEM WEIGHT</div>
+            <div v-if="props.certificate.MainStoneWeight" class="specs-label label">GEM WEIGHT</div>
           </div>
 
           <div

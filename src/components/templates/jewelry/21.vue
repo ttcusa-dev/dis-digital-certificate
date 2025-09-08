@@ -6,14 +6,13 @@
           <div class="spec-value value">{{ certificate.JewelryType }}</div>
           <div class="spec-label label">STYLE</div>
         </div>
-        <div class="spec-item">
+        <div v-if="certificate.Metal" class="spec-item">
           <div class="spec-value value">{{ certificate.Metal }}</div>
           <div class="spec-label">METAL</div>
         </div>
       </div>
     </div>
     <hr class="divider" />
-
     <div class="primary-gem animated-phase-one">
       <div class="diamond-section">
         <div class="specs-container">

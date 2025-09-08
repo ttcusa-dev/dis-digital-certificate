@@ -22,7 +22,7 @@
     <!-- Measurements & Weight -->
     <div class="stats">
       <div class="col">
-        <div class="value">{{ certificate.MainStoneWeight }} ct.</div>
+        <div class="value">{{ certificate.MainStoneWeight }} </div>
         <div class="label">CENTER STONE WEIGHT</div>
       </div>
     </div>

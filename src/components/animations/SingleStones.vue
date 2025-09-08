@@ -35,7 +35,12 @@ const props = defineProps({
 
 const stoneImage = computed(() => {
   try {
-    let stoneFileName = props.stoneShape.toLowerCase();
+    let stoneFileName = props.stoneShape
+      .replace(/\b(Modified|Brilliant)\b/gi, "")
+      .trim()
+      .replace(/\s+/g, " ")
+      .toLowerCase();
+
     let filePath = `/stones/${stoneFileName}.gif`;
     if (props.stoneType == "Pearl") {
       stoneFileName = props.stoneType.toLowerCase();
@@ -48,6 +53,9 @@ const stoneImage = computed(() => {
       filePath = `/multi-stone/Multi-${stoneFileName}.webp`;
     } else if (props.stoneShape.includes("Multi")) {
       stoneFileName = props.stoneShape.split(" ").join("-");
+      filePath = `/multi-stone/${stoneFileName}.webp`;
+    } else if (props.stoneShape.includes("Mixed")) {
+      stoneFileName = "Multi-Shape";
       filePath = `/multi-stone/${stoneFileName}.webp`;
     }
 

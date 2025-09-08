@@ -24,7 +24,7 @@
     <div class="jewelry-info__stats animated-phase-one">
       <div class="stats">
         <div class="stat">
-          <div class="value">{{ certificate.Weight }} ct.</div>
+          <div class="value">{{ certificate.Weight }} </div>
           <div class="label">Center Stone Weight</div>
         </div>
         <div class="stat">

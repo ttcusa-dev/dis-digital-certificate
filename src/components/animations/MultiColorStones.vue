@@ -55,7 +55,12 @@ const showOverlay = ref(true);
 
 const stoneImage = computed(() => {
   try {
-    let stoneFileName = props.stoneShape.toLowerCase();
+    let stoneFileName = props.stoneShape
+      .replace(/\b(Modified|Brilliant)\b/gi, "")
+      .trim()
+      .replace(/\s+/g, " ")
+      .toLowerCase();
+
     let filePath = `/stones/${stoneFileName}.gif`;
 
     if (props.stoneType === "Mixed Diamonds") {

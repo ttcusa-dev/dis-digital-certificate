@@ -19,16 +19,16 @@
         <div class="specs-container">
           <div v-if="props.certificate.MainStoneMeasurements" class="size-info">
             <div class="specs-value value">
-              {{ props.certificate.MainStoneMeasurements }}
+              {{ props.certificate.MainStoneMeasurements }} MM
             </div>
             <div class="specs-label label">GEM SIZE</div>
           </div>
 
-          <div  class="size-info">
+          <div v-if="props.certificate.MainStoneWeight" class="size-info">
             <div class="specs-value value">
               {{ props.certificate.MainStoneWeight }}
             </div>
-            <div v-if="props.certificate.MainStoneWeight" class="specs-label label">GEM WEIGHT</div>
+            <div class="specs-label label">GEM WEIGHT</div>
           </div>
 
           <div
@@ -116,5 +116,9 @@ const props = defineProps(["certificate"]);
 
 .product-info {
   margin-bottom: 0.2rem;
+}
+
+.primary-gem {
+  padding-top: 0 !important;
 }
 </style>

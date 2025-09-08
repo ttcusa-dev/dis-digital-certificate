@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="spec-item">
-      <div class="spec-value">{{ totalCaratWeight }}</div>
+      <div class="spec-value">{{ totalCaratWeight.toFixed(2) }}</div>
       <div class="spec-label">TOTAL CARAT WEIGHT</div>
     </div>
 
@@ -49,9 +49,9 @@
               </div>
               <div class="specs-label">COLOR</div>
             </div>
-            <div v-if="props.certificate.MainStoneWeight" class="specs-divs">
+            <div v-if="MainStoneWeight" class="specs-divs">
               <div class="specs-value">
-                {{ props.certificate.MainStoneWeight }}
+                {{ MainStoneWeight.toFixed(2) }}
               </div>
               <div class="specs-label">WEIGHT</div>
             </div>
@@ -91,9 +91,9 @@
               </div>
               <div class="specs-label">COLOR</div>
             </div>
-            <div v-if="props.certificate.SideStoneWeight" class="specs-divs">
+            <div v-if="SideStoneWeight" class="specs-divs">
               <div class="specs-value">
-                {{ props.certificate.SideStoneWeight }}
+                {{ SideStoneWeight.toFixed(2) }}
               </div>
               <div class="specs-label">WEIGHT</div>
             </div>
@@ -109,9 +109,16 @@ import { computed } from "vue";
 import Stones from "../../animations/Stones.vue";
 
 const props = defineProps(["certificate"]);
+const MainStoneWeight = computed(() =>
+  parseFloat(props.certificate.MainStoneWeight)
+);
+
+const SideStoneWeight = computed(() =>
+  parseFloat(props.certificate.SideStoneWeight)
+);
 
 const totalCaratWeight = computed(
-  () => props.certificate.MainStoneWeight + props.certificate.SideStoneWeight
+  () => MainStoneWeight.value + SideStoneWeight.value
 );
 </script>
 

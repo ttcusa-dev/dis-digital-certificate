@@ -652,7 +652,7 @@ onMounted(async () => {
       }
 
       if (!certificateDoesNotExist.value) {
-        await fetchClientCampaign(certificate.value.Company.id);
+        // await fetchClientCampaign(certificate.value.Company.id);
       }
 
       initAnalytics.value = await handleAnalyticsInitilization(

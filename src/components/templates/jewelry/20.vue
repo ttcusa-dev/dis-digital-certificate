@@ -21,7 +21,7 @@
         <div class="specs-container">
           <div class="size-info">
             <div class="specs-value value">
-              {{ props.certificate.MainStoneMeasurements }}
+              {{ props.certificate.MainStoneMeasurements }} MM
             </div>
             <div class="specs-label">GEM SIZE</div>
           </div>

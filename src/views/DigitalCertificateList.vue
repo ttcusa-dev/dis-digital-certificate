@@ -12,7 +12,7 @@
             <div class="video-title">
               <span>{{ cert.certInfo.shape }} </span>
               <span>{{ cert.certInfo.type }} </span>
-              <span>{{ cert.certInfo.caratWeight }}ct.tw</span>
+              <span>{{ cert.certInfo.caratWeight }}tw</span>
             </div>
             <div v-if="displayPlayBtn !== cert.name" class="video-thumbnail">
               <img class="client-logo" :src="client.logo" alt="" srcset="" />

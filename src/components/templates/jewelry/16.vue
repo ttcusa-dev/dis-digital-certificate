@@ -64,7 +64,7 @@
             <div class="specs-value">
               {{ certificate.SideStoneMeasurements }}
             </div>
-            <div class="specs-label">GEM SIZE</div>
+            <div v-if="certificate.SideStoneMeasurements" class="specs-label">GEM SIZE</div>
           </div>
           <div
             class="gem-center"

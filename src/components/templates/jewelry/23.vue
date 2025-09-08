@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="spec-item">
-      <div class="spec-value">{{ totalCaratWeight }}</div>
+      <div class="spec-value">{{ totalCaratWeight.toFixed(2) }}</div>
       <div class="spec-label">TOTAL CARAT WEIGHT</div>
     </div>
 

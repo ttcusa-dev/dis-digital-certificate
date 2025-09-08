@@ -11,6 +11,8 @@
         <div class="value">{{ depth }}</div>
         <div class="label">Depth</div>
       </div>
+
+      <div class="diamond-background"></div>
     </div>
   </div>
 </template>
@@ -29,10 +31,7 @@ const props = defineProps({
 
 const wireframe = computed(() => {
   try {
-    return new URL(
-      `/wireframes/TableDepthDiamond.gif`,
-      import.meta.url
-    ).href;
+    return new URL(`/wireframes/TableDepthDiamond.gif`, import.meta.url).href;
   } catch (e) {
     console.warn("Image not found:", e);
     return null;
@@ -41,8 +40,25 @@ const wireframe = computed(() => {
 </script>
 
 <style scoped>
-/* Full-page black background */
-
+/* Full-page black diamond-background */
+.diamond-background {
+  width: 0;
+  position: absolute;
+  top: 2.7rem;
+  z-index: -99;
+  right: 23.5px;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-top: 58px solid #85838358;
+  transform: scale(1.11);
+  clip-path: polygon(
+    27% 9%,   /* top-left cut */
+    75% 10%,   /* top-right cut */
+    100% 38%,  /* right mid-side */
+    50% 100%,  /* bottom point */
+    0% 37%     /* left mid-side */
+  );
+}
 /* Container auto-sizes to the GIF */
 .container {
   display: inline-block;

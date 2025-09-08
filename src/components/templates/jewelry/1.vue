@@ -98,7 +98,7 @@ defineProps({
   color: #e1e8ed;
   padding-left: 2rem;
   padding-right: 2rem;
-  padding-top: 0.5rem;
+  padding-top: 0.8rem;
 }
 
 .jewelry-info__number {

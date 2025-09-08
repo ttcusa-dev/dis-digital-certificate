@@ -63,12 +63,12 @@ defineProps({
   color: #e1e8ed;
   padding-top: 0.8rem;
   text-align: center;
-  font-family: "Helvetica Neue", Arial, sans-serif;
+  
   height: 50vh;
 }
 .number {
   font-size: 1.2rem;
-  opacity: 0.6;
+  opacity: 0.8;
   margin-bottom: 1.5rem;
 }
 .top {
@@ -80,7 +80,7 @@ defineProps({
 }
 .top .block .label {
   font-size: 0.75rem;
-  opacity: 0.6;
+  opacity: 0.8;
   text-transform: uppercase;
 }
 .top .block .value {
@@ -177,7 +177,7 @@ defineProps({
 }
 .stats .col .label {
   font-size: 0.75rem;
-  opacity: 0.6;
+  opacity: 0.8;
   text-transform: uppercase;
   margin-top: 0.25rem;
 }
@@ -194,7 +194,7 @@ defineProps({
 /* .quality .label {
   font-size: 0.75rem;
   text-transform: uppercase;
-  opacity: 0.6;
+  opacity: 0.8;
   text-align: center;
 } */
 .sides {
@@ -206,7 +206,7 @@ defineProps({
 }
 .sides .label {
   font-size: 0.75rem;
-  opacity: 0.6;
+  opacity: 0.8;
   text-transform: uppercase;
   margin-top: 0.25rem;
 }
@@ -222,7 +222,7 @@ defineProps({
 .label {
   font-size: 0.75rem;
   text-transform: uppercase;
-  opacity: 0.6;
+  opacity: 0.8;
   text-align: center;
 }
 </style>

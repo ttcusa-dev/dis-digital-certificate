@@ -17,7 +17,7 @@
             x2="190"
             y2="25"
             stroke="white"
-            stroke-width="5"
+            stroke-width="4"
             stroke-linecap="butt"
           />
 
@@ -29,7 +29,7 @@
             x2="10"
             y2="25"
             :stroke="barColor[color.template]"
-            stroke-width="5"
+            stroke-width="4"
             stroke-linecap="butt"
           />
 
@@ -37,7 +37,7 @@
           <g :id="`_pointer-${idPrefix}`">
             <!-- arrow subgroup (scaled in JS) -->
             <g :id="`arrow-${idPrefix}`">
-              <polygon points="0,0 -7,-10 7,-10" fill="#287bc9" />
+              <polygon points="0,0 -7,-10 7,-10" fill="#FFFFFF" />
             </g>
             <!-- text travels with the arrow -->
             <text
@@ -74,9 +74,9 @@ const props = defineProps({
 });
 
 // scale for the triangle (1 = original size, 0.5 = half size, etc.)
-const arrowScale = 0.5;
+const arrowScale = 0.3;
 // vertical text offset (negative moves up, positive moves down)
-const textYOffset = -7;
+const textYOffset = -5;
 
 function initBar(progId, ptrId, textId, arrowId, percent) {
   const bar = document.getElementById(progId);
@@ -144,7 +144,7 @@ onMounted(() => {
 
 <style scoped>
 .bar-wrapper {
-  width: 90vmin;
+  width: 82vmin;
   aspect-ratio: 4 / 1;
   display: block;
   height: 43px;
@@ -177,10 +177,8 @@ svg {
 }
 
 .colorText {
-  font-family: "Roboto", Arial, sans-serif;
-  font-weight: 700;
-  fill: #ffffff;
-  font-style: italic;
+  font-weight: 900;
+  fill: #7c9cc8;
 }
 
 .label {

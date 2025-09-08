@@ -121,7 +121,7 @@ function generateRandomID(index) {
   overflow: hidden;
 }
 .ring‑number {
-  opacity: 0.6;
+  opacity: 0.8;
   margin-bottom: 0.5rem;
 }
 
@@ -140,7 +140,7 @@ function generateRandomID(index) {
   padding: 0 0.75rem;
   font-size: 0.75rem;
   text-transform: uppercase;
-  opacity: 0.6;
+  opacity: 0.8;
 }
 
 /* 2) Vertical divider */
@@ -172,7 +172,7 @@ function generateRandomID(index) {
   border-radius: 50%;
   line-height: 24px;
   margin: 0 auto 0.25rem;
-  opacity: 0.6;
+  opacity: 0.8;
 }
 .value {
   font-size: 15px;
@@ -186,7 +186,7 @@ function generateRandomID(index) {
   display: flex;
   justify-content: space-between;
   font-size: 0.6rem;
-  opacity: 0.6;
+  opacity: 0.8;
   margin-bottom: 1rem;
 }
 .small {

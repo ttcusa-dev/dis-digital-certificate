@@ -118,7 +118,7 @@ defineProps({
 .jewelry-info__item .label {
   font-size: 13px;
   text-transform: uppercase;
-  opacity: 0.6;
+  opacity: 0.8;
   text-align: center;
 }
 
@@ -132,7 +132,7 @@ defineProps({
 .jewelry-info__color .label {
   font-size: 13px;
   text-transform: uppercase;
-  opacity: 0.6;
+  opacity: 0.8;
   margin-top: 10px;
   text-align: center;
 }
@@ -165,7 +165,7 @@ defineProps({
 
 .stat .label {
   font-size: 12px;
-  opacity: 0.6;
+  opacity: 0.8;
   text-transform: uppercase;
   margin-top: 0.25rem;
 }
@@ -203,7 +203,7 @@ defineProps({
 
 .gauge .label {
   font-size: 15px;
-  opacity: 0.6;
+  opacity: 0.8;
   margin-top: 0.25rem;
   text-transform: uppercase;
 }
@@ -216,7 +216,7 @@ defineProps({
 .jewelry-info__sides .label {
   font-size: 13px;
   text-transform: uppercase;
-  opacity: 0.6;
+  opacity: 0.8;
   margin-bottom: 0.5rem;
 }
 

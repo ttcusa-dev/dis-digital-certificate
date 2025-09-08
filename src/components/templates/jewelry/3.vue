@@ -75,11 +75,11 @@ defineProps({
   color: #e1e8ed;
   /* padding: 2rem 1.5rem; */
   text-align: center;
-  font-family: "Helvetica Neue", Arial, sans-serif;
+  
 }
 .number {
   font-size: 1.2rem;
-  opacity: 0.6;
+  opacity: 0.8;
   margin-bottom: 1.5rem;
 }
 .top {
@@ -90,7 +90,7 @@ defineProps({
 }
 .top .block .label {
   font-size: 13px;
-  opacity: 0.6;
+  opacity: 0.8;
   text-transform: uppercase;
 }
 .top .block .value {
@@ -124,7 +124,7 @@ defineProps({
 
 .color-slider .label {
   font-size: 13px;
-  opacity: 0.6;
+  opacity: 0.8;
   text-transform: uppercase;
   margin-top: 0.5rem;
 }
@@ -142,7 +142,7 @@ defineProps({
 }
 .stats .col .label {
   font-size: 13px;
-  opacity: 0.6;
+  opacity: 0.8;
   text-transform: uppercase;
   margin-top: 0.25rem;
 }
@@ -159,7 +159,7 @@ defineProps({
 /* .quality .label {
   font-size: 13px;
   text-transform: uppercase;
-  opacity: 0.6;
+  opacity: 0.8;
   text-align: center;
 } */
 .sides {
@@ -171,7 +171,7 @@ defineProps({
 }
 .sides .label {
   font-size: 13px;
-  opacity: 0.6;
+  opacity: 0.8;
   text-transform: uppercase;
   margin-top: 0.25rem;
 }
@@ -179,7 +179,7 @@ defineProps({
 .label {
   font-size: 13px;
   text-transform: uppercase;
-  opacity: 0.6;
+  opacity: 0.8;
   text-align: center;
 }
 </style>

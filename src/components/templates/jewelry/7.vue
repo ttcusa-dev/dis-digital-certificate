@@ -70,7 +70,7 @@ defineProps({
   color: #e1e8ed;
   /* padding: 2rem 1.5rem; */
   text-align: center;
-  font-family: "Helvetica Neue", Arial, sans-serif;
+  
 }
 .number {
   font-size: 1.2rem;

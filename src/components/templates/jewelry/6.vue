@@ -90,8 +90,8 @@ defineProps({
   width: 100%;
   margin: 0 auto;
   color: #e1e8ed;
-  padding-left: 3rem;
-  padding-right: 3rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
   padding-top: 0.5rem;
   border-radius: 0.75rem;
   
@@ -117,7 +117,7 @@ defineProps({
 }
 
 .jewelry-info__item .value {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
   margin-top: 0.25rem;
   text-align: center;
@@ -153,7 +153,7 @@ defineProps({
 }
 
 .stat .value {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
 }
 
@@ -196,7 +196,7 @@ defineProps({
 }
 
 .gauge .label {
-  font-size: 15px;
+  font-size: 14px;
   opacity: 0.8;
   margin-top: 0.25rem;
   text-transform: uppercase;
@@ -215,7 +215,7 @@ defineProps({
 }
 
 .jewelry-info__sides .value {
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .diagram {

@@ -94,7 +94,7 @@ defineProps({
   text-transform: uppercase;
 }
 .top .block .value {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
 }
 .divider {
@@ -137,7 +137,7 @@ defineProps({
   flex: 1;
 }
 .stats .col .value {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
 }
 .stats .col .label {
@@ -166,7 +166,7 @@ defineProps({
   /* margin-bottom: 1.5rem; */
 }
 .sides .value {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
 }
 .sides .label {

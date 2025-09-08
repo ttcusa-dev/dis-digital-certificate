@@ -144,10 +144,10 @@ onMounted(() => {
 
 <style scoped>
 .bar-wrapper {
-  width: 82vmin;
+  width: 83vmin;
   aspect-ratio: 4 / 1;
   display: block;
-  height: 43px;
+  height: 41px;
   overflow: hidden;
 }
 .bar-container {

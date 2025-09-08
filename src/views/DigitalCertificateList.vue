@@ -439,7 +439,7 @@ export default {
   position: absolute;
   top: 10px;
   right: 10px;
-  font-size: 15px;
+  font-size: 14px;
   border: none;
   background-color: #fff;
   color: red;

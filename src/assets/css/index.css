@@ -1031,8 +1031,8 @@ body {
   }
 
   .product-id {
-    height: 22px;
-    margin-top: 10px;
+    /* height: 22px;
+    margin-top: 10px; */
   }
 
   .product-id-main {
@@ -1168,7 +1168,7 @@ body {
 /* Medium tablet styles (769px+) */
 @media (min-width: 769px) {
   .main-content {
-    width: 400px;
+    width: 415px;
   }
 
   .ring-info-v2 {
@@ -1225,6 +1225,7 @@ body {
   .specifications-section {
     display: block;
     overflow: auto;
+    margin-top: 0.5rem;
   }
 
   .jewelry-image {
@@ -1345,7 +1346,7 @@ body {
 
   .ring-info-v2 {
     padding: 1rem;
-    height: fit-content !important;
+    height: 45vh;
   }
 }
 
@@ -1408,6 +1409,15 @@ body {
 
   .gem-content-layout {
     gap: 35px;
+  }
+
+  .ring-info-v2 {
+    margin-top: 20px;
+    height: 50vh !important;
+  }
+
+  .color-slider {
+    margin-top: 1rem;
   }
 }
 
@@ -1583,7 +1593,7 @@ body {
   .specifications-section {
     display: block;
     overflow: auto;
-    /* margin-top: 0.3rem; */
+    margin-top: 1rem;
   }
 }
 
@@ -1713,9 +1723,7 @@ body {
 }
 
 @media (width >= 300px) and (width <= 400px) and (height >= 800px) and (height <= 900px) {
-
   .jewelry-showcase {
     height: 22rem !important;
   }
-
 }

@@ -90,20 +90,20 @@
         <!-- Bottom section with specifications -->
         <!-- Template Section -->
         <div class="specifications-section">
-          <div class="product-id">
-            <p class="product-id-main">
-              <strong>
-                DIS CERTIFICATE#:
-                {{
-                  certificate && certificate.ManufacturedAs === "Lab Grown"
-                    ? `LG${certificate.CertNum}`
-                    : certificate.CertNum
-                }}</strong
-              >
-            </p>
-            <p class="product-id-overlap">{{ certificate.ClientSKU }}</p>
-          </div>
           <div class="template-container">
+            <div class="product-id">
+              <p class="product-id-main">
+                <strong>
+                  DIS CERTIFICATE#:
+                  {{
+                    certificate && certificate.ManufacturedAs === "Lab Grown"
+                      ? `LG${certificate.CertNum}`
+                      : certificate.CertNum
+                  }}</strong
+                >
+              </p>
+              <p class="product-id-overlap">{{ certificate.ClientSKU }}</p>
+            </div>
             <component
               @view-imperfections="initImperfectionModal"
               :is="templateComponent"

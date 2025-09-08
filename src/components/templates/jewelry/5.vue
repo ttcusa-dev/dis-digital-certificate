@@ -51,23 +51,23 @@ import colorbar from "../../animations/colorbar.vue";
 import gauge from "../../animations/Gauge.vue";
 import Wireframe from "../../animations/Wireframe.vue";
 
- defineProps({
+defineProps({
   certificate: { type: Object, default: {} },
 });
-
 </script>
 
 <style scoped>
 .ring-info-v2 {
-  max-width: 380px;
+  max-width: 100%;
   overflow: hidden;
   width: 100%;
-  margin: auto;
   color: #e1e8ed;
   padding-top: 0.8rem;
   text-align: center;
-  
-  height: 50vh;
+  height: 45vh;
+  display: grid;
+  flex-direction: column;
+  justify-content: center;
 }
 .number {
   font-size: 1.2rem;
@@ -78,8 +78,9 @@ import Wireframe from "../../animations/Wireframe.vue";
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 0.5rem;
   justify-content: space-around;
+  align-content: center;
+  margin-top: 10px;
 }
 .top .block .label {
   font-size: 0.75rem;
@@ -103,12 +104,6 @@ import Wireframe from "../../animations/Wireframe.vue";
   display: flex;
   margin-top: 30px;
 }
-.slider {
-  position: relative;
-  height: 4px;
-  background: #2c3742;
-  border-radius: 2px;
-}
 
 .gauges {
   width: 150px;
@@ -126,7 +121,6 @@ import Wireframe from "../../animations/Wireframe.vue";
   align-items: center;
   overflow: hidden;
 }
-
 
 .stats {
   display: flex;
@@ -146,7 +140,6 @@ import Wireframe from "../../animations/Wireframe.vue";
   text-transform: uppercase;
   margin-top: 0.25rem;
 }
-
 
 .label {
   font-size: 0.75rem;

@@ -34,7 +34,7 @@
         <div class="color-wrapper">
           <colorbar
             fontSize="13px"
-            maxWidth="170px"
+            maxWidth="185px"
             :idPrefix="`${i + 1}`"
             :color="stone.MainStoneColor"
           />

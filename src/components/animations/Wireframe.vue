@@ -49,14 +49,11 @@ const wireframe = computed(() => {
     const shape = props.jewelryShape.split(" ")[0];
     wireframeFileName = `${props.jewelryType}-${shape}`;
   }
-
+  const filePath = `/wireframes/${wireframeFileName}.webp`;
   try {
-    return new URL(
-      `/wireframes/${wireframeFileName}.webp`,
-      import.meta.url
-    ).href;
+    return new URL(filePath, import.meta.url).href;
   } catch (e) {
-    console.warn("Image not found:", e);
+    console.log("Image not found:", e);
     return null;
   }
 });

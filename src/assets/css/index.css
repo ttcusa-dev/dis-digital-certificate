@@ -23,6 +23,7 @@ body {
   width: 100vw;
   overflow-x: hidden;
   font-family: "Montserrat-Regular" !important;
+  user-select: none;
 }
 
 .template-container {

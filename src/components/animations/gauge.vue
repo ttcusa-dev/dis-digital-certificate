@@ -91,8 +91,8 @@ function initGauge(bgId, progId, ptrId, percent) {
 
   const cx = 100;
   const cy = 100;
-  const radius = 80;
-  const pointerRadius = 70; // distance from center
+  const radius = 70;
+  const pointerRadius = 60; // distance from center
   const startAngle = 225;
   const sweepAngle = 270;
   const duration = 2000;

@@ -704,7 +704,7 @@ watch(certificateDoesNotExist, (certDoesNotExists) => {
 
 watch(redirectTimer, (timer) => {
   if (!timer) {
-    //window.location = "https://diamondservicesusa.com";
+    window.location = "https://diamondservicesusa.com";
   } else {
     setTimeout(() => {
       redirectTimer.value -= 1;

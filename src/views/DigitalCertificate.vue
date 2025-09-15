@@ -174,6 +174,7 @@
       :currentCampaign="currentCampaign"
       :showFullPageAd="showFullPageAd"
       :showFooterAd="showFooterAd"
+      :certificate="certificate"
       @handleAdToggle="handleAdToggle"
       @handle-analytics="handleAnalytics('click', true)"
     />

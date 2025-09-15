@@ -2,7 +2,8 @@
   <section class="landing">
     <div class="logo">
       <img
-        src="https://firebasestorage.googleapis.com/v0/b/diamonds-8cf72.appspot.com/o/The_Diamond_Channel_Logo.webp?alt=media&token=6f765d6e-0ac5-470d-80e7-58937de17780"
+        style="filter: invert(-1)"
+        src="https://firebasestorage.googleapis.com/v0/b/diamonds-8cf72.appspot.com/o/customers%2Fb01ZxlcrMlMngnk65i1a%2Flogo%2F1756994107780?alt=media&token=58d56b90-5aff-4630-a4c2-7ccf09355d75"
         alt=""
         srcset=""
       />
@@ -65,8 +66,8 @@
 </template>
 
 <script>
-import { functions } from "../config/firebaseInit";
-import { DateTime } from "luxon";
+import { db, functions } from "@/firebaseConfig.js";
+const { DateTime } = require("luxon");
 
 export default {
   name: "LandingSendLink",

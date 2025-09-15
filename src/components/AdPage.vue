@@ -6,7 +6,7 @@
       class="adpage-container full fill"
     >
       <img
-        @click="handleAdsLink"
+        @click="handleAdsLink('full')"
         class="ads"
         :src="currentCampaign.full_screen_ad.url"
         alt=""
@@ -17,10 +17,9 @@
       v-show="showFooterAdToggle"
       class="ads-container bottom fill"
       :class="{ hideFooter: Boolean(currentCampaign.footer_ad.url) }"
-      
     >
       <img
-        @click="handleAdsLink"
+        @click="handleAdsLink('footer')"
         class="banner ads"
         :src="currentCampaign.footer_ad.url"
         alt=""
@@ -32,7 +31,8 @@
 
 <script setup>
 import { onMounted, useTemplateRef, watch, computed } from "vue";
-
+import { useRouter } from "vue-router";
+const router = useRouter();
 const emits = defineEmits(["handleAdToggle"]);
 
 const props = defineProps({
@@ -40,20 +40,24 @@ const props = defineProps({
   showFooterAd: { type: Boolean, default: false },
   showFullPageAd: { type: Boolean, default: false },
   currentCampaign: { type: Object, default: {} },
+  certificate: {
+    type: Object,
+    default: {},
+  },
 });
 
 const showFullPageAdToggle = computed(() => props.showFullPageAd);
 const showFooterAdToggle = computed(() => props.showFooterAd);
 onMounted(() => {
   if (showFooterAdToggle) {
-    // scrollToElement();
+    scrollToElement();
   }
 });
 
 watch(showFooterAdToggle, (e) => {
   if (e) {
     setTimeout(() => {
-      // scrollToElement();
+      scrollToElement();
     }, 5000);
   }
 });
@@ -73,7 +77,12 @@ watch(showFullPageAdToggle, (e) => {
 
 function handleAdsLink() {
   emits("handle-analytics");
-  setTimeout(() => {
+  if (props.certificate.Customer == "GM Ideal Corp." && type == "footer") {
+    return setTimeout(() => {
+      router.push(`/jewelry/${props.certificate.CertNum}/send_cert`);
+    }, 500);
+  }
+  return setTimeout(() => {
     window.location = props.currentCampaign.url;
   }, 500);
 }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 150.1 267.5">
+  <!-- Generator: Adobe Illustrator 29.8.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 2)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: none;
+      }
+
+      .st0, .st1 {
+        stroke: #fff;
+        stroke-width: 2.5px;
+      }
+
+      .st1 {
+        fill: #231f20;
+      }
+    </style>
+  </defs>
+  <g id="Shape_Layer_1">
+    <polygon id="Shape_1" class="st1" points="75 2.5 148.6 133.3 75 265 1.4 133.3 75 2.5"/>
+    <polygon id="Shape_2" class="st0" points="75 54.2 31.8 133.3 75 214 119.3 133.3 75 54.2"/>
+    <line id="Shape_3" class="st0" x1="75" y1="54.5" x2="75" y2="2.7"/>
+    <line id="Shape_4" class="st0" x1="119.4" y1="133.3" x2="148.3" y2="133.3"/>
+    <line id="Shape_5" class="st0" x1="1.7" y1="133.3" x2="32" y2="133.3"/>
+    <line id="Shape_6" class="st0" x1="75" y1="265" x2="75" y2="213.7"/>
+    <line id="Shape_7" class="st0" x1="75" y1="32.5" x2="133" y2="133.3"/>
+    <line id="Shape_8" class="st0" x1="133.2" y1="133.3" x2="75" y2="237.4"/>
+    <line id="Shape_9" class="st0" x1="16.8" y1="133.3" x2="75" y2="237.2"/>
+    <line id="Shape_10" class="st0" x1="75" y1="32.5" x2="17.2" y2="133.3"/>
+  </g>
+</svg>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 245 246.7">
+  <!-- Generator: Adobe Illustrator 29.8.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 2)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: #231f20;
+      }
+
+      .st0, .st1 {
+        stroke: #fff;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .st1 {
+        fill: none;
+        stroke-width: 3px;
+      }
+    </style>
+  </defs>
+  <polygon id="Shape_2" class="st0" points="121 2 74.5 11 36 39 9.5 75.5 .5 123.5 9 168.5 38 210 75 235 121 245.5 170 235.5 208.5 210 236 172 243.5 127.5 235.5 78.5 210 41 168 12 121 2"/>
+  <polyline id="Shape_1" class="st1" points="73.5 171 85.8 214.8 38 209.5 71.5 171"/>
+  <polyline id="Shape_13" class="st1" points="117.8 245.2 86.5 214.5 122 193"/>
+  <polygon id="Shape_11" data-name="Shape_1" class="st1" points="120.5 54 81 82 55.5 124.5 73.5 171 121 192 173 170.5 193.5 120.5 171.5 76 120.5 54"/>
+  <polyline id="Shape_3" class="st1" points="121 1.5 160 35 121 53.5"/>
+  <polyline id="Shape_4" class="st1" points="167.5 12 159.5 35 210 41"/>
+  <polyline id="Shape_5" class="st1" points="159.5 35.5 171 75 208.5 41"/>
+  <polyline id="Shape_6" class="st1" points="171 75.5 211.5 87.5 208.5 41"/>
+  <polyline id="Shape_7" class="st1" points="193.5 119.5 212 88 234.5 78.5"/>
+  <line id="Shape_8" class="st1" x1="193.5" y1="119.5" x2="243.5" y2="126.5"/>
+  <polyline id="Shape_9" class="st1" points="193 119 212.5 160 243.5 127"/>
+  <polyline id="Shape_10" class="st1" points="193 119 212.5 160 243.5 127"/>
+  <path id="uuid-78ac4214-c090-477d-ab4b-d6dd22f95f63" data-name="Shape_11" class="st1" d="M173.5,171l39-11,24,13M174,171l-14.8,43.7,49.3-4.7,3.5-50"/>
+  <polyline id="Shape_12" class="st1" points="122.9 193.2 158.4 215.3 127.5 244.7"/>
+  <polyline id="Shape_51" data-name="Shape_5" class="st1" points="36.5 41 86.5 33.5 73 72.5"/>
+  <polyline id="Shape_14" data-name="Shape_1" class="st1" points="73 171 32 159.5 37 209"/>
+  <polyline id="Shape_21" data-name="Shape_2" class="st1" points="2.5 126 54 124 32.5 87.5 1.5 125 33 160.5 54.5 125.5"/>
+  <polyline id="Shape_31" data-name="Shape_3" class="st1" points="10.5 77 33 88 80.8 80.7 35 41.5 33 87.5"/>
+  <polyline id="Shape_41" data-name="Shape_4" class="st1" points="120.5 54.5 86.5 33.5 75.5 10.5"/>
+  <line id="Shape_15" data-name="Shape_1" class="st1" x1="121" y1="3.5" x2="85.5" y2="33.5"/>
+</svg>

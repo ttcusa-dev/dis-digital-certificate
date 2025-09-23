@@ -81,6 +81,7 @@ const containerWidth = computed(() => {
   if (props.stoneShape == "Baguette") maxWidth = "35px";
   if (props.stoneShape == "Emerald") maxWidth = "55px";
   if (props.stoneShape == "Oval") maxWidth = "70px";
+  if (props.stoneShape == "Pear") maxWidth = "60px";
   if (props.stoneShape == "Marquise") maxWidth = "50px";
   if (props.stoneShape == "Multi Shape") maxWidth = "170px";
   if (props.stoneType == "Mixed Diamonds") maxWidth = "150px";

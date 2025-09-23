@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 148 266.3">
+  <!-- Generator: Adobe Illustrator 29.8.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 2)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: #231f20;
+      }
+
+      .st0, .st1 {
+        stroke: #fff;
+        stroke-miterlimit: 10;
+        stroke-width: 2px;
+      }
+
+      .st1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <g id="Wire_Frame">
+    <polygon id="Shape_1" class="st0" points="72.5 1.1 43 16.6 28 44.1 9 88.6 1 134.1 9 175.1 26 214.6 44 247.6 74 265.1 104.5 248.6 123 213.1 138 176.1 147 132.1 140.5 94.6 128 60.6 105 17.6 72.5 1.1"/>
+    <path id="Shape_2" class="st1" d="M73.9,44.4s-28.3,25.8-28.8,27.3-6.5,57.5-6.5,57.5l4.9,58.5,30.1,32.5,27-29,8.2-59-5.7-59-29.2-28.8Z"/>
+    <line id="Shape_3" class="st1" x1="42.6" y1="16.7" x2="73.9" y2="44.4"/>
+    <line id="Shape_4" class="st1" x1="105" y1="17.6" x2="73.9" y2="44.4"/>
+    <line id="Shape_5" class="st1" x1="9" y1="88.6" x2="45.1" y2="71.7"/>
+    <line id="Shape_6" class="st1" x1="1" y1="134.1" x2="38.1" y2="127.1"/>
+    <line id="Shape_7" class="st1" x1="9" y1="175.1" x2="43.5" y2="187.7"/>
+    <line id="Shape_8" class="st1" x1="25.9" y1="214.5" x2="43.5" y2="187.7"/>
+    <line id="Shape_9" class="st1" x1="44" y1="247.6" x2="73.6" y2="220.2"/>
+    <line id="Shape_10" class="st1" x1="104.5" y1="248.6" x2="73.6" y2="220.2"/>
+    <line id="Shape_11" class="st1" x1="138" y1="176.1" x2="100.6" y2="191.2"/>
+    <line id="Shape_12" class="st1" x1="147" y1="132.1" x2="108.8" y2="132.2"/>
+    <line id="Shape_13" class="st1" x1="140.8" y1="95.9" x2="103.1" y2="73.2"/>
+    <line id="Shape_14" class="st1" x1="123.9" y1="210.8" x2="100.6" y2="191.2"/>
+    <line id="Shape_15" class="st1" x1="121.2" y1="47.8" x2="103.1" y2="73.2"/>
+    <line id="Shape_16" class="st1" x1="45.1" y1="71.7" x2="27.2" y2="46.4"/>
+  </g>
+</svg>

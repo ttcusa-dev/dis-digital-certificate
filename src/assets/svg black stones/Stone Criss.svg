@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 175 240">
+  <!-- Generator: Adobe Illustrator 29.8.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 2)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: none;
+        stroke: #fff;
+        stroke-width: 3px;
+      }
+    </style>
+  </defs>
+  <polygon points="22.1 1.8 152.3 1.8 173.3 22.1 173.7 217.7 152.3 237.9 22.3 237.9 1 217.9 1.2 21.6 22.1 1.8"/>
+  <g id="Outline">
+    <g id="Shape_Layer_1">
+      <polyline id="Shape_1" class="st0" points="87.5 1.5 22.5 2 1.5 22 1.8 120.1"/>
+    </g>
+    <g id="Outline1" data-name="Outline">
+      <polygon id="Shape_11" data-name="Shape_1" class="st0" points="31.5 16.5 32.5 29 87.5 24 31.5 16.5"/>
+      <line id="Shape_4" class="st0" x1="22.5" y1="2" x2="31.5" y2="16.5"/>
+      <polyline id="Shape_6" class="st0" points="1.6 22 19 28 31.5 16.5"/>
+      <polyline id="Shape_7" class="st0" points="32.8 120.1 32.5 29 19 28 19 120.1"/>
+    </g>
+  </g>
+  <g id="Outline2" data-name="Outline">
+    <g id="Shape_Layer_11" data-name="Shape_Layer_1">
+      <polyline id="Shape_12" data-name="Shape_1" class="st0" points="87.5 238.5 22.5 238 1.5 218 1.8 119.9"/>
+    </g>
+    <g id="Outline3" data-name="Outline">
+      <polygon id="Shape_13" data-name="Shape_1" class="st0" points="31.5 223.5 32.5 211 87.5 216 31.5 223.5"/>
+      <line id="Shape_41" data-name="Shape_4" class="st0" x1="22.5" y1="238" x2="31.5" y2="223.5"/>
+      <polyline id="Shape_61" data-name="Shape_6" class="st0" points="1.6 218 19 212 31.5 223.5"/>
+      <polyline id="Shape_71" data-name="Shape_7" class="st0" points="32.8 119.9 32.5 211 19 212 19 119.9"/>
+    </g>
+  </g>
+  <g id="Outline4" data-name="Outline">
+    <g id="Shape_Layer_12" data-name="Shape_Layer_1">
+      <polyline id="Shape_14" data-name="Shape_1" class="st0" points="87.4 1.5 152.5 2 173.5 22 173.2 120.1"/>
+    </g>
+    <g id="Outline5" data-name="Outline">
+      <polygon id="Shape_15" data-name="Shape_1" class="st0" points="143.4 16.5 142.5 29 87.4 24 143.4 16.5"/>
+      <line id="Shape_42" data-name="Shape_4" class="st0" x1="152.4" y1="2" x2="143.4" y2="16.5"/>
+      <polyline id="Shape_62" data-name="Shape_6" class="st0" points="173.4 22 156 28 143.4 16.5"/>
+      <polyline id="Shape_72" data-name="Shape_7" class="st0" points="142.2 120.1 142.5 29 156 28 156 120.1"/>
+    </g>
+  </g>
+  <g id="Outline6" data-name="Outline">
+    <g id="Shape_Layer_13" data-name="Shape_Layer_1">
+      <polyline id="Shape_16" data-name="Shape_1" class="st0" points="87.4 238.5 152.5 238 173.5 218 173.2 119.9"/>
+    </g>
+    <g id="Outline7" data-name="Outline">
+      <polygon id="Shape_17" data-name="Shape_1" class="st0" points="143.4 223.5 142.5 211 87.4 216 143.4 223.5"/>
+      <line id="Shape_43" data-name="Shape_4" class="st0" x1="152.4" y1="238" x2="143.4" y2="223.5"/>
+      <polyline id="Shape_63" data-name="Shape_6" class="st0" points="173.4 218 156 212 143.4 223.5"/>
+      <polyline id="Shape_73" data-name="Shape_7" class="st0" points="142.2 119.9 142.5 211 156 212 156 119.9"/>
+    </g>
+  </g>
+</svg>

@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="spec-item">
-      <div class="spec-value">{{ totalCaratWeight.toFixed(2) }}</div>
+      <div class="spec-value">{{ totalCaratWeight }}</div>
       <div class="spec-label">TOTAL CARAT WEIGHT</div>
     </div>
 
@@ -109,17 +109,26 @@ import { computed } from "vue";
 import Stones from "../../animations/Stones.vue";
 
 const props = defineProps(["certificate"]);
-const MainStoneWeight = computed(() =>
-  parseFloat(props.certificate.MainStoneWeight)
-);
+const MainStoneWeight = computed(() => {
+  let weight = parseFloat(props.certificate.MainStoneWeight);
+  if (isNaN(weight)) {
+    return 0;
+  }
+  return weight;
+});
 
-const SideStoneWeight = computed(() =>
-  parseFloat(props.certificate.SideStoneWeight)
-);
+const SideStoneWeight = computed(() => {
+  let weight = parseFloat(props.certificate.SideStoneWeight);
+  if (isNaN(weight)) {
+    return 0;
+  }
+  return weight;
+});
 
-const totalCaratWeight = computed(
-  () => MainStoneWeight.value + SideStoneWeight.value
-);
+const totalCaratWeight = computed(() => {
+  let weight = MainStoneWeight.value + SideStoneWeight.value;
+  return weight ? weight.toFixed(2) : "Diamond Accent";
+});
 </script>
 
 <style scoped>

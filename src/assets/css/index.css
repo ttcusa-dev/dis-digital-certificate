@@ -184,6 +184,7 @@ body {
   object-position: center;
   bottom: 0px;
   position: absolute;
+  top: 40px;
 }
 
 .showcase-header {

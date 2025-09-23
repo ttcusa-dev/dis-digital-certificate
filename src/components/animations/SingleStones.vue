@@ -1,7 +1,12 @@
 <template>
   <div class="container" :style="{ maxWidth: containerWidth }">
     <!-- GIF that sizes the container -->
-    <img v-if="stoneImage" :src="stoneImage" :alt="`${stoneShape}`" />
+    <img
+      v-if="stoneImage"
+      :class="{ addHeight: stoneColor == 'Black' }"
+      :src="stoneImage"
+      :alt="`${stoneShape}`"
+    />
     <div
       class="tint"
       :style="{
@@ -31,6 +36,7 @@ const props = defineProps({
   colorCode: { type: String, default: "#ff0000" },
   colorMode: { type: String, default: "color" },
   maxWidth: { type: String, default: "90px" },
+  stoneColor: { type: String, default: "" },
 });
 
 const stoneImage = computed(() => {
@@ -57,6 +63,9 @@ const stoneImage = computed(() => {
     } else if (props.stoneShape.includes("Mixed")) {
       stoneFileName = "Multi-Shape";
       filePath = `/multi-stone/${stoneFileName}.webp`;
+    } else if (props.stoneColor == "Black") {
+      stoneFileName = props.stoneShape;
+      filePath = `/black-stones/Stone ${stoneFileName}.svg`;
     }
 
     return new URL(filePath, import.meta.url).href;
@@ -114,5 +123,9 @@ const containerWidth = computed(() => {
   mask-size: cover;
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-size: cover;
+}
+
+.addHeight {
+  height: 90px !important;
 }
 </style>

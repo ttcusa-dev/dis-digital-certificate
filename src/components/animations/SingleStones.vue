@@ -8,6 +8,7 @@
       :alt="`${stoneShape}`"
     />
     <div
+      v-if="stoneColor !== 'Black'"
       class="tint"
       :style="{
         mixBlendMode: colorMode,
@@ -65,6 +66,7 @@ const stoneImage = computed(() => {
       filePath = `/multi-stone/${stoneFileName}.webp`;
     } else if (props.stoneColor == "Black") {
       stoneFileName = props.stoneShape;
+      console.log({ stoneFileName });
       filePath = `/black-stones/Stone ${stoneFileName}.svg`;
     }
 
@@ -80,6 +82,7 @@ const containerWidth = computed(() => {
 
   if (props.stoneShape == "Baguette") maxWidth = "35px";
   if (props.stoneShape == "Emerald") maxWidth = "55px";
+  if (props.stoneShape == "Cushion") maxWidth = "85px";
   if (props.stoneShape == "Oval") maxWidth = "70px";
   if (props.stoneShape == "Pear") maxWidth = "60px";
   if (props.stoneShape == "Marquise") maxWidth = "50px";

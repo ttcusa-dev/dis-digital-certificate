@@ -51,7 +51,11 @@
       >
         <!-- Top section with jewelry showcase -->
         <div class="jewelry-showcase">
-          <div class="showcase-header" :class="{ has_footer: has_footer_ad }">
+          <div
+            id="client-logo"
+            class="showcase-header"
+            :class="{ has_footer: has_footer_ad }"
+          >
             <img
               v-if="clientLogo"
               class="client-logo"
@@ -505,6 +509,10 @@ function initCertificateViewingSequence() {
         specsSection.style.visibility = "visible";
         if (productShowCaseVideo.value) jewelryVideo.currentTime = 5;
         // specInfo.style.animation = "scaleUp 0.7s ease-in forwards";
+        if (certificate.value.Company.id == "VRkL6hAx8zmT6IbcgLgn") {
+          const el = document.getElementById("client-logo");
+          el.classList.add("dis-logo");
+        }
         animatedPhaseOneElements.forEach((el) => {
           el.style.animation = "scaleUp 0.7s ease-in forwards";
         });
@@ -643,7 +651,10 @@ onMounted(async () => {
           );
         has_imperfections.value = Boolean(imperfections.value);
       }
-      if (certificate.value.created > 1757381164000) {
+      if (
+        certificate.value.Company.id === "1iX1oea29dw1sMzmzMyz" ||
+        certificate.value.created < 1759204800000
+      ) {
         await fetchDigitalCertificate(certificate.value);
       } else {
         introVideo.value = fetchIntroVideo(certificate.value.Company.name);
@@ -653,7 +664,7 @@ onMounted(async () => {
       }
 
       if (!certificateDoesNotExist.value) {
-        // await fetchClientCampaign(certificate.value.Company.id);
+        await fetchClientCampaign(certificate.value.Company.id);
       }
 
       initAnalytics.value = await handleAnalyticsInitilization(

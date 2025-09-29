@@ -1,5 +1,15 @@
 {
   "projects": {
-    "default": "diamond-usa-staging"
+    "production": "diamonds-8cf72",
+    "staging": "diamond-usa-staging"
+  },
+  "targets": {
+    "diamond-usa-staging": {
+      "hosting": {
+        "digital-cert-staging-diamondservicesusa": [
+          "diamond-usa-staging"
+        ]
+      }
+    }
   }
 }

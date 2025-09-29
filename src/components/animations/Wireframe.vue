@@ -31,20 +31,23 @@ const props = defineProps({
 
 const className = ref("");
 const showLabel = ref(true);
-if (props.jewelryType == "Pendant") {
+const jewelryType = props.jewelryType.trim();
+if (jewelryType == "Pendant") {
   className.value = "pendant";
-} else if (props.jewelryType == "Ring") {
+} else if (jewelryType == "Ring") {
   className.value = "ring";
-} else if (props.jewelryType == "Necklace") {
+} else if (jewelryType == "Necklace") {
   className.value = "necklace";
-} else if (props.jewelryType == "Earring" || props.jewelryType == "Earrings") {
+} else if (jewelryType == "Earring" || jewelryType == "Earrings") {
   className.value = "earring";
-} else if (props.jewelryType == "Studs") {
+} else if (jewelryType == "Studs") {
   className.value = "studs";
+} else if (jewelryType == "Eternity Band") {
+  className.value = "eternity";
 }
 
 const wireframe = computed(() => {
-  let wireframeFileName = props.jewelryType;
+  let wireframeFileName = props.jewelryType.trim();
   if (props.jewelryType == "Pendant") {
     const shape = props.jewelryShape.split(" ")[0];
     wireframeFileName = `${props.jewelryType}-${shape}`;
@@ -114,6 +117,11 @@ const handleCaratWeight = (value) => {
 .ring {
   width: 100px;
   margin-left: -35px;
+}
+
+.eternity {
+  width: 100px;
+  margin-left: -25px;
 }
 
 .necklace {

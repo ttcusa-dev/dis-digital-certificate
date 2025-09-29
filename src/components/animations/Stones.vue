@@ -24,7 +24,7 @@
       :colorCode="colorCode"
       :colorMode="colorMode"
       :maxWidth="maxWidth"
-      :stoneColor="props.stoneColor"
+      :stoneColor="stoneColor"
     />
   </div>
 </template>

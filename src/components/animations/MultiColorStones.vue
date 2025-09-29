@@ -47,7 +47,7 @@ const props = defineProps({
 
   // Rotation controls
   spin: { type: Boolean, default: false },
-  spinDuration: { type: Number, default: 7.5 }, // seconds per full turn
+  spinDuration: { type: Number, default: 6 }, // seconds per full turn
   spinDirection: { type: String, default: "normal" }, // 'normal' or 'reverse'
 });
 

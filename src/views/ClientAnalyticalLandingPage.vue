@@ -2,8 +2,7 @@
   <section class="landing">
     <div class="logo">
       <img
-        style="filter: invert(-1)"
-        src="https://firebasestorage.googleapis.com/v0/b/diamonds-8cf72.appspot.com/o/customers%2Fb01ZxlcrMlMngnk65i1a%2Flogo%2F1756994107780?alt=media&token=58d56b90-5aff-4630-a4c2-7ccf09355d75"
+        src="https://firebasestorage.googleapis.com/v0/b/diamonds-8cf72.appspot.com/o/The%20Diamond%20Channel%20(1).png?alt=media&token=dc840b08-da8d-4bd6-a296-c4bd6e064245"
         alt=""
         srcset=""
       />
@@ -66,14 +65,14 @@
 </template>
 
 <script>
-import { functions } from "../config/firebaseInit";
+import { functions, httpsCallable } from "../config/firebaseInit";
 import { DateTime } from "luxon";
 
 export default {
   name: "LandingSendLink",
   data() {
     return {
-      sendEmail: functions.httpsCallable("sendEmail"),
+      sendEmail: httpsCallable(functions, "sendEmail"),
       form: {
         fullName: "",
         userEmail: "",
@@ -87,7 +86,7 @@ export default {
         type: "",
         text: "",
       },
-      redirectTimer: 5,
+      redirectTimer: 3,
     };
   },
   computed: {
@@ -427,7 +426,7 @@ export default {
   color: #1a1a1a;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial,
     sans-serif;
-  background: transparent;
+  background: white;
   height: 100vh;
   display: flex;
   flex-flow: column;

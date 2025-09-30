@@ -14,6 +14,7 @@
       />
     </div>
     <div
+      id="footerAd"
       v-show="showFooterAdToggle"
       class="ads-container bottom fill"
       :class="{ hideFooter: Boolean(currentCampaign.footer_ad.url) }"
@@ -30,7 +31,7 @@
 </template>
 
 <script setup>
-import { onMounted, useTemplateRef, watch, computed } from "vue";
+import { onMounted, watch, computed } from "vue";
 import { useRouter } from "vue-router";
 const router = useRouter();
 const emits = defineEmits(["handleAdToggle"]);
@@ -75,7 +76,7 @@ watch(showFullPageAdToggle, (e) => {
   }
 });
 
-function handleAdsLink() {
+function handleAdsLink(type) {
   emits("handle-analytics");
   if (props.certificate.Customer == "GM Ideal Corp." && type == "footer") {
     return setTimeout(() => {
@@ -88,7 +89,7 @@ function handleAdsLink() {
 }
 
 function scrollToElement() {
-  const el = useTemplateRef("footerAd");
+  const el = document.getElementById("footerAd");
   if (el) {
     // Use el.scrollIntoView() to instantly scroll to the element
     el.scrollIntoView({ behavior: "smooth" });
@@ -105,7 +106,7 @@ function scrollToElement() {
 .bottom {
   width: 100%;
   position: relative;
-  height: 4em;
+  height: 8em;
 }
 
 .ads {
@@ -199,13 +200,9 @@ function scrollToElement() {
   }
 }
 
-/* @media only screen and (-webkit-min-device-pixel-ratio:0) and (max-height: 800px) {
-   .ads-container,
-   .bottom {
-     left: 0;
-   }
-   .banner {
-     width: 90% !important;
-   }
- } */
+@media (max-width: 400px) and (max-height: 500px) {
+  .bottom {
+    width: 100% !important;
+  }
+}
 </style>

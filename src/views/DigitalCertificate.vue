@@ -28,7 +28,12 @@
 
   <div v-else class="digitalcert-wrapper">
     <!-- Intro container (shows after loader) -->
-    <div v-if="!olderCertificate">
+    <div
+      v-if="!olderCertificate"
+      :class="{
+        has_footer_ad: has_footer_ad,
+      }"
+    >
       <div class="intro-container">
         <div class="logo-container">
           <video
@@ -115,7 +120,7 @@
               :hasImperfection="has_imperfections"
             />
           </div>
-          <div class="bottom">
+          <div>
             <div style="visibility: hidden" class="product-description">
               <div class="description-label">
                 <p class="comment-label">COMMENTS</p>
@@ -133,22 +138,21 @@
     </div>
 
     <div v-else>
-      <div v-if="!showFullPageAd" class="right">
-        <video
-          ref="productVideo"
-          class="digital-cert-vid"
-          :src="digitalCertificateVideoURL"
-          autoplay
-          muted
-          playsinline
-          @timeupdate="handleTime"
-          @ended="handleVideoPlayback"
-        ></video>
+      <div
+        v-if="!showFullPageAd"
+        class="right"
+        :class="{
+          has_footer_ad: has_footer_ad,
+        }"
+      >
         <div
           v-if="showCertNumberForOldCerts"
           class="certificate-number-wrapper"
           :class="{
             hz_theme: certificate.Company.name.includes('Helzberg'),
+            isTemplate4: isTemplate4,
+
+            has_imperfections: has_imperfections,
           }"
         >
           <strong>
@@ -160,6 +164,16 @@
             }}</strong
           >
         </div>
+        <video
+          ref="productVideo"
+          class="digital-cert-vid"
+          :src="digitalCertificateVideoURL"
+          autoplay
+          muted
+          playsinline
+          @timeupdate="handleTime"
+          @ended="handleVideoPlayback"
+        ></video>
       </div>
     </div>
 
@@ -243,6 +257,7 @@ const showFullPageAd = ref(false);
 const activateAds = ref(false);
 const has_imperfections = ref(false);
 const has_footer_ad = ref(false);
+const isTemplate4 = ref(false);
 const stolenItem = ref(false);
 const showCertNumberForOldCerts = ref(false);
 const noAdsInit = ref(false);
@@ -280,7 +295,6 @@ async function fetchDigitalCertificate(certificate) {
       certificateVideo.data()
     );
     digitalCertificateVideoURL.value = certificateVideo.meta.url;
-    handleCertificateNumber(certificate.Company.name.includes("Helzberg"));
   } catch (error) {
     console.error("Error: ", error);
     if (certificate.CertificateVideo) {
@@ -432,7 +446,13 @@ function fetchIntroVideo(clientName) {
 }
 
 function handleTime(e) {
-  if (!noAdsInit) {
+  if (e.target.currentTime > 2) {
+    handleCertificateNumber(
+      certificate.value.Company.name.includes("Helzberg")
+    );
+  }
+
+  if (!noAdsInit.value) {
     if (e.target.currentTime > timerTickerBeforeAd.value.values) {
       handleVideoPlayback();
     }
@@ -447,9 +467,6 @@ function handleVideoPlayback() {
     productVideoRef.value.play();
     if (olderCertificate.value) {
       showCertNumberForOldCerts.value = false;
-      handleCertificateNumber(
-        certificate.value.Company.name.includes("Helzberg")
-      );
     }
   }
 }
@@ -586,7 +603,7 @@ function initImperfectionModal() {
 }
 
 function handleCertificateNumber(isHZ) {
-  const seconds = isHZ ? 4000 : 3200;
+  const seconds = isHZ ? 3000 : 3500;
   setTimeout(() => {
     showCertNumberForOldCerts.value = true;
   }, seconds);
@@ -652,8 +669,8 @@ onMounted(async () => {
         has_imperfections.value = Boolean(imperfections.value);
       }
       if (
-        certificate.value.Company.id === "1iX1oea29dw1sMzmzMyz" ||
-        certificate.value.created < 1759204800000
+        certificate.value.Company.id === "1iX1oea29dw1sMzmzMyz"
+        //  || certificate.value.created < 1759204800000
       ) {
         await fetchDigitalCertificate(certificate.value);
       } else {
@@ -666,6 +683,8 @@ onMounted(async () => {
       if (!certificateDoesNotExist.value) {
         await fetchClientCampaign(certificate.value.Company.id);
       }
+
+      isTemplate4.value = certificate.value.Template.id === 4;
 
       initAnalytics.value = await handleAnalyticsInitilization(
         certificate.value
@@ -683,14 +702,9 @@ onMounted(async () => {
 });
 
 watch(showFullPageAd, (toggled) => {
+  showCertNumberForOldCerts.value = false;
   if (!toggled) {
     if (!olderCertificate.value) restartCertificateViewingSequence();
-    else
-      handleCertificateNumber(
-        certificate.value.Company.name.includes("Helzberg")
-      );
-  } else {
-    if (olderCertificate.value) showCertNumberForOldCerts.value = false;
   }
 });
 

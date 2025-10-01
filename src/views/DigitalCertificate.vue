@@ -669,8 +669,8 @@ onMounted(async () => {
         has_imperfections.value = Boolean(imperfections.value);
       }
       if (
-        certificate.value.Company.id === "1iX1oea29dw1sMzmzMyz" ||
-        certificate.value.created < 1759204800000
+        certificate.value.Company.id === "1iX1oea29dw1sMzmzMyz"
+       //  ||  certificate.value.created < 1759204800000
       ) {
         await fetchDigitalCertificate(certificate.value);
       } else {

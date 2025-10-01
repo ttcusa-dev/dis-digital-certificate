@@ -57,16 +57,15 @@ const stoneImage = computed(() => {
       filePath = `/stones/${stoneFileName}.gif`;
     } else if (props.stoneType == "Mixed Diamonds") {
       stoneFileName = props.stoneShape;
-      filePath = `/multi-stone/Multi-${stoneFileName}.webp`;
+      filePath = `/multi-stone/Multi-${stoneFileName}.gif`;
     } else if (props.stoneShape.includes("Multi")) {
       stoneFileName = props.stoneShape.split(" ").join("-");
-      filePath = `/multi-stone/${stoneFileName}.webp`;
+      filePath = `/multi-stone/${stoneFileName}.gif`;
     } else if (props.stoneShape.includes("Mixed")) {
       stoneFileName = "Multi-Shape";
-      filePath = `/multi-stone/${stoneFileName}.webp`;
+      filePath = `/multi-stone/${stoneFileName}.gif`;
     } else if (props.stoneColor == "Black") {
       stoneFileName = props.stoneShape;
-      console.log({ stoneFileName });
       filePath = `/black-stones/Stone ${stoneFileName}.svg`;
     }
 

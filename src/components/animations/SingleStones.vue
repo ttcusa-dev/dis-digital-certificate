@@ -59,8 +59,7 @@ const stoneImage = computed(() => {
       stoneFileName = props.stoneShape;
       filePath = `/multi-stone/Multi-${stoneFileName}.gif`;
     } else if (props.stoneShape.includes("Multi")) {
-      // stoneFileName = props.stoneShape.split(" ").join("-");
-       stoneFileName = "Multi-Oval";
+      stoneFileName = props.stoneShape.split(" ").join("-");
       filePath = `/multi-stone/${stoneFileName}.gif`;
     } else if (props.stoneShape.includes("Mixed")) {
       stoneFileName = "Multi-Shape";

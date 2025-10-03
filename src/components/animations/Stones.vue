@@ -63,6 +63,8 @@ onMounted(() => {
     const color2 = props.stoneColor.split("/")[1].trim();
     colorHex.value = colorCodes[color] || "#FFFFFF";
     colorHex2.value = colorCodes[color2] || "#FFFFFF";
+  } else if (props.stoneType.includes("Mixed Colors")) {
+    showMixedColorComp.value = true;
   }
 });
 </script>
@@ -72,8 +74,12 @@ onMounted(() => {
 
 /* Container auto-sizes to the GIF */
 .container {
-  display: inline-block;
+  display: flex;
   position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 
   /* tint color via `color` */
 }

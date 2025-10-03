@@ -64,14 +64,14 @@ const stoneImage = computed(() => {
     let filePath = `/stones/${stoneFileName}.gif`;
 
     if (props.stoneType === "Mixed Diamonds") {
-      stoneFileName = props.stoneShape;
-      filePath = `/multi-stone/Multi-${stoneFileName}.webp`;
+      stoneFileName = props.stoneShape.split(" ").join("");
+      filePath = `/multi-stone/Multi-${stoneFileName}.gif`;
     } else if (props.stoneShape.includes("Multi")) {
       stoneFileName = props.stoneShape.split(" ").join("-");
-      filePath = `/multi-stone/${stoneFileName}.webp`;
+      filePath = `/multi-stone/${stoneFileName}.gif`;
     } else if (props.stoneType === "Mixed Colors") {
       stoneFileName = props.stoneShape.split(" ").join("-");
-      filePath = `/multi-stone/Multi-Gems.webp`;
+      filePath = `/multi-stone/Multi-Gems.gif`;
       showOverlay.value = false;
     }
 
@@ -88,6 +88,7 @@ const containerWidth = computed(() => {
   if (props.stoneShape === "Marquise") maxWidth = "65px";
   if (props.stoneShape === "Multi Shape") maxWidth = "170px";
   if (props.stoneType === "Mixed Diamonds") maxWidth = "170px";
+  if (props.stoneType === "Mixed Colors") maxWidth = "250px";
   return maxWidth;
 });
 
@@ -143,8 +144,10 @@ const tintGradientStyle = computed(() => ({
 
 <style scoped>
 .container {
-  display: inline-block;
+  display: flex;
   position: relative;
+  align-items: center;
+
 }
 .container img {
   display: block;

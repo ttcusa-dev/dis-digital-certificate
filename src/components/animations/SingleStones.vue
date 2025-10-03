@@ -8,7 +8,7 @@
       :alt="`${stoneShape}`"
     />
     <div
-      v-if="stoneColor !== 'Black'"
+      v-if="stoneColor !== 'Black' && !stoneShape.includes('Multi')"
       class="tint"
       :style="{
         mixBlendMode: colorMode,
@@ -59,7 +59,8 @@ const stoneImage = computed(() => {
       stoneFileName = props.stoneShape;
       filePath = `/multi-stone/Multi-${stoneFileName}.gif`;
     } else if (props.stoneShape.includes("Multi")) {
-      stoneFileName = props.stoneShape.split(" ").join("-");
+      // stoneFileName = props.stoneShape.split(" ").join("-");
+       stoneFileName = "Multi-Oval";
       filePath = `/multi-stone/${stoneFileName}.gif`;
     } else if (props.stoneShape.includes("Mixed")) {
       stoneFileName = "Multi-Shape";

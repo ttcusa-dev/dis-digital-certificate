@@ -526,7 +526,7 @@ function initCertificateViewingSequence() {
         specsSection.style.visibility = "visible";
         if (productShowCaseVideo.value) jewelryVideo.currentTime = 5;
         // specInfo.style.animation = "scaleUp 0.7s ease-in forwards";
-        if (certificate.value.Company.id == "VRkL6hAx8zmT6IbcgLgn") {
+        if (certificate.value.Company.id == "VRkL6hAx8zmT6IbcgLgn" && !certificate.value.Customer) {
           const el = document.getElementById("client-logo");
           el.classList.add("dis-logo");
         }

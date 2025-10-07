@@ -89,10 +89,6 @@
             <!-- <source src="../assets/images/Emerlad.mp4" type="video/mp4" /> -->
             Your browser does not support the video tag.
           </video>
-
-          <div v-if="certificate.Inscription" class="inscription">
-            {{ certificate.Inscription }}
-          </div>
         </div>
 
         <!-- <div class="custom-divider"></div> -->
@@ -100,6 +96,9 @@
         <!-- Template Section -->
         <div class="specifications-section">
           <div class="template-container">
+             <div v-if="certificate.Inscription" class="inscription">
+            {{ certificate.Inscription }}
+          </div>
             <div class="product-id">
               <p class="product-id-main">
                 <strong>
@@ -676,7 +675,7 @@ onMounted(async () => {
         has_imperfections.value = Boolean(imperfections.value);
       }
       if (
-        certificate.value.Company.id === "1iX1oea29dw1sMzmzMyz" 
+        certificate.value.Company.id === "1iX1oea29dw1sMzmzMyz"
         // ||
         // certificate.value.created < 1759515528000
       ) {

@@ -145,6 +145,9 @@
           has_footer_ad: has_footer_ad,
         }"
       >
+        <div v-if="certificate.Inscription" class="inscription">
+          {{ certificate.Inscription }}
+        </div>
         <div
           v-if="showCertNumberForOldCerts"
           class="certificate-number-wrapper"
@@ -526,7 +529,11 @@ function initCertificateViewingSequence() {
         specsSection.style.visibility = "visible";
         if (productShowCaseVideo.value) jewelryVideo.currentTime = 5;
         // specInfo.style.animation = "scaleUp 0.7s ease-in forwards";
-        if (certificate.value.Company.id == "VRkL6hAx8zmT6IbcgLgn" && !certificate.value.Customer) {
+        if (
+          certificate.value.Company.id == "VRkL6hAx8zmT6IbcgLgn" &&
+          (!certificate.value.Customer ||
+            certificate.value.Customer.includes("TTC"))
+        ) {
           const el = document.getElementById("client-logo");
           el.classList.add("dis-logo");
         }

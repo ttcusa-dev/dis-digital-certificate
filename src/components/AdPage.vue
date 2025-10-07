@@ -106,7 +106,7 @@ function scrollToElement() {
 .bottom {
   width: 100%;
   position: relative;
-  height: 8em;
+  height: 6em;
 }
 
 .ads {

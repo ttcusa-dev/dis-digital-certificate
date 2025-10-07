@@ -52,7 +52,7 @@ const wireframe = computed(() => {
     const shape = props.jewelryShape.split(" ")[0];
     wireframeFileName = `${props.jewelryType}-${shape}`;
   }
-  const filePath = `/wireframes/${wireframeFileName}.webp`;
+  const filePath = `/wireframes/${wireframeFileName}.gif`;
   try {
     return new URL(filePath, import.meta.url).href;
   } catch (e) {

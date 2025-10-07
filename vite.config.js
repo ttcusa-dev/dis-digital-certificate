@@ -11,6 +11,7 @@ export default defineConfig({
       manifest: {
         name: "DIS Digital Certificate",
         short_name: "DIS DC",
+        display: "fullscreen",
         description: "Diamond Services USA Digital Certificate Web App",
         theme_color: "#7c9cc8",
         icons: [

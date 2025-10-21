@@ -37,18 +37,6 @@
         />
       </div>
 
-      <!-- <div class="field">
-        <label for="link">Link to Send</label>
-        <input
-          id="link"
-          v-model.trim="form.link"
-          :class="{ invalid: touched.link && !isValidUrl(form.link) }"
-          type="url"
-          placeholder="https://example.com"
-          required
-        />
-      </div> -->
-
       <button type="submit" :disabled="!isFormValid || loading">
         {{ loading ? "Sending…" : "Email Certificate" }}
       </button>
@@ -86,7 +74,7 @@ export default {
         type: "",
         text: "",
       },
-      redirectTimer: 3,
+      redirectTimer: 5,
     };
   },
   computed: {
@@ -237,12 +225,8 @@ export default {
         subject: "Digital Certificate Delivery Notification",
       });
     },
-    async sendEmailLinkToUser(data) {
-      let certLink = `https://certificates.diamondservicesusa.com/${
-        this.$route.params.type
-      }/${this.$route.params.certificate_num.trim()}`;
-
-      await this.sendEmail({
+    async sendEmailLinkToUser(data, certLink) {
+      return await this.sendEmail({
         csv: null,
         message: `
 <!doctype html>
@@ -355,11 +339,19 @@ export default {
         filename: null,
         subject: "Digital Certificate Delivery",
       });
-
-      return await this.sendAnalyticalDataToClient(data, certLink);
     },
     isValidEmail(email) {
       return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email || "");
+    },
+
+    async addConsumerData(fullName, email, certLink) {
+      await db.collection("consumers").add({
+        fullName,
+        email,
+        certLink,
+      });
+
+      return true;
     },
 
     async onSubmit() {
@@ -373,21 +365,39 @@ export default {
 
       this.loading = true;
 
-      await this.sendEmailLinkToUser({
+      let certLink = `https://certificates.diamondservicesusa.com/${
+        this.$route.params.type
+      }/${this.$route.params.certificate_num.trim()}`;
+
+      await this.addConsumerData({
         fullName: this.form.fullName,
-        userEmail: this.form.userEmail,
-        link: this.form.link,
+        email: this.form.userEmail,
+        certLink,
       });
+
+      await this.sendEmailLinkToUser(
+        {
+          fullName: this.form.fullName,
+          userEmail: this.form.userEmail,
+        },
+        certLink
+      );
+
+      await this.sendAnalyticalDataToClient(
+        {
+          fullName: this.form.fullName,
+          userEmail: this.form.userEmail,
+        },
+        certLink
+      );
 
       this.message.type = "success";
       this.message.text = "Link sent successfully and client notified.";
 
       this.form.fullName = "";
       this.form.userEmail = "";
-      this.form.link = "";
       this.touched.fullName = false;
       this.touched.userEmail = false;
-      this.touched.link = false;
 
       setInterval(() => {
         this.redirectTimer -= 1;

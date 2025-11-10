@@ -53,14 +53,12 @@
 </template>
 
 <script>
-import { functions, httpsCallable } from "../config/firebaseInit";
 import { DateTime } from "luxon";
 
 export default {
   name: "LandingSendLink",
   data() {
     return {
-      sendEmail: httpsCallable(functions, "sendEmail"),
       form: {
         fullName: "",
         userEmail: "",
@@ -83,6 +81,12 @@ export default {
     },
   },
   methods: {
+    async sendEmail(data) {
+      return await fetch(
+        `https://us-central1-diamonds-8cf72.cloudfunctions.net/sendEmailApi`,
+        data
+      );
+    },
     async sendAnalyticalDataToClient(data, certLink) {
       const currentDate = DateTime.now().toFormat("LLL dd yyyy");
       return await this.sendEmail({

@@ -197,7 +197,6 @@
       :showFooterAd="showFooterAd"
       :certificate="certificate"
       @handleAdToggle="handleAdToggle"
-      @handle-analytics="handleAnalytics('click', true)"
     />
   </div>
 </template>
@@ -212,34 +211,43 @@ import {
   watch,
 } from "vue";
 
-import {
-  httpsCallable,
-  functions,
-  db,
-  getDoc,
-  doc,
-  getDocs,
-  where,
-  orderBy,
-  endAt,
-  query,
-  collection,
-  getDownloadURL,
-  ref as storageRef,
-  storage,
-} from "../config/firebaseInit";
-
 import { useRoute } from "vue-router";
 import Footer from "../components/Footer.vue";
 import AdPage from "../components/AdPage.vue";
 import Imperfections from "../components/Imperfections.vue";
 import Modal from "../components/Modal.vue";
-
 import { DateTime } from "luxon";
 
+// ──────────────────────────────────────────────
+// Cloud Functions base URL
+// ──────────────────────────────────────────────
+const BASE_URL =
+  "https://us-central1-diamonds-8cf72.cloudfunctions.net/digitalCertificateApi";
+
+// tiny GET helper for all APIs
+async function httpGet(path, params = {}, timeoutMs = 15000) {
+  const qs = new URLSearchParams();
+  Object.entries(params).forEach(([k, v]) => {
+    if (v !== undefined && v !== null && String(v).length) qs.set(k, String(v));
+  });
+  const ac = new AbortController();
+  const t = setTimeout(() => ac.abort(), timeoutMs);
+  try {
+    const res = await fetch(`${BASE_URL}-${path}?${qs.toString()}`, {
+      method: "GET",
+      signal: ac.signal,
+    });
+    return await res.json();
+  } finally {
+    clearTimeout(t);
+  }
+}
+
+// ──────────────────────────────────────────────
 const route = useRoute();
 const productVideoRef = useTemplateRef("productVideo");
 
+// State (unchanged)
 const certificate = ref(null);
 const clientLogo = ref(null);
 const campaings = ref([]);
@@ -269,39 +277,33 @@ const certificateDoesNotExist = ref(false);
 const initAnalytics = ref(false);
 const loading = ref(false);
 
-async function fetchCertificate() {
-  let certificateDoc = await getDoc(
-    doc(db, route.params.certType, route.params.certId)
-  );
-  if (!certificateDoc.exists) return false;
-  else return certificateDoc.data();
+// ──────────────────────────────────────────────
+// API wrappers
+// ──────────────────────────────────────────────
+
+async function apiFetchCertificate({ certType, certId }) {
+  const data = await httpGet("fetchCertificate", { certType, certId });
+  if (data?.ok && data.found) return data.data;
+  return false;
 }
 
-async function fetchDigitalCertificate(certificate) {
-  const { ClientSKU, CertNum, LineNum, OrderNum } = certificate;
-  let certificateVideo;
-  try {
-    const digitalCertRef = collection(db, "digital_certificate_videos");
-    const digitalCertQuery = query(
-      digitalCertRef,
-      where("name", "in", [ClientSKU, CertNum, `${OrderNum}-${LineNum}`])
-    );
-    certificateVideo = await getDocs(digitalCertQuery);
-    if (certificateVideo.empty) {
-      throw "No Digital Certificate Has Been Found";
-    }
-    olderCertificate.value = true;
-    certificateVideo = certificateVideo.docs[0];
+async function apiFetchDigitalCertificateVideo(cert) {
+  const { ClientSKU, CertNum, LineNum, OrderNum } = cert || {};
+  const data = await httpGet("fetchDigitalCertificateVideo", {
+    ClientSKU,
+    CertNum,
+    OrderNum,
+    LineNum,
+    certificateVideoUrl: cert?.CertificateVideo?.url,
+  });
 
-    certificateVideo = Object.assign(
-      { id: certificateVideo.id },
-      certificateVideo.data()
-    );
-    digitalCertificateVideoURL.value = certificateVideo.meta.url;
-  } catch (error) {
-    console.error("Error: ", error);
-    if (certificate.CertificateVideo) {
-      digitalCertificateVideoURL.value = certificate.CertificateVideo.url;
+  if (data?.ok) {
+    digitalCertificateVideoURL.value = data.digitalCertificateVideoURL || null;
+    olderCertificate.value = !!data.olderCertificate;
+    certificateDoesNotExist.value = !!data.certificateDoesNotExist;
+  } else {
+    if (cert?.CertificateVideo?.url) {
+      digitalCertificateVideoURL.value = cert.CertificateVideo.url;
       olderCertificate.value = true;
     } else {
       certificateDoesNotExist.value = true;
@@ -309,130 +311,47 @@ async function fetchDigitalCertificate(certificate) {
   }
 }
 
-async function fetchShowCasingVideo(videoFileName) {
-  const fileName = videoFileName.replace(/_001.*$/, "");
-  const videoRef = storageRef(storage, `product-display/${fileName}`);
-  try {
-    const [url] = await Promise.all([getDownloadURL(videoRef)]);
-    productShowCaseVideo.value = url;
-  } catch (error) {
-    noProductShowcasingVideo.value = true;
-    // certificateDoesNotExist.value = true;
-  }
+async function apiFetchShowCasingVideo(videoFileName) {
+  const data = await httpGet("fetchShowCasingVideo", { videoFileName });
+  productShowCaseVideo.value = data?.url || null;
+  noProductShowcasingVideo.value = !!data?.noProductShowcasingVideo;
 }
 
-async function fetchClientLogo(cert) {
-  let clientDoc = await getDoc(doc(db, "companies", cert.Company.id));
-  clientLogo.value = cert.CustomerLogo || clientDoc.data().images.url;
+async function apiFetchClientLogo(cert) {
+  const data = await httpGet("fetchClientLogo", {
+    companyId: cert?.Company?.id,
+    customerLogo: cert?.CustomerLogo,
+  });
+  clientLogo.value = data?.logo || null;
 }
 
-async function getAdRunTime() {
-  let tickerDoc = await getDoc(doc(db, "attributes", "timerTickerBeforeAd"));
-  if (!tickerDoc.exists) return null;
-  else return tickerDoc.data();
+async function apiFetchImperfections(id) {
+  const data = await httpGet("fetchImperfections", { id });
+  if (data?.ok && data.found) return data.imperfection;
+  return false;
 }
 
-async function handleAnalytics(userAction, saveViewingTime) {
-  if (initAnalytics) {
-    const viewingTime = handleViewingTime();
-    const userDevice = fetchUserDevice();
-    const productID = certificate.value.ClientSKU || certificate.value.CertNum;
-    const clientId = certificate.value.Company.id;
-    const country = "United States";
-    const locality = null;
-    const certificateData = certificate.value;
-    const handleAnalyticsPerCertificate = httpsCallable(
-      functions,
-      "analytics-handleAnalyticsPerClient"
-    );
+async function apiFetchClientCampaign(clientId, certCtx) {
+  const payload = {
+    clientId,
+    OrderNum: certCtx?.OrderNum,
+    CertNum: certCtx?.CertNum,
+    ClientSKU: certCtx?.ClientSKU,
+    Customer: certCtx?.Customer,
+  };
+  const data = await httpGet("fetchClientCampaign", payload);
 
-    try {
-      await handleAnalyticsPerCertificate({
-        clientId,
-        userDevice,
-        productID,
-        country,
-        locality,
-        viewingTime,
-        saveViewingTime,
-        userAction,
-        certificateData,
-      });
+  if (data?.ok) {
+    campaings.value = data.campaigns || [];
+    if (data.currentCampaign) currentCampaign.value = data.currentCampaign;
 
-      return true;
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
-  }
-}
-
-async function fetchImperfections(id) {
-  let imperfection_doc = await getDoc(doc(db, "diamond_imperfections", id));
-  if (!imperfection_doc.exists) return false;
-  return Object.assign({ id: imperfection_doc.id }, imperfection_doc.data());
-}
-
-//For Advertisement
-async function fetchClientCampaign(clientId) {
-  const timestamp = DateTime.now().toMillis();
-  const campaignRef = collection(db, "companies", clientId, "campaigns");
-  const campaignQuery = query(
-    campaignRef,
-    where("active", "==", true),
-    orderBy("start_at", "asc"),
-    endAt(timestamp)
-  );
-  const campaignDoc = await getDocs(campaignQuery);
-
-  if (!campaignDoc.empty) {
-    campaings.value = campaignDoc.docs
-      .map((d) => Object.assign({ id: d.id }, d.data()))
-      .filter((d) => {
-        if (d.use_for_all) {
-          return true;
-        } else if (
-          certificate.value.hasOwnProperty("Customer") &&
-          d.fetch_by_customer &&
-          d.fetch_by_customer.selected
-        ) {
-          if (d.exclude_sku.selected) {
-            return (
-              !d.exclude_sku.items.includes(certificate.value.OrderNum) ||
-              !d.exclude_sku.items.includes(certificate.value.CertNum) ||
-              !d.exclude_sku.items.includes(certificate.value.ClientSKU)
-            );
-          }
-          return (
-            certificate.value.Customer.toUpperCase() ===
-            d.fetch_by_customer.value
-          );
-        } else if (d.include_sku.selected) {
-          return (
-            d.include_sku.items.includes(certificate.value.OrderNum) ||
-            d.include_sku.items.includes(certificate.value.CertNum) ||
-            d.include_sku.items.includes(certificate.value.ClientSKU)
-          );
-        } else if (d.exclude_sku.selected) {
-          return (
-            !d.exclude_sku.items.includes(certificate.value.OrderNum) ||
-            !d.exclude_sku.items.includes(certificate.value.CertNum) ||
-            !d.exclude_sku.items.includes(certificate.value.ClientSKU)
-          );
-        } else {
-          return false;
-        }
-      });
-
+    // keep your reveal timing on client
     if (campaings.value.length) {
-      const randomCampaign = Math.floor(Math.random() * campaings.value.length);
-      currentCampaign.value = campaings.value[randomCampaign];
-
       setTimeout(() => {
-        activateAds.value = Boolean(campaings.value.length);
+        activateAds.value = true;
         setTimeout(() => {
-          showFooterAd.value = Boolean(currentCampaign.value.footer_ad.url);
-          if (currentCampaign.value.footer_ad.url) has_footer_ad.value = true;
+          showFooterAd.value = !!currentCampaign.value?.footer_ad?.url;
+          if (currentCampaign.value?.footer_ad?.url) has_footer_ad.value = true;
         }, 500);
       }, 5000);
     } else {
@@ -443,8 +362,17 @@ async function fetchClientCampaign(clientId) {
   }
 }
 
+async function apiFetchAdRunTime() {
+  const data = await httpGet("fetchAdRunTime");
+  // expects { ok:true, timer:{ values: number } }
+  return data?.ok ? data.timer : null;
+}
+
+// ──────────────────────────────────────────────
+// Helpers
+// ──────────────────────────────────────────────
 function fetchIntroVideo(clientName) {
-  let filePath = `/intro-videos/${clientName}.mp4`;
+  const filePath = `/intro-videos/${clientName}.mp4`;
   return new URL(filePath, import.meta.url).href;
 }
 
@@ -476,12 +404,8 @@ function handleVideoPlayback() {
 
 function handleAdToggle(data) {
   for (const key in data) {
-    if (key == "showFullPageAd") {
-      showFullPageAd.value = data[key];
-    }
-    if (key == "showFooterAd") {
-      showFooterAd.value = data[key];
-    }
+    if (key === "showFullPageAd") showFullPageAd.value = data[key];
+    if (key === "showFooterAd") showFooterAd.value = data[key];
   }
 }
 
@@ -491,29 +415,20 @@ function initCertificateViewingSequence() {
 
   setTimeout(() => {
     introContainer.classList.remove("hidden");
-    video.currentTime = 0; // Set the video to start from the beginning
+    video.currentTime = 0;
     video.play();
   }, 500);
 
-  // After 8 seconds total (5s loader + 3s intro), show main content
   setTimeout(() => {
     const mainContent = document.querySelector(".main-content");
     const templateContainer = document.querySelector(".template-container");
     const specsSection = document.querySelector(".specifications-section");
 
     const jewelryVideo = document.getElementById("jewelry-video");
-    const animatedPhaseOneElements = document.querySelectorAll(
-      ".animated-phase-one"
-    );
-    const animatedPhaseTwoElements = document.querySelectorAll(
-      ".animated-phase-two"
-    );
-    const animatedPhaseThreeElements = document.querySelectorAll(
-      ".animated-phase-three"
-    );
-    const animatedPhaseFourElements = document.querySelectorAll(
-      ".animated-phase-four"
-    );
+    const ani1 = document.querySelectorAll(".animated-phase-one");
+    const ani2 = document.querySelectorAll(".animated-phase-two");
+    const ani3 = document.querySelectorAll(".animated-phase-three");
+    const ani4 = document.querySelectorAll(".animated-phase-four");
     const descriptionLabel = document.querySelector(".description-label");
     const productDesc = document.querySelector(".product-description");
 
@@ -528,7 +443,7 @@ function initCertificateViewingSequence() {
         mainContent.classList.add("visible");
         specsSection.style.visibility = "visible";
         if (productShowCaseVideo.value) jewelryVideo.currentTime = 5;
-        // specInfo.style.animation = "scaleUp 0.7s ease-in forwards";
+
         if (
           certificate.value.Company.id == "VRkL6hAx8zmT6IbcgLgn" &&
           (!certificate.value.Customer ||
@@ -537,34 +452,26 @@ function initCertificateViewingSequence() {
           const el = document.getElementById("client-logo");
           el.classList.add("dis-logo");
         }
-        animatedPhaseOneElements.forEach((el) => {
-          el.style.animation = "scaleUp 0.7s ease-in forwards";
-        });
+        ani1.forEach(
+          (el) => (el.style.animation = "scaleUp 0.7s ease-in forwards")
+        );
         setTimeout(() => {
-          animatedPhaseTwoElements.forEach((el) => {
-            el.style.animation = "scaleUp 0.7s ease-in forwards";
-          });
+          ani2.forEach(
+            (el) => (el.style.animation = "scaleUp 0.7s ease-in forwards")
+          );
           setTimeout(() => {
-            animatedPhaseThreeElements.forEach((el) => {
-              el.style.animation = "scaleUp 0.7s ease-in forwards";
-            });
+            ani3.forEach(
+              (el) => (el.style.animation = "scaleUp 0.7s ease-in forwards")
+            );
             setTimeout(() => {
-              animatedPhaseFourElements.forEach((el) => {
-                el.style.animation = "scaleUp 0.7s ease-in forwards";
-              });
+              ani4.forEach(
+                (el) => (el.style.animation = "scaleUp 0.7s ease-in forwards")
+              );
               productDesc.style.visibility = "visible";
               productDesc.style.animation = "scaleUp 0.7s ease-in forwards";
               descriptionLabel.classList.remove("hidden");
               descriptionLabel.style.animation =
                 "scaleUp 0.7s ease-in forwards";
-              // setTimeout(() => {
-              //   productDesc.style.visibility = "visible";
-              //   productDesc.style.animation = "scaleUp 0.7s ease-in forwards";
-
-              //   descriptionLabel.classList.remove("hidden");
-              //   descriptionLabel.style.animation =
-              //     "scaleUp 0.7s ease-in forwards";
-              // }, 300);
             }, 300);
           }, 300);
         }, 200);
@@ -576,32 +483,22 @@ function initCertificateViewingSequence() {
 function restartCertificateViewingSequence() {
   const mainContent = document.querySelector(".main-content");
   const introContainer = document.querySelector(".intro-container");
-  // const templateContainer = document.querySelector(".template-container");
-  // templateContainer.classList.add("hidden");
   introContainer.classList.remove("visible");
   mainContent.classList.remove("visible");
   introContainer.classList.add("hidden");
   mainContent.classList.add("hidden");
   introContainer.style.display = "none";
   mainContent.style.display = "none";
-  productVideoRef.value.currentTime = 0; // Set the productVideoRef to start from the beginning
+  productVideoRef.value.currentTime = 0;
   productVideoRef.value.play();
-
   initCertificateViewingSequence();
 }
 
 function fetchUserDevice() {
-  const userAgent = navigator.userAgent;
-  if (/Android/i.test(userAgent)) {
-    console.log("This is an Android device");
-    return "Android";
-  } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
-    console.log("This is an iOS device");
-    return "iOS";
-  } else {
-    console.log("This is a desktop computer");
-    return "Desktop";
-  }
+  const ua = navigator.userAgent;
+  if (/Android/i.test(ua)) return "Android";
+  if (/iPhone|iPad|iPod/i.test(ua)) return "iOS";
+  return "Desktop";
 }
 
 function initImperfectionModal() {
@@ -610,10 +507,8 @@ function initImperfectionModal() {
 }
 
 function handleCertificateNumber(isHZ) {
-  const seconds = isHZ ? 3000 : 3500;
-  setTimeout(() => {
-    showCertNumberForOldCerts.value = true;
-  }, seconds);
+  const ms = isHZ ? 3000 : 3500;
+  setTimeout(() => (showCertNumberForOldCerts.value = true), ms);
 }
 
 function closeModal() {
@@ -623,18 +518,18 @@ function closeModal() {
 
 function handleViewingTime() {
   const leaveTimestamp = Date.now();
-  const timeSpentOnSite = leaveTimestamp - enterTimestamp.value; // Time in milliseconds
-  // You can convert the time to seconds, minutes, or hours as needed
-  const secondsSpent = Math.floor(timeSpentOnSite / 1000); // Convert milliseconds to seconds
-  const minutesSpent = Math.floor(secondsSpent / 60); // Convert seconds to minutes
+  const timeSpentOnSite = leaveTimestamp - enterTimestamp.value;
+  const secondsSpent = Math.floor(timeSpentOnSite / 1000);
+  const minutesSpent = Math.floor(secondsSpent / 60);
   return { seconds: secondsSpent, minutes: minutesSpent };
 }
 
 async function fetchIPAddress() {
   try {
-    const IPAdd = await axios.get("https://api.ipify.org?format=json");
-    return IPAdd.data.ip === process.env.VUE_APP_DIS_IP;
-  } catch (error) {
+    const res = await fetch("https://api.ipify.org?format=json");
+    const data = await res.json();
+    return data.ip === import.meta.env.VITE_DIS_IP;
+  } catch {
     return false;
   }
 }
@@ -647,6 +542,7 @@ async function handleAnalyticsInitilization(data) {
   return !timestampDate.equals(now);
 }
 
+// Template resolver
 const templateComponent = computed(() =>
   defineAsyncComponent(() =>
     import(
@@ -655,52 +551,99 @@ const templateComponent = computed(() =>
   )
 );
 
+//Ignore
+// async function handleAnalytics(userAction, saveViewingTime) {
+//   if (initAnalytics.value) {
+//     const viewingTime = handleViewingTime();
+//     const userDevice = fetchUserDevice();
+//     const productID = certificate.value.ClientSKU || certificate.value.CertNum;
+//     const clientId = certificate.value.Company.id;
+//     const country = "United States";
+//     const locality = null;
+//     const certificateData = certificate.value;
+
+//     const handleAnalyticsPerCertificate = httpsCallable(
+//       functions,
+//       "analytics-handleAnalyticsPerClient"
+//     );
+
+//     try {
+//       await handleAnalyticsPerCertificate({
+//         clientId,
+//         userDevice,
+//         productID,
+//         country,
+//         locality,
+//         viewingTime,
+//         saveViewingTime,
+//         userAction,
+//         certificateData,
+//       });
+//       return true;
+//     } catch (e) {
+//       console.log(e);
+//       return false;
+//     }
+//   }
+// }
+
+// ──────────────────────────────────────────────
+// Mount flow
+// ──────────────────────────────────────────────
 onMounted(async () => {
   loading.value = true;
-  certificate.value = await fetchCertificate();
-  // After 5 seconds, hide loader and show intro
+
+  // fetch certificate via API
+  certificate.value = await apiFetchCertificate({
+    certType: route.params.certType,
+    certId: route.params.certId,
+  });
+
   if (certificate.value) {
     if (certificate.value.isStolen) {
       stolenItem.value = true;
       certificateDoesNotExist.value = true;
       loading.value = false;
-      return null;
+      return;
     }
 
     setTimeout(async () => {
-      if (route.params.certType == "diamond") {
-        if (certificate.value.imperfection)
-          imperfections.value = await fetchImperfections(
+      // diamond imperfections
+      if (route.params.certType === "diamond") {
+        if (certificate.value.imperfection) {
+          imperfections.value = await apiFetchImperfections(
             certificate.value.imperfection.id
           );
+        }
         has_imperfections.value = Boolean(imperfections.value);
       }
-      if (
-        certificate.value.Company.id === "1iX1oea29dw1sMzmzMyz" 
-        // ||
-        // certificate.value.created < 1759515528000
-      ) {
-        await fetchDigitalCertificate(certificate.value);
-      } else {
-        introVideo.value = fetchIntroVideo(certificate.value.Company.name);
-        await fetchShowCasingVideo(certificate.value.Video.name);
-        await fetchClientLogo(certificate.value);
-        initCertificateViewingSequence();
-      }
+
+      // old vs new cert video paths 
+      // if (certificate.value.Company.id === "1iX1oea29dw1sMzmzMyz") {
+      //   await apiFetchDigitalCertificateVideo(certificate.value);
+      // } else {
+      introVideo.value = fetchIntroVideo(certificate.value.Company.name);
+      await apiFetchShowCasingVideo(certificate.value.Video.name);
+      await apiFetchClientLogo(certificate.value);
+      initCertificateViewingSequence();
+      // }
 
       if (!certificateDoesNotExist.value) {
-        await fetchClientCampaign(certificate.value.Company.id);
+        await apiFetchClientCampaign(
+          certificate.value.Company.id,
+          certificate.value
+        );
       }
 
       isTemplate4.value = certificate.value.Template.id === 4;
-
       initAnalytics.value = await handleAnalyticsInitilization(
         certificate.value
       );
 
-      setTimeout(() => {
-        handleAnalytics("view", false);
-      }, 2000);
+      // setTimeout(() => {
+      //   handleAnalytics("view", false);
+      // }, 2000);
+
       loading.value = false;
     }, 500);
   } else {
@@ -709,6 +652,9 @@ onMounted(async () => {
   }
 });
 
+// ──────────────────────────────────────────────
+// Watchers
+// ──────────────────────────────────────────────
 watch(showFullPageAd, (toggled) => {
   showCertNumberForOldCerts.value = false;
   if (!toggled) {
@@ -718,7 +664,12 @@ watch(showFullPageAd, (toggled) => {
 
 watch(activateAds, async (toggled) => {
   if (toggled) {
-    timerTickerBeforeAd.value = await getAdRunTime();
+    const t = await apiFetchAdRunTime(); // { values: number } or null
+    if (t && typeof t.values !== "undefined") {
+      timerTickerBeforeAd.value = t; // keep your existing .values usage
+      // or, if you prefer a plain number everywhere:
+      // timerTickerBeforeAd.value = t.values;
+    }
   }
 });
 

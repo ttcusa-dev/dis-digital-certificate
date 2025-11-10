@@ -8,8 +8,8 @@ import { createRouter, createWebHistory } from "vue-router";
 // import Redirect from "../views/Redirect.vue";
 
 import DigitalCertificate from "../views/DigitalCertificate.vue";
-import ClientAnalyticalLandingPage from "../views/ClientAnalyticalLandingPage.vue";
-import DigitalCertificateList from "../views/DigitalCertificateList.vue";
+// import ClientAnalyticalLandingPage from "../views/ClientAnalyticalLandingPage.vue";
+// import DigitalCertificateList from "../views/DigitalCertificateList.vue";
 
 const routes = [
   {
@@ -17,17 +17,17 @@ const routes = [
     name: "DigitalCertificate",
     component: DigitalCertificate,
   },
-  {
-    path: "/digitalcertlist/:list_id",
-    name: "DigitalCertificateList",
-    component: DigitalCertificateList,
-  },
+  // {
+  //   path: "/digitalcertlist/:list_id",
+  //   name: "DigitalCertificateList",
+  //   component: DigitalCertificateList,
+  // },
 
-  {
-    path: "/:type/:certificate_num/send_cert",
-    name: "ClientAnalyticalLandingPage",
-    component: ClientAnalyticalLandingPage,
-  },
+  // {
+  //   path: "/:type/:certificate_num/send_cert",
+  //   name: "ClientAnalyticalLandingPage",
+  //   component: ClientAnalyticalLandingPage,
+  // },
 
   // {
   //   path: "/redirect",
